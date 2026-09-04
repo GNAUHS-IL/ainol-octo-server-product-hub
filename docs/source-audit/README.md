@@ -8,6 +8,8 @@
 
 | 项 | 数量 | 文件 |
 |---|---:|---|
+| 仓库结构总览 | - | `docs/source-audit/repo-structure.md` |
+| 目标仓参考材料 | - | `docs/upstream-reference-index.md` |
 | `modules/` 目录 | 41 | `docs/source-audit/module-inventory.md` |
 | 已注册模块 | 38 | `docs/source-audit/module-inventory.md` |
 | 未注册模块目录 | 3 | `docs/source-audit/module-inventory.md` |

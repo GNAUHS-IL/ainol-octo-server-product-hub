@@ -6,46 +6,46 @@
 
 ## 注册模块
 
-| 模块 | 注册来源 | Go 文件数(非测试) | SQL migration 数 |
-|---|---|---:|---:|
-| `agentmailgateway` | 来源: internal/modules.go#L24-L24 | 5 | 0 |
-| `backup` | 来源: internal/modules.go#L25-L25 | 9 | 2 |
-| `base` | 来源: internal/modules.go#L26-L26 | 19 | 6 |
-| `robot` | 来源: internal/modules.go#L30-L30 | 15 | 10 |
-| `bot_mention` | 来源: internal/modules.go#L32-L32 | 6 | 0 |
-| `botfather` | 来源: internal/modules.go#L33-L33 | 22 | 10 |
-| `card_template_catalog` | 来源: internal/modules.go#L35-L35 | 14 | 2 |
-| `category` | 来源: internal/modules.go#L36-L36 | 8 | 5 |
-| `channel` | 来源: internal/modules.go#L37-L37 | 7 | 3 |
-| `common` | 来源: internal/modules.go#L38-L38 | 18 | 18 |
-| `conversation_ext` | 来源: internal/modules.go#L39-L39 | 7 | 7 |
-| `file` | 来源: internal/modules.go#L40-L40 | 15 | 0 |
-| `group` | 来源: internal/modules.go#L41-L41 | 22 | 17 |
-| `incomingwebhook` | 来源: internal/modules.go#L42-L42 | 21 | 11 |
-| `integration` | 来源: internal/modules.go#L43-L43 | 5 | 1 |
-| `internal_resolve` | 来源: internal/modules.go#L44-L44 | 4 | 0 |
-| `message` | 来源: internal/modules.go#L45-L45 | 43 | 19 |
-| `messages_search` | 来源: internal/modules.go#L46-L46 | 37 | 0 |
-| `notification` | 来源: internal/modules.go#L47-L47 | 5 | 2 |
-| `notify` | 来源: internal/modules.go#L48-L48 | 22 | 3 |
-| `oidc` | 来源: internal/modules.go#L49-L49 | 45 | 3 |
-| `opanalytics` | 来源: internal/modules.go#L50-L50 | 11 | 3 |
-| `openapi` | 来源: internal/modules.go#L51-L51 | 2 | 0 |
-| `qrcode` | 来源: internal/modules.go#L52-L52 | 4 | 0 |
-| `report` | 来源: internal/modules.go#L53-L53 | 6 | 2 |
-| `search` | 来源: internal/modules.go#L58-L58 | 3 | 0 |
-| `space` | 来源: internal/modules.go#L59-L59 | 22 | 14 |
-| `statistics` | 来源: internal/modules.go#L60-L60 | 3 | 0 |
-| `sticker` | 来源: internal/modules.go#L61-L61 | 6 | 3 |
-| `thread` | 来源: internal/modules.go#L62-L62 | 7 | 8 |
-| `user` | 来源: internal/modules.go#L63-L63 | 63 | 37 |
-| `usersecret` | 来源: internal/modules.go#L66-L66 | 8 | 1 |
-| `bot_api` | 来源: internal/modules.go#L70-L70 | 37 | 3 |
-| `app_bot` | 来源: internal/modules.go#L72-L72 | 5 | 5 |
-| `bot_provision` | 来源: internal/modules.go#L74-L74 | 5 | 0 |
-| `voice_adapter` | 来源: internal/modules.go#L75-L75 | 4 | 1 |
-| `webhook` | 来源: internal/modules.go#L76-L76 | 18 | 3 |
-| `workplace` | 来源: internal/modules.go#L77-L77 | 6 | 3 |
+| 模块 | 注册来源 | Go 文件数(非测试) | SQL migration 数 | 对应知识库 area |
+|---|---|---:|---:|---|
+| `agentmailgateway` | 来源: internal/modules.go#L24-L24 | 5 | 0  area/bot-agent |
+| `backup` | 来源: internal/modules.go#L25-L25 | 9 | 2  area/storage |
+| `base` | 来源: internal/modules.go#L26-L26 | 19 | 6  area/modules |
+| `robot` | 来源: internal/modules.go#L30-L30 | 15 | 10  area/bot-agent |
+| `bot_mention` | 来源: internal/modules.go#L32-L32 | 6 | 0  area/bot-agent |
+| `botfather` | 来源: internal/modules.go#L33-L33 | 22 | 10  area/bot-agent |
+| `card_template_catalog` | 来源: internal/modules.go#L35-L35 | 14 | 2  area/bot-agent |
+| `category` | 来源: internal/modules.go#L36-L36 | 8 | 5  area/modules |
+| `channel` | 来源: internal/modules.go#L37-L37 | 7 | 3  area/im |
+| `common` | 来源: internal/modules.go#L38-L38 | 18 | 18  area/modules |
+| `conversation_ext` | 来源: internal/modules.go#L39-L39 | 7 | 7  area/im |
+| `file` | 来源: internal/modules.go#L40-L40 | 15 | 0  area/storage |
+| `group` | 来源: internal/modules.go#L41-L41 | 22 | 17  area/im / area/rbac |
+| `incomingwebhook` | 来源: internal/modules.go#L42-L42 | 21 | 11  area/modules |
+| `integration` | 来源: internal/modules.go#L43-L43 | 5 | 1  area/modules |
+| `internal_resolve` | 来源: internal/modules.go#L44-L44 | 4 | 0  area/modules |
+| `message` | 来源: internal/modules.go#L45-L45 | 43 | 19  area/im |
+| `messages_search` | 来源: internal/modules.go#L46-L46 | 37 | 0  area/im |
+| `notification` | 来源: internal/modules.go#L47-L47 | 5 | 2  area/modules |
+| `notify` | 来源: internal/modules.go#L48-L48 | 22 | 3  area/modules |
+| `oidc` | 来源: internal/modules.go#L49-L49 | 45 | 3  area/auth / area/storage |
+| `opanalytics` | 来源: internal/modules.go#L50-L50 | 11 | 3  area/modules |
+| `openapi` | 来源: internal/modules.go#L51-L51 | 2 | 0  area/auth |
+| `qrcode` | 来源: internal/modules.go#L52-L52 | 4 | 0  area/modules |
+| `report` | 来源: internal/modules.go#L53-L53 | 6 | 2  area/modules |
+| `search` | 来源: internal/modules.go#L58-L58 | 3 | 0  area/modules |
+| `space` | 来源: internal/modules.go#L59-L59 | 22 | 14  area/rbac |
+| `statistics` | 来源: internal/modules.go#L60-L60 | 3 | 0  area/modules |
+| `sticker` | 来源: internal/modules.go#L61-L61 | 6 | 3  area/im |
+| `thread` | 来源: internal/modules.go#L62-L62 | 7 | 8  area/im |
+| `user` | 来源: internal/modules.go#L63-L63 | 63 | 37  area/auth |
+| `usersecret` | 来源: internal/modules.go#L66-L66 | 8 | 1  area/auth / area/bot-agent |
+| `bot_api` | 来源: internal/modules.go#L70-L70 | 37 | 3  area/bot-agent |
+| `app_bot` | 来源: internal/modules.go#L72-L72 | 5 | 5  area/bot-agent |
+| `bot_provision` | 来源: internal/modules.go#L74-L74 | 5 | 0  area/bot-agent |
+| `voice_adapter` | 来源: internal/modules.go#L75-L75 | 4 | 1  area/bot-agent |
+| `webhook` | 来源: internal/modules.go#L76-L76 | 18 | 3  area/modules |
+| `workplace` | 来源: internal/modules.go#L77-L77 | 6 | 3  area/modules |
 
 ## modules/ 目录存在但未在 internal/modules.go 注册
 

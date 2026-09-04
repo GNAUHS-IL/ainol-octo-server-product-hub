@@ -1,6 +1,6 @@
 # Citation Verification
 
-本页记录考试前引用校验机制和最近一次校验摘要。完整执行日志保存在本地 `state/`，公开仓库只提交不含敏感信息的摘要。
+本页记录交付前引用校验机制和最近一次校验摘要。完整执行日志保存在本地 `state/`，公开仓库只提交不含敏感信息的摘要。
 
 ## 校验脚本
 
@@ -8,7 +8,7 @@
 scripts/verify_citations.py --docs-root . --source-root ../octo-server
 ```
 
-校验范围：需求池仓库内所有 Markdown 文件中的考试引用格式：
+校验范围：需求池仓库内所有 Markdown 文件中的引用格式：
 
 ```text
 来源: <相对路径>#L<起>-L<止>

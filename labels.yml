@@ -5,7 +5,7 @@ type/feature: 新需求
 type/docs: 文档缺失或说明不清
 type/prd: PRD 任务
 type/review: Review 任务
-priority/P0: 安全、凭证、登录不可用、Bot/Agent 断联、考试核心链路阻塞
+priority/P0: 安全、凭证、登录不可用、Bot/Agent 断联、交付核心链路阻塞
 priority/P1: 核心功能异常或重要需求
 priority/P2: 常规缺陷或普通增强
 priority/P3: 低优先级建议、体验优化
@@ -37,7 +37,7 @@ pm/review-requested: 已请求 Review
 pm/review-approved: Review 通过
 pm/review-rejected: Review 打回
 pm/human-needed: 需要人工接管
-source/exam-group: 考试群输入
+source/group: 外部沟通渠道输入
 source/cron-detected: cron 扫描发现
 source/manual-triage: 人工分诊
 source/evaluation: 评测集输入

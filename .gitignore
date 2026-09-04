@@ -1,6 +1,5 @@
 # Local real runtime logs/state are not committed; keep only examples.
 /logs/*.jsonl
-!/logs/scan-log.example.jsonl
 /state/*.json
 !/state/scan-state.example.json
 /state/*.md

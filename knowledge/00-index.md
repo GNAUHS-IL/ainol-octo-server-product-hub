@@ -1,6 +1,6 @@
 # 知识库索引
 
-本知识库围绕 `Mininglamp-OSS/octo-server` 的源码建立，用于 AINOL Agent 实操考核 B 卷中的源码可核验问答、反馈分诊、PRD 与 Review。
+本知识库围绕 `Mininglamp-OSS/octo-server` 的源码建立，用于 源码可核验问答、反馈分诊、PRD 与 Review。
 
 ## 源码基线
 

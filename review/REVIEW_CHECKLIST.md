@@ -37,7 +37,7 @@
 
 - [ ] 有实质变化才发
 - [ ] @ 对应人
-- [ ] @ 主考
+- [ ] @ 外部审核方
 - [ ] 不发送“本次扫描无更新”
 - [ ] 不泄露凭证
 
@@ -47,3 +47,15 @@
 - [ ] Changes requested
 - [ ] Rejected
 - [ ] Human needed
+
+## 6. Evidence Gate
+
+- [ ] Source path exists in `Mininglamp-OSS/octo-server`.
+- [ ] Line numbers exist and directly support the conclusion.
+- [ ] Single citation span is precise, normally no more than 15 lines.
+- [ ] README/docs can support product context, but implementation claims need code/config evidence.
+
+## 7. What-only Gate
+
+PRD content must describe user-visible needs and acceptance criteria only. It must not prescribe Redis, database tables, internal field names, SQL, queues, code blocks, or HTTP status implementation details as the product requirement.
+
