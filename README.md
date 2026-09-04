@@ -14,6 +14,10 @@
 | 提 Bug / Feature / Question / Review | GitHub Issues 与 `.github/ISSUE_TEMPLATE/` |
 | 写 PRD | `prd/TEMPLATE.md` |
 | 做 Review | `review/REVIEW_CHECKLIST.md` |
+| 跨模块高频问题速查 | `knowledge/10-cross-module-quickref.md` |
+| 收单分诊决策 | `docs/triage-decision-table.md` |
+| 最终状态仲裁 | `docs/status-arbitration-rules.md` |
+| 上游变更影响扫描 | `docs/upstream-change-scan.md` |
 | 校验引用 | `scripts/verify_citations.py` |
 
 ## 目标

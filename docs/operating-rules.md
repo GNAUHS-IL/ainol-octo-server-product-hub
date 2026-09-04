@@ -27,3 +27,16 @@
 - 源码/产品问题必须引用真实源码，单个引用跨度默认不超过 15 行。
 - 找不到证据时说“不确定”，并说明需要补查的路径或模块。
 
+
+
+## 收单分诊与状态仲裁
+
+- 收到反馈后按 `docs/triage-decision-table.md` 判断 type、area、risk、PRD/Review 需求。
+- 最终状态按 `docs/status-arbitration-rules.md` 仲裁；没有完成证据不得标记 `status/done`。
+- 跨模块问题优先查 `knowledge/10-cross-module-quickref.md`，再回到九大知识库与源码引用。
+
+## 上游变更影响扫描
+
+- 目标仓变化由 `scripts/scan_upstream_changes.sh` 只读扫描。
+- 无变化只写本地日志，不发群。
+- 命中认证、鉴权、Bot、配置、存储等高风险领域时，先人工复核再更新知识库或同步。

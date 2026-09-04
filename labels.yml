@@ -30,6 +30,7 @@ area/im: IM 控制面
 area/bot-agent: Bot 与 Agent
 area/storage: 存储与外部依赖
 area/build-release: 构建与发布
+area/cross-module: 跨模块高频问题速查
 area/unknown: 暂不能判断
 pm/needs-prd: 需要补 PRD
 pm/prd-ready: PRD 已准备好

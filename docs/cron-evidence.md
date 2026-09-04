@@ -36,3 +36,16 @@
 - 真实日志、真实 state、token、cookie、secret、私钥不得提交到 public repo。
 - public repo 只保留脱敏样例和流程说明。
 - 如需证明最近执行情况，优先提交摘要或截图，不提交原始敏感日志。
+
+
+## 上游变更扫描证据
+
+需求池 issue 扫描之外，产品运营负责人还维护目标仓只读变更影响扫描：
+
+```bash
+scripts/scan_upstream_changes.sh ../octo-server
+```
+
+- `no_change`：只写 `logs/upstream-change-log.jsonl`，不通知。
+- `change_detected`：写 `state/latest-upstream-impact.json`，列出命中领域和建议复核的知识库文件。
+- 高风险领域包括认证、鉴权、Bot、配置、存储；命中后先人工复核，不自动发布结论。
