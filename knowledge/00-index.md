@@ -22,6 +22,7 @@
 | `07-bot-agent.md` | `area/bot-agent` | app_bot / botfather / bot_provision / botidentity / bot_api / bot_mention / agentmailgateway | V2 已补源码证据 |
 | `08-storage-dependencies.md` | `area/storage` | MySQL、Redis、SQL migration、对象存储、SMS、Push、OIDC | V2 已补源码证据 |
 | `09-build-release.md` | `area/build-release` | go build、Dockerfile、Dockerfile.ghcr、Makefile、octo-deployment | V2 已补源码证据 |
+| `10-cross-module-quickref.md` | `area/cross-module` | 跨模块高频问题速查：Bot、Webhook、Card、OIDC/Token、文件、群/Thread、配置/部署 | V1 已补源码证据 |
 
 ## 引用规则
 
