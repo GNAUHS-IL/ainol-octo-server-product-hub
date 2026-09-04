@@ -2,6 +2,20 @@
 
 本仓库用于围绕 [`Mininglamp-OSS/octo-server`](https://github.com/Mininglamp-OSS/octo-server) 维护产品反馈、源码可核验知识库、PRD、Review、定时巡检和状态闭环。
 
+## 快速导航
+
+| 想了解 | 入口 |
+|---|---|
+| octo-server 支持哪些产品能力 | `docs/capability-map.md` |
+| 目标仓源码结构如何组织 | `docs/source-audit/repo-structure.md` |
+| 目标仓自带文档/规格哪些有用 | `docs/upstream-reference-index.md` |
+| 具体源码问答依据 | `knowledge/00-index.md` |
+| API / 错误码 / 配置 / migration / workflow 索引 | `docs/source-audit/README.md` |
+| 提 Bug / Feature / Question / Review | GitHub Issues 与 `.github/ISSUE_TEMPLATE/` |
+| 写 PRD | `prd/TEMPLATE.md` |
+| 做 Review | `review/REVIEW_CHECKLIST.md` |
+| 校验引用 | `scripts/verify_citations.py` |
+
 ## 目标
 
 - 为 `octo-server` 建立源码可核验知识库。
@@ -40,16 +54,6 @@
 来源: modules/bot_api/auth.go#L12-L21；来源: modules/bot_api/auth.go#L22-L31；来源: modules/bot_api/auth.go#L32-L41；来源: modules/bot_api/auth.go#L42-L48
 ```
 
-
-## 关键入口
-
-- 能力地图：`docs/capability-map.md`
-- 目标仓结构总览：`docs/source-audit/repo-structure.md`
-- 目标仓参考材料：`docs/upstream-reference-index.md`
-- 九大知识库：`knowledge/00-index.md`
-- 源码索引：`docs/source-audit/README.md`
-- PRD 模板：`prd/TEMPLATE.md`
-- Review checklist：`review/REVIEW_CHECKLIST.md`
 
 ## 九大知识领域
 
