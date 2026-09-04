@@ -8,8 +8,12 @@
 
 ### 证据
 
-- 来源: pkg/i18n/codes/registry.go#L28-L43
-- 来源: pkg/i18n/codes/registry.go#L74-L104
+- 来源: pkg/i18n/codes/registry.go#L28-L37
+- 来源: pkg/i18n/codes/registry.go#L38-L43
+- 来源: pkg/i18n/codes/registry.go#L74-L83
+- 来源: pkg/i18n/codes/registry.go#L84-L93
+- 来源: pkg/i18n/codes/registry.go#L94-L103
+- 来源: pkg/i18n/codes/registry.go#L104-L104
 
 ### 适用范围
 
@@ -32,8 +36,11 @@
 
 ### 证据
 
-- 来源: pkg/httperr/respond.go#L13-L31
-- 来源: pkg/httperr/respond.go#L53-L81
+- 来源: pkg/httperr/respond.go#L13-L22
+- 来源: pkg/httperr/respond.go#L23-L31
+- 来源: pkg/httperr/respond.go#L53-L62
+- 来源: pkg/httperr/respond.go#L63-L72
+- 来源: pkg/httperr/respond.go#L73-L81
 
 ### 适用范围
 
@@ -56,7 +63,9 @@
 
 ### 证据
 
-- 来源: pkg/i18n/codes/registry.go#L45-L67
+- 来源: pkg/i18n/codes/registry.go#L45-L54
+- 来源: pkg/i18n/codes/registry.go#L55-L64
+- 来源: pkg/i18n/codes/registry.go#L65-L67
 - 来源: pkg/i18n/codes/shared.go#L96-L106
 - 来源: pkg/httperr/respond.go#L73-L80
 
@@ -83,10 +92,28 @@ renderer 具体输出格式在 `pkg/i18n`，需继续补充。
 
 #### 证据
 
-- 来源: pkg/i18n/codes/registry.go#L74-L104
-- 来源: pkg/errcode/agent_mail_gateway.go#L9-L42
-- 来源: pkg/errcode/app_bot.go#L20-L100
-- 来源: pkg/errcode/bot_api.go#L21-L68
+- 来源: pkg/i18n/codes/registry.go#L74-L83
+- 来源: pkg/i18n/codes/registry.go#L84-L93
+- 来源: pkg/i18n/codes/registry.go#L94-L103
+- 来源: pkg/i18n/codes/registry.go#L104-L104
+- 来源: pkg/errcode/agent_mail_gateway.go#L9-L18
+- 来源: pkg/errcode/agent_mail_gateway.go#L19-L28
+- 来源: pkg/errcode/agent_mail_gateway.go#L29-L38
+- 来源: pkg/errcode/agent_mail_gateway.go#L39-L42
+- 来源: pkg/errcode/app_bot.go#L20-L29
+- 来源: pkg/errcode/app_bot.go#L30-L39
+- 来源: pkg/errcode/app_bot.go#L40-L49
+- 来源: pkg/errcode/app_bot.go#L50-L59
+- 来源: pkg/errcode/app_bot.go#L60-L69
+- 来源: pkg/errcode/app_bot.go#L70-L79
+- 来源: pkg/errcode/app_bot.go#L80-L89
+- 来源: pkg/errcode/app_bot.go#L90-L99
+- 来源: pkg/errcode/app_bot.go#L100-L100
+- 来源: pkg/errcode/bot_api.go#L21-L30
+- 来源: pkg/errcode/bot_api.go#L31-L40
+- 来源: pkg/errcode/bot_api.go#L41-L50
+- 来源: pkg/errcode/bot_api.go#L51-L60
+- 来源: pkg/errcode/bot_api.go#L61-L68
 
 #### 适用范围
 
@@ -104,7 +131,10 @@ renderer 具体输出格式在 `pkg/i18n`，需继续补充。
 
 #### 证据
 
-- 来源: pkg/i18n/renderer.go#L27-L65
+- 来源: pkg/i18n/renderer.go#L27-L36
+- 来源: pkg/i18n/renderer.go#L37-L46
+- 来源: pkg/i18n/renderer.go#L47-L56
+- 来源: pkg/i18n/renderer.go#L57-L65
 - 来源: main.go#L197-L205
 - 来源: main.go#L253-L257
 
@@ -124,8 +154,12 @@ renderer 具体输出格式在 `pkg/i18n`，需继续补充。
 
 #### 证据
 
-- 来源: pkg/httperr/respond.go#L13-L31
-- 来源: pkg/httperr/respond.go#L49-L81
+- 来源: pkg/httperr/respond.go#L13-L22
+- 来源: pkg/httperr/respond.go#L23-L31
+- 来源: pkg/httperr/respond.go#L49-L58
+- 来源: pkg/httperr/respond.go#L59-L68
+- 来源: pkg/httperr/respond.go#L69-L78
+- 来源: pkg/httperr/respond.go#L79-L81
 - 来源: modules/app_bot/api_i18n.go#L10-L17
 - 来源: modules/bot_api/api_i18n.go#L13-L27
 
@@ -145,9 +179,14 @@ renderer 具体输出格式在 `pkg/i18n`，需继续补充。
 
 #### 证据
 
-- 来源: pkg/i18n/codes/registry.go#L28-L43
-- 来源: pkg/i18n/codes/registry.go#L74-L104
-- 来源: pkg/i18n/codes/shared.go#L5-L20
+- 来源: pkg/i18n/codes/registry.go#L28-L37
+- 来源: pkg/i18n/codes/registry.go#L38-L43
+- 来源: pkg/i18n/codes/registry.go#L74-L83
+- 来源: pkg/i18n/codes/registry.go#L84-L93
+- 来源: pkg/i18n/codes/registry.go#L94-L103
+- 来源: pkg/i18n/codes/registry.go#L104-L104
+- 来源: pkg/i18n/codes/shared.go#L5-L14
+- 来源: pkg/i18n/codes/shared.go#L15-L20
 - 来源: pkg/errcode/server.go#L118-L120
 
 #### 适用范围
@@ -166,10 +205,16 @@ renderer 具体输出格式在 `pkg/i18n`，需继续补充。
 
 #### 证据
 
-- 来源: pkg/i18n/codes/registry.go#L45-L67
+- 来源: pkg/i18n/codes/registry.go#L45-L54
+- 来源: pkg/i18n/codes/registry.go#L55-L64
+- 来源: pkg/i18n/codes/registry.go#L65-L67
 - 来源: pkg/i18n/details.go#L10-L23
-- 来源: pkg/i18n/details.go#L25-L44
-- 来源: pkg/i18n/renderer.go#L68-L98
+- 来源: pkg/i18n/details.go#L25-L34
+- 来源: pkg/i18n/details.go#L35-L44
+- 来源: pkg/i18n/renderer.go#L68-L77
+- 来源: pkg/i18n/renderer.go#L78-L87
+- 来源: pkg/i18n/renderer.go#L88-L97
+- 来源: pkg/i18n/renderer.go#L98-L98
 - 来源: pkg/i18n/codes/shared.go#L96-L106
 
 #### 适用范围
@@ -188,14 +233,28 @@ API 错误文案走 i18n。默认语言来自 `OCTO_DEFAULT_LANGUAGE`，默认�
 
 #### 证据
 
-- 来源: pkg/i18n/config.go#L10-L26
-- 来源: pkg/i18n/config.go#L28-L63
-- 来源: pkg/i18n/lang.go#L12-L32
-- 来源: pkg/i18n/lang.go#L50-L83
-- 来源: pkg/i18n/ctx.go#L36-L65
-- 来源: pkg/i18n/middleware.go#L16-L35
+- 来源: pkg/i18n/config.go#L10-L19
+- 来源: pkg/i18n/config.go#L20-L26
+- 来源: pkg/i18n/config.go#L28-L37
+- 来源: pkg/i18n/config.go#L38-L47
+- 来源: pkg/i18n/config.go#L48-L57
+- 来源: pkg/i18n/config.go#L58-L63
+- 来源: pkg/i18n/lang.go#L12-L21
+- 来源: pkg/i18n/lang.go#L22-L31
+- 来源: pkg/i18n/lang.go#L32-L32
+- 来源: pkg/i18n/lang.go#L50-L59
+- 来源: pkg/i18n/lang.go#L60-L69
+- 来源: pkg/i18n/lang.go#L70-L79
+- 来源: pkg/i18n/lang.go#L80-L83
+- 来源: pkg/i18n/ctx.go#L36-L45
+- 来源: pkg/i18n/ctx.go#L46-L55
+- 来源: pkg/i18n/ctx.go#L56-L65
+- 来源: pkg/i18n/middleware.go#L16-L25
+- 来源: pkg/i18n/middleware.go#L26-L35
 - 来源: main.go#L197-L205
-- 来源: main.go#L231-L257
+- 来源: main.go#L231-L240
+- 来源: main.go#L241-L250
+- 来源: main.go#L251-L257
 
 #### 适用范围
 
@@ -213,8 +272,15 @@ API 错误文案走 i18n。默认语言来自 `OCTO_DEFAULT_LANGUAGE`，默认�
 
 #### 证据
 
-- 来源: pkg/i18n/codes/shared.go#L21-L75
-- 来源: pkg/i18n/codes/shared.go#L77-L106
+- 来源: pkg/i18n/codes/shared.go#L21-L30
+- 来源: pkg/i18n/codes/shared.go#L31-L40
+- 来源: pkg/i18n/codes/shared.go#L41-L50
+- 来源: pkg/i18n/codes/shared.go#L51-L60
+- 来源: pkg/i18n/codes/shared.go#L61-L70
+- 来源: pkg/i18n/codes/shared.go#L71-L75
+- 来源: pkg/i18n/codes/shared.go#L77-L86
+- 来源: pkg/i18n/codes/shared.go#L87-L96
+- 来源: pkg/i18n/codes/shared.go#L97-L106
 
 #### 适用范围
 
@@ -232,14 +298,76 @@ API 错误文案走 i18n。默认语言来自 `OCTO_DEFAULT_LANGUAGE`，默认�
 
 #### 证据
 
-- 来源: pkg/errcode/user.go#L21-L92
-- 来源: pkg/errcode/user.go#L94-L156
-- 来源: pkg/errcode/user.go#L206-L309
-- 来源: pkg/errcode/group.go#L15-L63
-- 来源: pkg/errcode/group.go#L64-L183
-- 来源: pkg/errcode/group.go#L185-L247
-- 来源: pkg/errcode/space.go#L15-L107
-- 来源: pkg/errcode/space.go#L109-L207
+- 来源: pkg/errcode/user.go#L21-L30
+- 来源: pkg/errcode/user.go#L31-L40
+- 来源: pkg/errcode/user.go#L41-L50
+- 来源: pkg/errcode/user.go#L51-L60
+- 来源: pkg/errcode/user.go#L61-L70
+- 来源: pkg/errcode/user.go#L71-L80
+- 来源: pkg/errcode/user.go#L81-L90
+- 来源: pkg/errcode/user.go#L91-L92
+- 来源: pkg/errcode/user.go#L94-L103
+- 来源: pkg/errcode/user.go#L104-L113
+- 来源: pkg/errcode/user.go#L114-L123
+- 来源: pkg/errcode/user.go#L124-L133
+- 来源: pkg/errcode/user.go#L134-L143
+- 来源: pkg/errcode/user.go#L144-L153
+- 来源: pkg/errcode/user.go#L154-L156
+- 来源: pkg/errcode/user.go#L206-L215
+- 来源: pkg/errcode/user.go#L216-L225
+- 来源: pkg/errcode/user.go#L226-L235
+- 来源: pkg/errcode/user.go#L236-L245
+- 来源: pkg/errcode/user.go#L246-L255
+- 来源: pkg/errcode/user.go#L256-L265
+- 来源: pkg/errcode/user.go#L266-L275
+- 来源: pkg/errcode/user.go#L276-L285
+- 来源: pkg/errcode/user.go#L286-L295
+- 来源: pkg/errcode/user.go#L296-L305
+- 来源: pkg/errcode/user.go#L306-L309
+- 来源: pkg/errcode/group.go#L15-L24
+- 来源: pkg/errcode/group.go#L25-L34
+- 来源: pkg/errcode/group.go#L35-L44
+- 来源: pkg/errcode/group.go#L45-L54
+- 来源: pkg/errcode/group.go#L55-L63
+- 来源: pkg/errcode/group.go#L64-L73
+- 来源: pkg/errcode/group.go#L74-L83
+- 来源: pkg/errcode/group.go#L84-L93
+- 来源: pkg/errcode/group.go#L94-L103
+- 来源: pkg/errcode/group.go#L104-L113
+- 来源: pkg/errcode/group.go#L114-L123
+- 来源: pkg/errcode/group.go#L124-L133
+- 来源: pkg/errcode/group.go#L134-L143
+- 来源: pkg/errcode/group.go#L144-L153
+- 来源: pkg/errcode/group.go#L154-L163
+- 来源: pkg/errcode/group.go#L164-L173
+- 来源: pkg/errcode/group.go#L174-L183
+- 来源: pkg/errcode/group.go#L185-L194
+- 来源: pkg/errcode/group.go#L195-L204
+- 来源: pkg/errcode/group.go#L205-L214
+- 来源: pkg/errcode/group.go#L215-L224
+- 来源: pkg/errcode/group.go#L225-L234
+- 来源: pkg/errcode/group.go#L235-L244
+- 来源: pkg/errcode/group.go#L245-L247
+- 来源: pkg/errcode/space.go#L15-L24
+- 来源: pkg/errcode/space.go#L25-L34
+- 来源: pkg/errcode/space.go#L35-L44
+- 来源: pkg/errcode/space.go#L45-L54
+- 来源: pkg/errcode/space.go#L55-L64
+- 来源: pkg/errcode/space.go#L65-L74
+- 来源: pkg/errcode/space.go#L75-L84
+- 来源: pkg/errcode/space.go#L85-L94
+- 来源: pkg/errcode/space.go#L95-L104
+- 来源: pkg/errcode/space.go#L105-L107
+- 来源: pkg/errcode/space.go#L109-L118
+- 来源: pkg/errcode/space.go#L119-L128
+- 来源: pkg/errcode/space.go#L129-L138
+- 来源: pkg/errcode/space.go#L139-L148
+- 来源: pkg/errcode/space.go#L149-L158
+- 来源: pkg/errcode/space.go#L159-L168
+- 来源: pkg/errcode/space.go#L169-L178
+- 来源: pkg/errcode/space.go#L179-L188
+- 来源: pkg/errcode/space.go#L189-L198
+- 来源: pkg/errcode/space.go#L199-L207
 
 #### 适用范围
 
@@ -260,9 +388,21 @@ API 错误文案走 i18n。默认语言来自 `OCTO_DEFAULT_LANGUAGE`，默认�
 - 来源: pkg/errcode/bot_api.go#L9-L20
 - 来源: pkg/errcode/bot_api.go#L278-L290
 - 来源: pkg/errcode/bot_api.go#L347-L357
-- 来源: modules/bot_api/api_i18n.go#L87-L113
-- 来源: modules/bot_api/bot_api.go#L298-L339
-- 来源: modules/bot_api/bot_api.go#L400-L467
+- 来源: modules/bot_api/api_i18n.go#L87-L96
+- 来源: modules/bot_api/api_i18n.go#L97-L106
+- 来源: modules/bot_api/api_i18n.go#L107-L113
+- 来源: modules/bot_api/bot_api.go#L298-L307
+- 来源: modules/bot_api/bot_api.go#L308-L317
+- 来源: modules/bot_api/bot_api.go#L318-L327
+- 来源: modules/bot_api/bot_api.go#L328-L337
+- 来源: modules/bot_api/bot_api.go#L338-L339
+- 来源: modules/bot_api/bot_api.go#L400-L409
+- 来源: modules/bot_api/bot_api.go#L410-L419
+- 来源: modules/bot_api/bot_api.go#L420-L429
+- 来源: modules/bot_api/bot_api.go#L430-L439
+- 来源: modules/bot_api/bot_api.go#L440-L449
+- 来源: modules/bot_api/bot_api.go#L450-L459
+- 来源: modules/bot_api/bot_api.go#L460-L467
 
 #### 适用范围
 
@@ -280,10 +420,25 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 
 #### 证据
 
-- 来源: modules/bot_api/ratelimit.go#L21-L48
-- 来源: modules/bot_api/ratelimit.go#L49-L70
-- 来源: pkg/ratelimit/limiter.go#L60-L120
-- 来源: modules/bot_api/ratelimit.go#L390-L448
+- 来源: modules/bot_api/ratelimit.go#L21-L30
+- 来源: modules/bot_api/ratelimit.go#L31-L40
+- 来源: modules/bot_api/ratelimit.go#L41-L48
+- 来源: modules/bot_api/ratelimit.go#L49-L58
+- 来源: modules/bot_api/ratelimit.go#L59-L68
+- 来源: modules/bot_api/ratelimit.go#L69-L70
+- 来源: pkg/ratelimit/limiter.go#L60-L69
+- 来源: pkg/ratelimit/limiter.go#L70-L79
+- 来源: pkg/ratelimit/limiter.go#L80-L89
+- 来源: pkg/ratelimit/limiter.go#L90-L99
+- 来源: pkg/ratelimit/limiter.go#L100-L109
+- 来源: pkg/ratelimit/limiter.go#L110-L119
+- 来源: pkg/ratelimit/limiter.go#L120-L120
+- 来源: modules/bot_api/ratelimit.go#L390-L399
+- 来源: modules/bot_api/ratelimit.go#L400-L409
+- 来源: modules/bot_api/ratelimit.go#L410-L419
+- 来源: modules/bot_api/ratelimit.go#L420-L429
+- 来源: modules/bot_api/ratelimit.go#L430-L439
+- 来源: modules/bot_api/ratelimit.go#L440-L448
 - 来源: pkg/i18n/codes/shared.go#L67-L75
 
 #### 适用范围
@@ -302,10 +457,26 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 
 #### 证据
 
-- 来源: main.go#L69-L96
-- 来源: modules/bot_api/bot_api.go#L298-L339
-- 来源: modules/bot_api/bot_api.go#L341-L375
-- 来源: modules/bot_api/ratelimit.go#L72-L147
+- 来源: main.go#L69-L78
+- 来源: main.go#L79-L88
+- 来源: main.go#L89-L96
+- 来源: modules/bot_api/bot_api.go#L298-L307
+- 来源: modules/bot_api/bot_api.go#L308-L317
+- 来源: modules/bot_api/bot_api.go#L318-L327
+- 来源: modules/bot_api/bot_api.go#L328-L337
+- 来源: modules/bot_api/bot_api.go#L338-L339
+- 来源: modules/bot_api/bot_api.go#L341-L350
+- 来源: modules/bot_api/bot_api.go#L351-L360
+- 来源: modules/bot_api/bot_api.go#L361-L370
+- 来源: modules/bot_api/bot_api.go#L371-L375
+- 来源: modules/bot_api/ratelimit.go#L72-L81
+- 来源: modules/bot_api/ratelimit.go#L82-L91
+- 来源: modules/bot_api/ratelimit.go#L92-L101
+- 来源: modules/bot_api/ratelimit.go#L102-L111
+- 来源: modules/bot_api/ratelimit.go#L112-L121
+- 来源: modules/bot_api/ratelimit.go#L122-L131
+- 来源: modules/bot_api/ratelimit.go#L132-L141
+- 来源: modules/bot_api/ratelimit.go#L142-L147
 - 来源: modules/bot_api/ratelimit.go#L167-L174
 
 #### 适用范围
@@ -324,11 +495,21 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 
 #### 证据
 
-- 来源: modules/internal_resolve/api.go#L122-L157
+- 来源: modules/internal_resolve/api.go#L122-L131
+- 来源: modules/internal_resolve/api.go#L132-L141
+- 来源: modules/internal_resolve/api.go#L142-L151
+- 来源: modules/internal_resolve/api.go#L152-L157
 - 来源: modules/internal_resolve/api.go#L159-L172
-- 来源: modules/internal_resolve/api.go#L196-L215
-- 来源: modules/internal_resolve/api.go#L215-L260
-- 来源: modules/internal_resolve/api_i18n.go#L10-L36
+- 来源: modules/internal_resolve/api.go#L196-L205
+- 来源: modules/internal_resolve/api.go#L206-L215
+- 来源: modules/internal_resolve/api.go#L215-L224
+- 来源: modules/internal_resolve/api.go#L225-L234
+- 来源: modules/internal_resolve/api.go#L235-L244
+- 来源: modules/internal_resolve/api.go#L245-L254
+- 来源: modules/internal_resolve/api.go#L255-L260
+- 来源: modules/internal_resolve/api_i18n.go#L10-L19
+- 来源: modules/internal_resolve/api_i18n.go#L20-L29
+- 来源: modules/internal_resolve/api_i18n.go#L30-L36
 
 #### 适用范围
 
@@ -346,11 +527,23 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 
 #### 证据
 
-- 来源: modules/bot_mention/api.go#L70-L89
-- 来源: modules/bot_mention/api.go#L91-L145
-- 来源: modules/bot_mention/api.go#L148-L180
-- 来源: modules/bot_mention/api_i18n.go#L13-L40
-- 来源: pkg/errcode/bot_mention.go#L9-L25
+- 来源: modules/bot_mention/api.go#L70-L79
+- 来源: modules/bot_mention/api.go#L80-L89
+- 来源: modules/bot_mention/api.go#L91-L100
+- 来源: modules/bot_mention/api.go#L101-L110
+- 来源: modules/bot_mention/api.go#L111-L120
+- 来源: modules/bot_mention/api.go#L121-L130
+- 来源: modules/bot_mention/api.go#L131-L140
+- 来源: modules/bot_mention/api.go#L141-L145
+- 来源: modules/bot_mention/api.go#L148-L157
+- 来源: modules/bot_mention/api.go#L158-L167
+- 来源: modules/bot_mention/api.go#L168-L177
+- 来源: modules/bot_mention/api.go#L178-L180
+- 来源: modules/bot_mention/api_i18n.go#L13-L22
+- 来源: modules/bot_mention/api_i18n.go#L23-L32
+- 来源: modules/bot_mention/api_i18n.go#L33-L40
+- 来源: pkg/errcode/bot_mention.go#L9-L18
+- 来源: pkg/errcode/bot_mention.go#L19-L25
 
 #### 适用范围
 
@@ -369,8 +562,13 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 #### 证据
 
 - 来源: modules/agentmailgateway/api_i18n.go#L1-L10
-- 来源: modules/agentmailgateway/api_i18n_test.go#L9-L37
-- 来源: pkg/errcode/agent_mail_gateway.go#L9-L42
+- 来源: modules/agentmailgateway/api_i18n_test.go#L9-L18
+- 来源: modules/agentmailgateway/api_i18n_test.go#L19-L28
+- 来源: modules/agentmailgateway/api_i18n_test.go#L29-L37
+- 来源: pkg/errcode/agent_mail_gateway.go#L9-L18
+- 来源: pkg/errcode/agent_mail_gateway.go#L19-L28
+- 来源: pkg/errcode/agent_mail_gateway.go#L29-L38
+- 来源: pkg/errcode/agent_mail_gateway.go#L39-L42
 
 #### 适用范围
 

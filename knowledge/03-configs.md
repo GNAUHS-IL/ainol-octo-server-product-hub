@@ -31,7 +31,9 @@
 
 ### 证据
 
-- 来源: configs/tsdd.yaml#L21-L50
+- 来源: configs/tsdd.yaml#L21-L30
+- 来源: configs/tsdd.yaml#L31-L40
+- 来源: configs/tsdd.yaml#L41-L50
 
 ### 适用范围
 
@@ -55,7 +57,8 @@
 ### 证据
 
 - 来源: main.go#L152-L160
-- 来源: configs/tsdd.yaml#L52-L67
+- 来源: configs/tsdd.yaml#L52-L61
+- 来源: configs/tsdd.yaml#L62-L67
 
 ### 适用范围
 
@@ -78,7 +81,10 @@
 
 ### 证据
 
-- 来源: configs/tsdd.yaml#L69-L103
+- 来源: configs/tsdd.yaml#L69-L78
+- 来源: configs/tsdd.yaml#L79-L88
+- 来源: configs/tsdd.yaml#L89-L98
+- 来源: configs/tsdd.yaml#L99-L103
 
 ### 适用范围
 
@@ -103,13 +109,32 @@
 
 #### 证据
 
-- 来源: main.go#L138-L155
-- 来源: modules/oidc/config.go#L129-L153
-- 来源: modules/messages_search/config.go#L104-L132
-- 来源: modules/thread/archive_config.go#L24-L51
-- 来源: modules/internal_resolve/config.go#L23-L83
-- 来源: modules/voice_adapter/config.go#L9-L53
-- 来源: modules/opanalytics/config.go#L13-L37
+- 来源: main.go#L138-L147
+- 来源: main.go#L148-L155
+- 来源: modules/oidc/config.go#L129-L138
+- 来源: modules/oidc/config.go#L139-L148
+- 来源: modules/oidc/config.go#L149-L153
+- 来源: modules/messages_search/config.go#L104-L113
+- 来源: modules/messages_search/config.go#L114-L123
+- 来源: modules/messages_search/config.go#L124-L132
+- 来源: modules/thread/archive_config.go#L24-L33
+- 来源: modules/thread/archive_config.go#L34-L43
+- 来源: modules/thread/archive_config.go#L44-L51
+- 来源: modules/internal_resolve/config.go#L23-L32
+- 来源: modules/internal_resolve/config.go#L33-L42
+- 来源: modules/internal_resolve/config.go#L43-L52
+- 来源: modules/internal_resolve/config.go#L53-L62
+- 来源: modules/internal_resolve/config.go#L63-L72
+- 来源: modules/internal_resolve/config.go#L73-L82
+- 来源: modules/internal_resolve/config.go#L83-L83
+- 来源: modules/voice_adapter/config.go#L9-L18
+- 来源: modules/voice_adapter/config.go#L19-L28
+- 来源: modules/voice_adapter/config.go#L29-L38
+- 来源: modules/voice_adapter/config.go#L39-L48
+- 来源: modules/voice_adapter/config.go#L49-L53
+- 来源: modules/opanalytics/config.go#L13-L22
+- 来源: modules/opanalytics/config.go#L23-L32
+- 来源: modules/opanalytics/config.go#L33-L37
 
 #### 适用范围
 
@@ -166,11 +191,25 @@ session runtime 初始会把签发 fence 住，等模块 migration 后调用 `In
 
 #### 证据
 
-- 来源: pkg/auth/runtime.go#L46-L75
+- 来源: pkg/auth/runtime.go#L46-L55
+- 来源: pkg/auth/runtime.go#L56-L65
+- 来源: pkg/auth/runtime.go#L66-L75
 - 来源: pkg/auth/runtime.go#L89-L101
-- 来源: pkg/auth/runtime.go#L133-L181
-- 来源: pkg/auth/session_policy.go#L10-L40
-- 来源: pkg/auth/session_policy.go#L66-L122
+- 来源: pkg/auth/runtime.go#L133-L142
+- 来源: pkg/auth/runtime.go#L143-L152
+- 来源: pkg/auth/runtime.go#L153-L162
+- 来源: pkg/auth/runtime.go#L163-L172
+- 来源: pkg/auth/runtime.go#L173-L181
+- 来源: pkg/auth/session_policy.go#L10-L19
+- 来源: pkg/auth/session_policy.go#L20-L29
+- 来源: pkg/auth/session_policy.go#L30-L39
+- 来源: pkg/auth/session_policy.go#L40-L40
+- 来源: pkg/auth/session_policy.go#L66-L75
+- 来源: pkg/auth/session_policy.go#L76-L85
+- 来源: pkg/auth/session_policy.go#L86-L95
+- 来源: pkg/auth/session_policy.go#L96-L105
+- 来源: pkg/auth/session_policy.go#L106-L115
+- 来源: pkg/auth/session_policy.go#L116-L122
 
 #### 适用范围
 
@@ -188,7 +227,8 @@ session runtime 初始会把签发 fence 住，等模块 migration 后调用 `In
 
 #### 证据
 
-- 来源: configs/tsdd.yaml#L52-L67
+- 来源: configs/tsdd.yaml#L52-L61
+- 来源: configs/tsdd.yaml#L62-L67
 - 来源: main.go#L152-L160
 - 来源: modules/base/common/testcode.go#L10-L24
 - 来源: modules/base/common/testcode.go#L41-L49
@@ -209,8 +249,17 @@ OIDC 模块注释说明当前 `octo-lib` 暂不支持 OIDC 配置块，因此 `L
 
 #### 证据
 
-- 来源: modules/oidc/config.go#L129-L153
-- 来源: modules/oidc/config.go#L155-L230
+- 来源: modules/oidc/config.go#L129-L138
+- 来源: modules/oidc/config.go#L139-L148
+- 来源: modules/oidc/config.go#L149-L153
+- 来源: modules/oidc/config.go#L155-L164
+- 来源: modules/oidc/config.go#L165-L174
+- 来源: modules/oidc/config.go#L175-L184
+- 来源: modules/oidc/config.go#L185-L194
+- 来源: modules/oidc/config.go#L195-L204
+- 来源: modules/oidc/config.go#L205-L214
+- 来源: modules/oidc/config.go#L215-L224
+- 来源: modules/oidc/config.go#L225-L230
 - 来源: modules/oidc/config.go#L252-L264
 
 #### 适用范围
@@ -229,11 +278,29 @@ OIDC provider 的上游可用性、Discovery 返回内容和真实回调地址�
 
 #### 证据
 
-- 来源: pkg/oidcboot/rules.go#L1-L33
-- 来源: pkg/oidcboot/rules.go#L45-L89
-- 来源: pkg/oidcboot/rules.go#L251-L279
-- 来源: pkg/oidcboot/rules.go#L281-L316
-- 来源: modules/oidc/config.go#L272-L335
+- 来源: pkg/oidcboot/rules.go#L1-L10
+- 来源: pkg/oidcboot/rules.go#L11-L20
+- 来源: pkg/oidcboot/rules.go#L21-L30
+- 来源: pkg/oidcboot/rules.go#L31-L33
+- 来源: pkg/oidcboot/rules.go#L45-L54
+- 来源: pkg/oidcboot/rules.go#L55-L64
+- 来源: pkg/oidcboot/rules.go#L65-L74
+- 来源: pkg/oidcboot/rules.go#L75-L84
+- 来源: pkg/oidcboot/rules.go#L85-L89
+- 来源: pkg/oidcboot/rules.go#L251-L260
+- 来源: pkg/oidcboot/rules.go#L261-L270
+- 来源: pkg/oidcboot/rules.go#L271-L279
+- 来源: pkg/oidcboot/rules.go#L281-L290
+- 来源: pkg/oidcboot/rules.go#L291-L300
+- 来源: pkg/oidcboot/rules.go#L301-L310
+- 来源: pkg/oidcboot/rules.go#L311-L316
+- 来源: modules/oidc/config.go#L272-L281
+- 来源: modules/oidc/config.go#L282-L291
+- 来源: modules/oidc/config.go#L292-L301
+- 来源: modules/oidc/config.go#L302-L311
+- 来源: modules/oidc/config.go#L312-L321
+- 来源: modules/oidc/config.go#L322-L331
+- 来源: modules/oidc/config.go#L332-L335
 
 #### 适用范围
 
@@ -251,9 +318,17 @@ OIDC provider 的上游可用性、Discovery 返回内容和真实回调地址�
 
 #### 证据
 
-- 来源: modules/common/system_settings.go#L25-L60
-- 来源: modules/common/system_settings.go#L72-L100
-- 来源: modules/common/system_setting_schema.go#L69-L104
+- 来源: modules/common/system_settings.go#L25-L34
+- 来源: modules/common/system_settings.go#L35-L44
+- 来源: modules/common/system_settings.go#L45-L54
+- 来源: modules/common/system_settings.go#L55-L60
+- 来源: modules/common/system_settings.go#L72-L81
+- 来源: modules/common/system_settings.go#L82-L91
+- 来源: modules/common/system_settings.go#L92-L100
+- 来源: modules/common/system_setting_schema.go#L69-L78
+- 来源: modules/common/system_setting_schema.go#L79-L88
+- 来源: modules/common/system_setting_schema.go#L89-L98
+- 来源: modules/common/system_setting_schema.go#L99-L104
 
 #### 适用范围
 
@@ -271,9 +346,16 @@ OIDC provider 的上游可用性、Discovery 返回内容和真实回调地址�
 
 #### 证据
 
-- 来源: modules/common/system_settings.go#L427-L449
-- 来源: modules/common/system_settings.go#L465-L489
-- 来源: pkg/oidcboot/rules.go#L1-L33
+- 来源: modules/common/system_settings.go#L427-L436
+- 来源: modules/common/system_settings.go#L437-L446
+- 来源: modules/common/system_settings.go#L447-L449
+- 来源: modules/common/system_settings.go#L465-L474
+- 来源: modules/common/system_settings.go#L475-L484
+- 来源: modules/common/system_settings.go#L485-L489
+- 来源: pkg/oidcboot/rules.go#L1-L10
+- 来源: pkg/oidcboot/rules.go#L11-L20
+- 来源: pkg/oidcboot/rules.go#L21-L30
+- 来源: pkg/oidcboot/rules.go#L31-L33
 
 #### 适用范围
 
@@ -292,8 +374,13 @@ GitHub/Gitee OAuth 上游是否可用不由该本地检查保证，只校验 cli
 #### 证据
 
 - 来源: modules/common/system_setting_schema.go#L115-L123
-- 来源: modules/common/system_settings.go#L977-L1004
-- 来源: modules/common/system_settings.go#L1006-L1039
+- 来源: modules/common/system_settings.go#L977-L986
+- 来源: modules/common/system_settings.go#L987-L996
+- 来源: modules/common/system_settings.go#L997-L1004
+- 来源: modules/common/system_settings.go#L1006-L1015
+- 来源: modules/common/system_settings.go#L1016-L1025
+- 来源: modules/common/system_settings.go#L1026-L1035
+- 来源: modules/common/system_settings.go#L1036-L1039
 - 来源: modules/common/system_settings.go#L1125-L1135
 
 #### 适用范围
@@ -312,11 +399,28 @@ SMTP 具体字段来自 support email 相关 getter，本轮未逐项列全。
 
 #### 证据
 
-- 来源: configs/tsdd.yaml#L69-L103
-- 来源: modules/file/service.go#L58-L99
-- 来源: modules/file/service.go#L139-L160
-- 来源: modules/file/service_minio.go#L190-L217
-- 来源: modules/file/service_minio.go#L242-L311
+- 来源: configs/tsdd.yaml#L69-L78
+- 来源: configs/tsdd.yaml#L79-L88
+- 来源: configs/tsdd.yaml#L89-L98
+- 来源: configs/tsdd.yaml#L99-L103
+- 来源: modules/file/service.go#L58-L67
+- 来源: modules/file/service.go#L68-L77
+- 来源: modules/file/service.go#L78-L87
+- 来源: modules/file/service.go#L88-L97
+- 来源: modules/file/service.go#L98-L99
+- 来源: modules/file/service.go#L139-L148
+- 来源: modules/file/service.go#L149-L158
+- 来源: modules/file/service.go#L159-L160
+- 来源: modules/file/service_minio.go#L190-L199
+- 来源: modules/file/service_minio.go#L200-L209
+- 来源: modules/file/service_minio.go#L210-L217
+- 来源: modules/file/service_minio.go#L242-L251
+- 来源: modules/file/service_minio.go#L252-L261
+- 来源: modules/file/service_minio.go#L262-L271
+- 来源: modules/file/service_minio.go#L272-L281
+- 来源: modules/file/service_minio.go#L282-L291
+- 来源: modules/file/service_minio.go#L292-L301
+- 来源: modules/file/service_minio.go#L302-L311
 
 #### 适用范围
 
@@ -334,8 +438,16 @@ Tencent COS、AWS S3、Qiniu、SeaweedFS 的全部签名/下载实现细节需�
 
 #### 证据
 
-- 来源: modules/messages_search/config.go#L10-L72
-- 来源: modules/messages_search/config.go#L104-L132
+- 来源: modules/messages_search/config.go#L10-L19
+- 来源: modules/messages_search/config.go#L20-L29
+- 来源: modules/messages_search/config.go#L30-L39
+- 来源: modules/messages_search/config.go#L40-L49
+- 来源: modules/messages_search/config.go#L50-L59
+- 来源: modules/messages_search/config.go#L60-L69
+- 来源: modules/messages_search/config.go#L70-L72
+- 来源: modules/messages_search/config.go#L104-L113
+- 来源: modules/messages_search/config.go#L114-L123
+- 来源: modules/messages_search/config.go#L124-L132
 
 #### 适用范围
 
@@ -353,9 +465,16 @@ OpenSearch 索引结构和 DSL 拼接需在 API/存储或消息搜索专题继�
 
 #### 证据
 
-- 来源: modules/internal_resolve/config.go#L7-L22
-- 来源: modules/internal_resolve/config.go#L23-L54
-- 来源: modules/internal_resolve/config.go#L85-L117
+- 来源: modules/internal_resolve/config.go#L7-L16
+- 来源: modules/internal_resolve/config.go#L17-L22
+- 来源: modules/internal_resolve/config.go#L23-L32
+- 来源: modules/internal_resolve/config.go#L33-L42
+- 来源: modules/internal_resolve/config.go#L43-L52
+- 来源: modules/internal_resolve/config.go#L53-L54
+- 来源: modules/internal_resolve/config.go#L85-L94
+- 来源: modules/internal_resolve/config.go#L95-L104
+- 来源: modules/internal_resolve/config.go#L105-L114
+- 来源: modules/internal_resolve/config.go#L115-L117
 
 #### 适用范围
 
@@ -373,10 +492,14 @@ OpenSearch 索引结构和 DSL 拼接需在 API/存储或消息搜索专题继�
 
 #### 证据
 
-- 来源: modules/common/system_setting_schema.go#L47-L67
+- 来源: modules/common/system_setting_schema.go#L47-L56
+- 来源: modules/common/system_setting_schema.go#L57-L66
+- 来源: modules/common/system_setting_schema.go#L67-L67
 - 来源: modules/common/system_setting_schema.go#L152-L165
 - 来源: modules/thread/archive_config.go#L10-L22
-- 来源: modules/thread/archive_config.go#L24-L51
+- 来源: modules/thread/archive_config.go#L24-L33
+- 来源: modules/thread/archive_config.go#L34-L43
+- 来源: modules/thread/archive_config.go#L44-L51
 - 来源: modules/thread/archive_config.go#L104-L110
 
 #### 适用范围

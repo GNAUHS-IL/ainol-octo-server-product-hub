@@ -9,7 +9,8 @@
 ### 证据
 
 - 来源: pkg/db/mysql.go#L10-L18
-- 来源: pkg/db/mysql.go#L22-L38
+- 来源: pkg/db/mysql.go#L22-L31
+- 来源: pkg/db/mysql.go#L32-L38
 - 来源: pkg/db/mysql.go#L41-L50
 
 ### 适用范围
@@ -35,7 +36,9 @@
 
 - 来源: configs/tsdd.yaml#L26-L34
 - 来源: pkg/redis/options.go#L15-L24
-- 来源: pkg/redis/options.go#L58-L81
+- 来源: pkg/redis/options.go#L58-L67
+- 来源: pkg/redis/options.go#L68-L77
+- 来源: pkg/redis/options.go#L78-L81
 
 ### 适用范围
 
@@ -58,8 +61,12 @@
 
 ### 证据
 
-- 来源: configs/tsdd.yaml#L88-L103
-- 来源: configs/tsdd.yaml#L135-L170
+- 来源: configs/tsdd.yaml#L88-L97
+- 来源: configs/tsdd.yaml#L98-L103
+- 来源: configs/tsdd.yaml#L135-L144
+- 来源: configs/tsdd.yaml#L145-L154
+- 来源: configs/tsdd.yaml#L155-L164
+- 来源: configs/tsdd.yaml#L165-L170
 
 ### 适用范围
 
@@ -82,8 +89,11 @@ Tencent COS 配置实际字段和 service 实现需继续查 `modules/file/servi
 
 ### 证据
 
-- 来源: modules/file/api.go#L83-L99
-- 来源: modules/file/api.go#L101-L130
+- 来源: modules/file/api.go#L83-L92
+- 来源: modules/file/api.go#L93-L99
+- 来源: modules/file/api.go#L101-L110
+- 来源: modules/file/api.go#L111-L120
+- 来源: modules/file/api.go#L121-L130
 
 ### 适用范围
 
@@ -108,7 +118,9 @@ Tencent COS 配置实际字段和 service 实现需继续查 `modules/file/servi
 
 #### 证据
 
-- 来源: main.go#L456-L483
+- 来源: main.go#L456-L465
+- 来源: main.go#L466-L475
+- 来源: main.go#L476-L483
 - 来源: pkg/db/mysql.go#L41-L50
 - 来源: modules/thread/archive_config.go#L40-L51
 
@@ -129,7 +141,10 @@ Tencent COS 配置实际字段和 service 实现需继续查 `modules/file/servi
 #### 证据
 
 - 来源: main.go#L214-L218
-- 来源: main.go#L949-L986
+- 来源: main.go#L949-L958
+- 来源: main.go#L959-L968
+- 来源: main.go#L969-L978
+- 来源: main.go#L979-L986
 
 #### 适用范围
 
@@ -149,7 +164,9 @@ rollout 表结构和 lease key 命名在 `pkg/auth` / migration SQL 中，需要
 
 - 来源: main.go#L295-L305
 - 来源: pkg/redis/options.go#L15-L24
-- 来源: pkg/redis/options.go#L58-L81
+- 来源: pkg/redis/options.go#L58-L67
+- 来源: pkg/redis/options.go#L68-L77
+- 来源: pkg/redis/options.go#L78-L81
 
 #### 适用范围
 
@@ -167,8 +184,14 @@ rollout 表结构和 lease key 命名在 `pkg/auth` / migration SQL 中，需要
 
 #### 证据
 
-- 来源: modules/file/service.go#L58-L99
-- 来源: modules/file/service.go#L139-L160
+- 来源: modules/file/service.go#L58-L67
+- 来源: modules/file/service.go#L68-L77
+- 来源: modules/file/service.go#L78-L87
+- 来源: modules/file/service.go#L88-L97
+- 来源: modules/file/service.go#L98-L99
+- 来源: modules/file/service.go#L139-L148
+- 来源: modules/file/service.go#L149-L158
+- 来源: modules/file/service.go#L159-L160
 
 #### 适用范围
 
@@ -186,9 +209,21 @@ MinIO 预签名 client 使用 `publicEndpoint`，注释说明 SigV4 会把 host 
 
 #### 证据
 
-- 来源: modules/file/service_minio.go#L206-L263
-- 来源: modules/file/service_minio.go#L369-L414
-- 来源: modules/file/service_minio.go#L417-L450
+- 来源: modules/file/service_minio.go#L206-L215
+- 来源: modules/file/service_minio.go#L216-L225
+- 来源: modules/file/service_minio.go#L226-L235
+- 来源: modules/file/service_minio.go#L236-L245
+- 来源: modules/file/service_minio.go#L246-L255
+- 来源: modules/file/service_minio.go#L256-L263
+- 来源: modules/file/service_minio.go#L369-L378
+- 来源: modules/file/service_minio.go#L379-L388
+- 来源: modules/file/service_minio.go#L389-L398
+- 来源: modules/file/service_minio.go#L399-L408
+- 来源: modules/file/service_minio.go#L409-L414
+- 来源: modules/file/service_minio.go#L417-L426
+- 来源: modules/file/service_minio.go#L427-L436
+- 来源: modules/file/service_minio.go#L437-L446
+- 来源: modules/file/service_minio.go#L447-L450
 
 #### 适用范围
 
@@ -206,7 +241,13 @@ Tencent COS 的 `PresignedPutURL` 会根据 BucketURL 形状选择签名 client�
 
 #### 证据
 
-- 来源: modules/file/service_cos.go#L300-L365
+- 来源: modules/file/service_cos.go#L300-L309
+- 来源: modules/file/service_cos.go#L310-L319
+- 来源: modules/file/service_cos.go#L320-L329
+- 来源: modules/file/service_cos.go#L330-L339
+- 来源: modules/file/service_cos.go#L340-L349
+- 来源: modules/file/service_cos.go#L350-L359
+- 来源: modules/file/service_cos.go#L360-L365
 
 #### 适用范围
 
@@ -224,8 +265,13 @@ COS `publicEndpoint` 对 BucketURL 的完整解析在同文件前半段，必要
 
 #### 证据
 
-- 来源: modules/common/system_settings.go#L38-L64
-- 来源: modules/common/system_settings.go#L145-L181
+- 来源: modules/common/system_settings.go#L38-L47
+- 来源: modules/common/system_settings.go#L48-L57
+- 来源: modules/common/system_settings.go#L58-L64
+- 来源: modules/common/system_settings.go#L145-L154
+- 来源: modules/common/system_settings.go#L155-L164
+- 来源: modules/common/system_settings.go#L165-L174
+- 来源: modules/common/system_settings.go#L175-L181
 
 #### 适用范围
 
@@ -244,7 +290,8 @@ schema 中 `mail.enabled` 只控制客户端 Agent Mail 入口展示，不替代
 #### 证据
 
 - 来源: modules/common/system_setting_schema.go#L289-L292
-- 来源: modules/common/system_setting_schema.go#L369-L384
+- 来源: modules/common/system_setting_schema.go#L369-L378
+- 来源: modules/common/system_setting_schema.go#L379-L384
 - 来源: modules/common/system_setting_schema.go#L414-L420
 
 #### 适用范围
@@ -263,9 +310,18 @@ OIDC 配置由环境变量加载；`DM_OIDC_ENABLED=false` 时直接返回，不
 
 #### 证据
 
-- 来源: modules/oidc/config.go#L129-L207
+- 来源: modules/oidc/config.go#L129-L138
+- 来源: modules/oidc/config.go#L139-L148
+- 来源: modules/oidc/config.go#L149-L158
+- 来源: modules/oidc/config.go#L159-L168
+- 来源: modules/oidc/config.go#L169-L178
+- 来源: modules/oidc/config.go#L179-L188
+- 来源: modules/oidc/config.go#L189-L198
+- 来源: modules/oidc/config.go#L199-L207
 - 来源: modules/oidc/config.go#L236-L248
-- 来源: modules/oidc/config.go#L338-L360
+- 来源: modules/oidc/config.go#L338-L347
+- 来源: modules/oidc/config.go#L348-L357
+- 来源: modules/oidc/config.go#L358-L360
 
 #### 适用范围
 
@@ -283,8 +339,12 @@ OIDC 配置由环境变量加载；`DM_OIDC_ENABLED=false` 时直接返回，不
 
 #### 证据
 
-- 来源: modules/messages_search/config.go#L31-L52
-- 来源: modules/messages_search/config.go#L104-L130
+- 来源: modules/messages_search/config.go#L31-L40
+- 来源: modules/messages_search/config.go#L41-L50
+- 来源: modules/messages_search/config.go#L51-L52
+- 来源: modules/messages_search/config.go#L104-L113
+- 来源: modules/messages_search/config.go#L114-L123
+- 来源: modules/messages_search/config.go#L124-L130
 - 来源: modules/messages_search/config.go#L190-L202
 
 #### 适用范围
@@ -303,8 +363,17 @@ OIDC 配置由环境变量加载；`DM_OIDC_ENABLED=false` 时直接返回，不
 
 #### 证据
 
-- 来源: modules/base/common/service_sms.go#L44-L105
-- 来源: modules/base/common/testcode.go#L10-L48
+- 来源: modules/base/common/service_sms.go#L44-L53
+- 来源: modules/base/common/service_sms.go#L54-L63
+- 来源: modules/base/common/service_sms.go#L64-L73
+- 来源: modules/base/common/service_sms.go#L74-L83
+- 来源: modules/base/common/service_sms.go#L84-L93
+- 来源: modules/base/common/service_sms.go#L94-L103
+- 来源: modules/base/common/service_sms.go#L104-L105
+- 来源: modules/base/common/testcode.go#L10-L19
+- 来源: modules/base/common/testcode.go#L20-L29
+- 来源: modules/base/common/testcode.go#L30-L39
+- 来源: modules/base/common/testcode.go#L40-L48
 
 #### 适用范围
 
@@ -322,9 +391,22 @@ Thread 自动归档 worker 通过 `DM_THREAD_AUTO_ARCHIVE_*` 环境变量配置 
 
 #### 证据
 
-- 来源: modules/thread/archive_config.go#L10-L51
-- 来源: modules/thread/archive_config.go#L54-L111
-- 来源: modules/voice_adapter/config.go#L9-L54
+- 来源: modules/thread/archive_config.go#L10-L19
+- 来源: modules/thread/archive_config.go#L20-L29
+- 来源: modules/thread/archive_config.go#L30-L39
+- 来源: modules/thread/archive_config.go#L40-L49
+- 来源: modules/thread/archive_config.go#L50-L51
+- 来源: modules/thread/archive_config.go#L54-L63
+- 来源: modules/thread/archive_config.go#L64-L73
+- 来源: modules/thread/archive_config.go#L74-L83
+- 来源: modules/thread/archive_config.go#L84-L93
+- 来源: modules/thread/archive_config.go#L94-L103
+- 来源: modules/thread/archive_config.go#L104-L111
+- 来源: modules/voice_adapter/config.go#L9-L18
+- 来源: modules/voice_adapter/config.go#L19-L28
+- 来源: modules/voice_adapter/config.go#L29-L38
+- 来源: modules/voice_adapter/config.go#L39-L48
+- 来源: modules/voice_adapter/config.go#L49-L54
 
 #### 适用范围
 
@@ -343,8 +425,13 @@ Agent Mail Gateway 从 `OCTO_MAIL_GATEWAY_URL`、`OCTO_MAIL_GATEWAY_SECRET`、`O
 #### 证据
 
 - 来源: modules/agentmailgateway/gateway.go#L32-L45
-- 来源: modules/agentmailgateway/gateway.go#L131-L158
-- 来源: modules/agentmailgateway/gateway.go#L198-L228
+- 来源: modules/agentmailgateway/gateway.go#L131-L140
+- 来源: modules/agentmailgateway/gateway.go#L141-L150
+- 来源: modules/agentmailgateway/gateway.go#L151-L158
+- 来源: modules/agentmailgateway/gateway.go#L198-L207
+- 来源: modules/agentmailgateway/gateway.go#L208-L217
+- 来源: modules/agentmailgateway/gateway.go#L218-L227
+- 来源: modules/agentmailgateway/gateway.go#L228-L228
 
 #### 适用范围
 

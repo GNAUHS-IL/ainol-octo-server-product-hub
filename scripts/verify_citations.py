@@ -38,7 +38,7 @@ def iter_markdown_files(root: Path):
         yield path
 
 
-def verify_one(repo_root: Path, doc_root: Path, doc: Path, line_no: int, match: re.Match[str]) -> CitationResult:
+def verify_one(repo_root: Path, doc_root: Path, doc: Path, line_no: int, match: re.Match[str], max_span: int = 15) -> CitationResult:
     source_path = match.group(1)
     start = int(match.group(2))
     end = int(match.group(3))
@@ -48,6 +48,8 @@ def verify_one(repo_root: Path, doc_root: Path, doc: Path, line_no: int, match: 
         return CitationResult(rel_doc, line_no, source_path, start, end, False, "line_number_must_be_positive")
     if end < start:
         return CitationResult(rel_doc, line_no, source_path, start, end, False, "end_before_start")
+    if max_span > 0 and end - start + 1 > max_span:
+        return CitationResult(rel_doc, line_no, source_path, start, end, False, f"line_range_too_wide:{end - start + 1}>max_span:{max_span}")
     if source_path.startswith("/") or ".." in Path(source_path).parts:
         return CitationResult(rel_doc, line_no, source_path, start, end, False, "source_path_must_be_repo_relative")
 
@@ -80,6 +82,7 @@ def main() -> int:
     parser.add_argument("--source-root", default="../octo-server", help="read-only octo-server checkout, default: ../octo-server")
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     parser.add_argument("--fail-fast", action="store_true", help="stop at first invalid citation")
+    parser.add_argument("--max-span", type=int, default=15, help="maximum allowed citation line span; use 0 to disable")
     args = parser.parse_args()
 
     doc_root = Path(args.docs_root).resolve()
@@ -93,7 +96,7 @@ def main() -> int:
             lines = doc.read_text(encoding="utf-8", errors="replace").splitlines()
         for line_no, line in enumerate(lines, 1):
             for match in CITATION_RE.finditer(line):
-                result = verify_one(source_root, doc_root, doc, line_no, match)
+                result = verify_one(source_root, doc_root, doc, line_no, match, args.max_span)
                 results.append(result)
                 if args.fail_fast and not result.ok:
                     break
@@ -111,6 +114,7 @@ def main() -> int:
         "total": total,
         "passed": passed,
         "failed": len(failed),
+        "max_span": args.max_span,
         "status": "ok" if not failed else "failed",
     }
 

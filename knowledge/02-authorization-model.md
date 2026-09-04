@@ -8,7 +8,9 @@
 
 ### 证据
 
-- 来源: main.go#L205-L227
+- 来源: main.go#L205-L214
+- 来源: main.go#L215-L224
+- 来源: main.go#L225-L227
 - 来源: pkg/auth/parser.go#L45-L57
 - 来源: pkg/auth/parser.go#L104-L113
 
@@ -33,7 +35,9 @@ RoleService 具体 DB 查询逻辑需继续补 `modules/user` 证据。
 
 ### 证据
 
-- 来源: pkg/auth/manager_roles.go#L1-L24
+- 来源: pkg/auth/manager_roles.go#L1-L10
+- 来源: pkg/auth/manager_roles.go#L11-L20
+- 来源: pkg/auth/manager_roles.go#L21-L24
 
 ### 适用范围
 
@@ -56,7 +60,10 @@ RoleService 具体 DB 查询逻辑需继续补 `modules/user` 证据。
 
 ### 证据
 
-- 来源: modules/space/1module.go#L17-L52
+- 来源: modules/space/1module.go#L17-L26
+- 来源: modules/space/1module.go#L27-L36
+- 来源: modules/space/1module.go#L37-L46
+- 来源: modules/space/1module.go#L47-L52
 
 ### 适用范围
 
@@ -80,7 +87,13 @@ Bot API 鉴权时把身份类型写入上下文：User Bot 来自 robot 表，Ap
 ### 证据
 
 - 来源: modules/bot_api/auth.go#L10-L23
-- 来源: modules/bot_api/auth.go#L64-L129
+- 来源: modules/bot_api/auth.go#L64-L73
+- 来源: modules/bot_api/auth.go#L74-L83
+- 来源: modules/bot_api/auth.go#L84-L93
+- 来源: modules/bot_api/auth.go#L94-L103
+- 来源: modules/bot_api/auth.go#L104-L113
+- 来源: modules/bot_api/auth.go#L114-L123
+- 来源: modules/bot_api/auth.go#L124-L129
 - 来源: modules/botidentity/resolver.go#L14-L24
 
 ### 适用范围
@@ -107,9 +120,16 @@ App Bot 各路由具体 scope 允许矩阵需继续查 `modules/bot_api/authtree
 #### 证据
 
 - 来源: modules/user/role_service.go#L11-L21
-- 来源: modules/user/role_service.go#L23-L50
+- 来源: modules/user/role_service.go#L23-L32
+- 来源: modules/user/role_service.go#L33-L42
+- 来源: modules/user/role_service.go#L43-L50
 - 来源: modules/user/role_service.go#L57-L68
-- 来源: modules/user/role_service.go#L70-L123
+- 来源: modules/user/role_service.go#L70-L79
+- 来源: modules/user/role_service.go#L80-L89
+- 来源: modules/user/role_service.go#L90-L99
+- 来源: modules/user/role_service.go#L100-L109
+- 来源: modules/user/role_service.go#L110-L119
+- 来源: modules/user/role_service.go#L120-L123
 
 #### 适用范围
 
@@ -127,10 +147,19 @@ App Bot 各路由具体 scope 允许矩阵需继续查 `modules/bot_api/authtree
 
 #### 证据
 
-- 来源: pkg/auth/manager_roles.go#L5-L24
-- 来源: pkg/auth/manager_roles.go#L63-L90
-- 来源: modules/user/api_manager.go#L171-L186
-- 来源: modules/user/api_manager.go#L188-L247
+- 来源: pkg/auth/manager_roles.go#L5-L14
+- 来源: pkg/auth/manager_roles.go#L15-L24
+- 来源: pkg/auth/manager_roles.go#L63-L72
+- 来源: pkg/auth/manager_roles.go#L73-L82
+- 来源: pkg/auth/manager_roles.go#L83-L90
+- 来源: modules/user/api_manager.go#L171-L180
+- 来源: modules/user/api_manager.go#L181-L186
+- 来源: modules/user/api_manager.go#L188-L197
+- 来源: modules/user/api_manager.go#L198-L207
+- 来源: modules/user/api_manager.go#L208-L217
+- 来源: modules/user/api_manager.go#L218-L227
+- 来源: modules/user/api_manager.go#L228-L237
+- 来源: modules/user/api_manager.go#L238-L247
 
 #### 适用范围
 
@@ -148,8 +177,14 @@ marketplace 侧 `/api/v1/admin/*` 的真实 enforcement 在 `octo-marketplace`�
 
 #### 证据
 
-- 来源: modules/user/api_manager.go#L140-L155
-- 来源: modules/user/api_manager.go#L877-L933
+- 来源: modules/user/api_manager.go#L140-L149
+- 来源: modules/user/api_manager.go#L150-L155
+- 来源: modules/user/api_manager.go#L877-L886
+- 来源: modules/user/api_manager.go#L887-L896
+- 来源: modules/user/api_manager.go#L897-L906
+- 来源: modules/user/api_manager.go#L907-L916
+- 来源: modules/user/api_manager.go#L917-L926
+- 来源: modules/user/api_manager.go#L927-L933
 - 来源: modules/user/api_manager.go#L961-L970
 
 #### 适用范围
@@ -168,9 +203,23 @@ Space manager 路由全部位于 `/v1/manager` 且先经过 `AuthMiddleware`；�
 
 #### 证据
 
-- 来源: modules/space/api_manager.go#L78-L113
-- 来源: modules/space/api_manager.go#L159-L180
-- 来源: modules/space/api_manager.go#L229-L327
+- 来源: modules/space/api_manager.go#L78-L87
+- 来源: modules/space/api_manager.go#L88-L97
+- 来源: modules/space/api_manager.go#L98-L107
+- 来源: modules/space/api_manager.go#L108-L113
+- 来源: modules/space/api_manager.go#L159-L168
+- 来源: modules/space/api_manager.go#L169-L178
+- 来源: modules/space/api_manager.go#L179-L180
+- 来源: modules/space/api_manager.go#L229-L238
+- 来源: modules/space/api_manager.go#L239-L248
+- 来源: modules/space/api_manager.go#L249-L258
+- 来源: modules/space/api_manager.go#L259-L268
+- 来源: modules/space/api_manager.go#L269-L278
+- 来源: modules/space/api_manager.go#L279-L288
+- 来源: modules/space/api_manager.go#L289-L298
+- 来源: modules/space/api_manager.go#L299-L308
+- 来源: modules/space/api_manager.go#L309-L318
+- 来源: modules/space/api_manager.go#L319-L327
 
 #### 适用范围
 
@@ -188,9 +237,15 @@ Space manager 路由全部位于 `/v1/manager` 且先经过 `AuthMiddleware`；�
 
 #### 证据
 
-- 来源: modules/user/api.go#L5046-L5085
-- 来源: modules/user/api.go#L5088-L5116
-- 来源: modules/user/api.go#L5123-L5141
+- 来源: modules/user/api.go#L5046-L5055
+- 来源: modules/user/api.go#L5056-L5065
+- 来源: modules/user/api.go#L5066-L5075
+- 来源: modules/user/api.go#L5076-L5085
+- 来源: modules/user/api.go#L5088-L5097
+- 来源: modules/user/api.go#L5098-L5107
+- 来源: modules/user/api.go#L5108-L5116
+- 来源: modules/user/api.go#L5123-L5132
+- 来源: modules/user/api.go#L5133-L5141
 
 #### 适用范围
 
@@ -208,10 +263,22 @@ Bot API 通过 `Authorization: Bearer` 提取 token，`app_` 前缀走 App Bot�
 
 #### 证据
 
-- 来源: modules/bot_api/auth.go#L10-L42
-- 来源: modules/bot_api/auth.go#L64-L129
+- 来源: modules/bot_api/auth.go#L10-L19
+- 来源: modules/bot_api/auth.go#L20-L29
+- 来源: modules/bot_api/auth.go#L30-L39
+- 来源: modules/bot_api/auth.go#L40-L42
+- 来源: modules/bot_api/auth.go#L64-L73
+- 来源: modules/bot_api/auth.go#L74-L83
+- 来源: modules/bot_api/auth.go#L84-L93
+- 来源: modules/bot_api/auth.go#L94-L103
+- 来源: modules/bot_api/auth.go#L104-L113
+- 来源: modules/bot_api/auth.go#L114-L123
+- 来源: modules/bot_api/auth.go#L124-L129
 - 来源: modules/bot_api/auth.go#L143-L150
-- 来源: modules/botidentity/resolver.go#L1-L40
+- 来源: modules/botidentity/resolver.go#L1-L10
+- 来源: modules/botidentity/resolver.go#L11-L20
+- 来源: modules/botidentity/resolver.go#L21-L30
+- 来源: modules/botidentity/resolver.go#L31-L40
 
 #### 适用范围
 
@@ -229,8 +296,15 @@ App Bot token 签发和 registry 源数据维护需继续查 `modules/bot_api/re
 
 #### 证据
 
-- 来源: modules/bot_api/authtree_guard.go#L17-L46
-- 来源: modules/bot_api/authtree_guard.go#L47-L99
+- 来源: modules/bot_api/authtree_guard.go#L17-L26
+- 来源: modules/bot_api/authtree_guard.go#L27-L36
+- 来源: modules/bot_api/authtree_guard.go#L37-L46
+- 来源: modules/bot_api/authtree_guard.go#L47-L56
+- 来源: modules/bot_api/authtree_guard.go#L57-L66
+- 来源: modules/bot_api/authtree_guard.go#L67-L76
+- 来源: modules/bot_api/authtree_guard.go#L77-L86
+- 来源: modules/bot_api/authtree_guard.go#L87-L96
+- 来源: modules/bot_api/authtree_guard.go#L97-L99
 
 #### 适用范围
 
@@ -248,10 +322,22 @@ App Bot token 签发和 registry 源数据维护需继续查 `modules/bot_api/re
 
 #### 证据
 
-- 来源: modules/bot_api/obo_check.go#L20-L67
+- 来源: modules/bot_api/obo_check.go#L20-L29
+- 来源: modules/bot_api/obo_check.go#L30-L39
+- 来源: modules/bot_api/obo_check.go#L40-L49
+- 来源: modules/bot_api/obo_check.go#L50-L59
+- 来源: modules/bot_api/obo_check.go#L60-L67
 - 来源: modules/bot_api/obo_check.go#L77-L87
-- 来源: modules/bot_api/obo_check.go#L90-L127
-- 来源: modules/bot_api/obo_check.go#L188-L239
+- 来源: modules/bot_api/obo_check.go#L90-L99
+- 来源: modules/bot_api/obo_check.go#L100-L109
+- 来源: modules/bot_api/obo_check.go#L110-L119
+- 来源: modules/bot_api/obo_check.go#L120-L127
+- 来源: modules/bot_api/obo_check.go#L188-L197
+- 来源: modules/bot_api/obo_check.go#L198-L207
+- 来源: modules/bot_api/obo_check.go#L208-L217
+- 来源: modules/bot_api/obo_check.go#L218-L227
+- 来源: modules/bot_api/obo_check.go#L228-L237
+- 来源: modules/bot_api/obo_check.go#L238-L239
 
 #### 适用范围
 

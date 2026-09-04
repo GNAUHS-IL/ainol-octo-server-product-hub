@@ -9,7 +9,12 @@
 ### 证据
 
 - 来源: configs/tsdd.yaml#L21-L24
-- 来源: modules/group/1module.go#L50-L105
+- 来源: modules/group/1module.go#L50-L59
+- 来源: modules/group/1module.go#L60-L69
+- 来源: modules/group/1module.go#L70-L79
+- 来源: modules/group/1module.go#L80-L89
+- 来源: modules/group/1module.go#L90-L99
+- 来源: modules/group/1module.go#L100-L105
 - 来源: modules/user/1module.go#L40-L54
 
 ### 适用范围
@@ -33,7 +38,13 @@ WebSocket 握手的最终实现很可能在 `octo-lib` 或 WuKongIM 侧；本仓
 
 ### 证据
 
-- 来源: modules/group/1module.go#L43-L105
+- 来源: modules/group/1module.go#L43-L52
+- 来源: modules/group/1module.go#L53-L62
+- 来源: modules/group/1module.go#L63-L72
+- 来源: modules/group/1module.go#L73-L82
+- 来源: modules/group/1module.go#L83-L92
+- 来源: modules/group/1module.go#L93-L102
+- 来源: modules/group/1module.go#L103-L105
 - 来源: modules/group/1module.go#L76-L87
 
 ### 适用范围
@@ -57,8 +68,15 @@ WebSocket 握手的最终实现很可能在 `octo-lib` 或 WuKongIM 侧；本仓
 
 ### 证据
 
-- 来源: modules/message/1module.go#L26-L57
-- 来源: modules/message/1module.go#L59-L103
+- 来源: modules/message/1module.go#L26-L35
+- 来源: modules/message/1module.go#L36-L45
+- 来源: modules/message/1module.go#L46-L55
+- 来源: modules/message/1module.go#L56-L57
+- 来源: modules/message/1module.go#L59-L68
+- 来源: modules/message/1module.go#L69-L78
+- 来源: modules/message/1module.go#L79-L88
+- 来源: modules/message/1module.go#L89-L98
+- 来源: modules/message/1module.go#L99-L103
 
 ### 适用范围
 
@@ -85,9 +103,17 @@ WebSocket 握手的最终实现很可能在 `octo-lib` 或 WuKongIM 侧；本仓
 
 - 来源: modules/webhook/api.go#L150-L156
 - 来源: modules/webhook/api_datasource.go#L34-L46
-- 来源: modules/webhook/api_datasource.go#L61-L81
-- 来源: modules/webhook/api_datasource.go#L90-L111
-- 来源: modules/webhook/api_datasource.go#L177-L222
+- 来源: modules/webhook/api_datasource.go#L61-L70
+- 来源: modules/webhook/api_datasource.go#L71-L80
+- 来源: modules/webhook/api_datasource.go#L81-L81
+- 来源: modules/webhook/api_datasource.go#L90-L99
+- 来源: modules/webhook/api_datasource.go#L100-L109
+- 来源: modules/webhook/api_datasource.go#L110-L111
+- 来源: modules/webhook/api_datasource.go#L177-L186
+- 来源: modules/webhook/api_datasource.go#L187-L196
+- 来源: modules/webhook/api_datasource.go#L197-L206
+- 来源: modules/webhook/api_datasource.go#L207-L216
+- 来源: modules/webhook/api_datasource.go#L217-L222
 
 #### 适用范围
 
@@ -105,8 +131,13 @@ WebSocket 握手的最终实现很可能在 `octo-lib` 或 WuKongIM 侧；本仓
 
 #### 证据
 
-- 来源: modules/webhook/api_datasource.go#L90-L111
-- 来源: modules/webhook/api_datasource.go#L121-L157
+- 来源: modules/webhook/api_datasource.go#L90-L99
+- 来源: modules/webhook/api_datasource.go#L100-L109
+- 来源: modules/webhook/api_datasource.go#L110-L111
+- 来源: modules/webhook/api_datasource.go#L121-L130
+- 来源: modules/webhook/api_datasource.go#L131-L140
+- 来源: modules/webhook/api_datasource.go#L141-L150
+- 来源: modules/webhook/api_datasource.go#L151-L157
 
 #### 适用范围
 
@@ -124,9 +155,13 @@ DM 的完整好友关系、拉黑、同 Space 门禁还分布在 `modules/user`�
 
 #### 证据
 
-- 来源: modules/group/api.go#L3764-L3784
+- 来源: modules/group/api.go#L3764-L3773
+- 来源: modules/group/api.go#L3774-L3783
+- 来源: modules/group/api.go#L3784-L3784
 - 来源: modules/group/api.go#L3802-L3816
-- 来源: modules/group/api.go#L4078-L4098
+- 来源: modules/group/api.go#L4078-L4087
+- 来源: modules/group/api.go#L4088-L4097
+- 来源: modules/group/api.go#L4098-L4098
 
 #### 适用范围
 
@@ -144,7 +179,8 @@ DM 的完整好友关系、拉黑、同 Space 门禁还分布在 `modules/user`�
 
 #### 证据
 
-- 来源: modules/group/service.go#L561-L580
+- 来源: modules/group/service.go#L561-L570
+- 来源: modules/group/service.go#L571-L580
 - 来源: modules/group/1module.go#L76-L90
 
 #### 适用范围
@@ -163,8 +199,11 @@ DM 的完整好友关系、拉黑、同 Space 门禁还分布在 `modules/user`�
 
 #### 证据
 
-- 来源: modules/thread/1module.go#L24-L43
-- 来源: modules/thread/api.go#L179-L205
+- 来源: modules/thread/1module.go#L24-L33
+- 来源: modules/thread/1module.go#L34-L43
+- 来源: modules/thread/api.go#L179-L188
+- 来源: modules/thread/api.go#L189-L198
+- 来源: modules/thread/api.go#L199-L205
 - 来源: modules/message/api_message_get.go#L20-L27
 
 #### 适用范围
@@ -183,9 +222,18 @@ Thread 只处理 `ChannelTypeCommunityTopic`，且要求 channelID 能解析、t
 
 #### 证据
 
-- 来源: modules/thread/1module.go#L73-L96
-- 来源: modules/thread/1module.go#L115-L170
-- 来源: modules/thread/1module.go#L175-L197
+- 来源: modules/thread/1module.go#L73-L82
+- 来源: modules/thread/1module.go#L83-L92
+- 来源: modules/thread/1module.go#L93-L96
+- 来源: modules/thread/1module.go#L115-L124
+- 来源: modules/thread/1module.go#L125-L134
+- 来源: modules/thread/1module.go#L135-L144
+- 来源: modules/thread/1module.go#L145-L154
+- 来源: modules/thread/1module.go#L155-L164
+- 来源: modules/thread/1module.go#L165-L170
+- 来源: modules/thread/1module.go#L175-L184
+- 来源: modules/thread/1module.go#L185-L194
+- 来源: modules/thread/1module.go#L195-L197
 
 #### 适用范围
 
@@ -203,9 +251,19 @@ Thread 只处理 `ChannelTypeCommunityTopic`，且要求 channelID 能解析、t
 
 #### 证据
 
-- 来源: modules/message/api.go#L1442-L1507
-- 来源: modules/message/api.go#L1550-L1567
-- 来源: modules/message/api.go#L353-L387
+- 来源: modules/message/api.go#L1442-L1451
+- 来源: modules/message/api.go#L1452-L1461
+- 来源: modules/message/api.go#L1462-L1471
+- 来源: modules/message/api.go#L1472-L1481
+- 来源: modules/message/api.go#L1482-L1491
+- 来源: modules/message/api.go#L1492-L1501
+- 来源: modules/message/api.go#L1502-L1507
+- 来源: modules/message/api.go#L1550-L1559
+- 来源: modules/message/api.go#L1560-L1567
+- 来源: modules/message/api.go#L353-L362
+- 来源: modules/message/api.go#L363-L372
+- 来源: modules/message/api.go#L373-L382
+- 来源: modules/message/api.go#L383-L387
 
 #### 适用范围
 
@@ -224,8 +282,15 @@ Thread 只处理 `ChannelTypeCommunityTopic`，且要求 channelID 能解析、t
 #### 证据
 
 - 来源: modules/message/api.go#L392-L403
-- 来源: modules/message/api_message_get.go#L197-L238
-- 来源: modules/message/api_message_get.go#L243-L275
+- 来源: modules/message/api_message_get.go#L197-L206
+- 来源: modules/message/api_message_get.go#L207-L216
+- 来源: modules/message/api_message_get.go#L217-L226
+- 来源: modules/message/api_message_get.go#L227-L236
+- 来源: modules/message/api_message_get.go#L237-L238
+- 来源: modules/message/api_message_get.go#L243-L252
+- 来源: modules/message/api_message_get.go#L253-L262
+- 来源: modules/message/api_message_get.go#L263-L272
+- 来源: modules/message/api_message_get.go#L273-L275
 
 #### 适用范围
 
@@ -244,9 +309,15 @@ Thread 只处理 `ChannelTypeCommunityTopic`，且要求 channelID 能解析、t
 #### 证据
 
 - 来源: modules/conversation_ext/1module.go#L57-L70
-- 来源: modules/conversation_ext/service.go#L51-L79
-- 来源: modules/conversation_ext/service.go#L97-L115
-- 来源: modules/message/1module.go#L73-L103
+- 来源: modules/conversation_ext/service.go#L51-L60
+- 来源: modules/conversation_ext/service.go#L61-L70
+- 来源: modules/conversation_ext/service.go#L71-L79
+- 来源: modules/conversation_ext/service.go#L97-L106
+- 来源: modules/conversation_ext/service.go#L107-L115
+- 来源: modules/message/1module.go#L73-L82
+- 来源: modules/message/1module.go#L83-L92
+- 来源: modules/message/1module.go#L93-L102
+- 来源: modules/message/1module.go#L103-L103
 
 #### 适用范围
 
@@ -264,9 +335,21 @@ FollowChannel 在写 `auto_follow_threads=1` 和清除 `group_unfollowed` 前先
 
 #### 证据
 
-- 来源: modules/conversation_ext/service.go#L414-L455
-- 来源: modules/thread/service.go#L324-L365
-- 来源: modules/conversation_ext/service.go#L653-L700
+- 来源: modules/conversation_ext/service.go#L414-L423
+- 来源: modules/conversation_ext/service.go#L424-L433
+- 来源: modules/conversation_ext/service.go#L434-L443
+- 来源: modules/conversation_ext/service.go#L444-L453
+- 来源: modules/conversation_ext/service.go#L454-L455
+- 来源: modules/thread/service.go#L324-L333
+- 来源: modules/thread/service.go#L334-L343
+- 来源: modules/thread/service.go#L344-L353
+- 来源: modules/thread/service.go#L354-L363
+- 来源: modules/thread/service.go#L364-L365
+- 来源: modules/conversation_ext/service.go#L653-L662
+- 来源: modules/conversation_ext/service.go#L663-L672
+- 来源: modules/conversation_ext/service.go#L673-L682
+- 来源: modules/conversation_ext/service.go#L683-L692
+- 来源: modules/conversation_ext/service.go#L693-L700
 
 #### 适用范围
 
@@ -284,9 +367,18 @@ FollowChannel 在写 `auto_follow_threads=1` 和清除 `group_unfollowed` 前先
 
 #### 证据
 
-- 来源: modules/conversation_ext/service.go#L940-L978
-- 来源: modules/conversation_ext/api.go#L235-L260
-- 来源: modules/message/1module.go#L134-L179
+- 来源: modules/conversation_ext/service.go#L940-L949
+- 来源: modules/conversation_ext/service.go#L950-L959
+- 来源: modules/conversation_ext/service.go#L960-L969
+- 来源: modules/conversation_ext/service.go#L970-L978
+- 来源: modules/conversation_ext/api.go#L235-L244
+- 来源: modules/conversation_ext/api.go#L245-L254
+- 来源: modules/conversation_ext/api.go#L255-L260
+- 来源: modules/message/1module.go#L134-L143
+- 来源: modules/message/1module.go#L144-L153
+- 来源: modules/message/1module.go#L154-L163
+- 来源: modules/message/1module.go#L164-L173
+- 来源: modules/message/1module.go#L174-L179
 
 #### 适用范围
 

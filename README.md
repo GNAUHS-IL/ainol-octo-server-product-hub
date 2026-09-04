@@ -37,7 +37,7 @@
 示例：
 
 ```text
-来源: modules/bot_api/auth.go#L12-L48
+来源: modules/bot_api/auth.go#L12-L21；来源: modules/bot_api/auth.go#L22-L31；来源: modules/bot_api/auth.go#L32-L41；来源: modules/bot_api/auth.go#L42-L48
 ```
 
 ## 九大知识领域

@@ -8,8 +8,14 @@
 
 ### 证据
 
-- 来源: internal/modules.go#L1-L18
-- 来源: internal/modules.go#L22-L78
+- 来源: internal/modules.go#L1-L10
+- 来源: internal/modules.go#L11-L18
+- 来源: internal/modules.go#L22-L31
+- 来源: internal/modules.go#L32-L41
+- 来源: internal/modules.go#L42-L51
+- 来源: internal/modules.go#L52-L61
+- 来源: internal/modules.go#L62-L71
+- 来源: internal/modules.go#L72-L78
 
 ### 适用范围
 
@@ -73,7 +79,12 @@
 
 ### 证据
 
-- 来源: internal/modules.go#L22-L78
+- 来源: internal/modules.go#L22-L31
+- 来源: internal/modules.go#L32-L41
+- 来源: internal/modules.go#L42-L51
+- 来源: internal/modules.go#L52-L61
+- 来源: internal/modules.go#L62-L71
+- 来源: internal/modules.go#L72-L78
 
 ### 适用范围
 
@@ -96,7 +107,9 @@
 
 ### 证据
 
-- 来源: main.go#L454-L483
+- 来源: main.go#L454-L463
+- 来源: main.go#L464-L473
+- 来源: main.go#L474-L483
 
 ### 适用范围
 
@@ -121,14 +134,40 @@
 
 #### 证据
 
-- 来源: internal/modules.go#L22-L78
+- 来源: internal/modules.go#L22-L31
+- 来源: internal/modules.go#L32-L41
+- 来源: internal/modules.go#L42-L51
+- 来源: internal/modules.go#L52-L61
+- 来源: internal/modules.go#L62-L71
+- 来源: internal/modules.go#L72-L78
 - 来源: modules/user/1module.go#L26-L39
-- 来源: modules/user/1module.go#L104-L185
-- 来源: modules/message/1module.go#L26-L57
-- 来源: modules/message/1module.go#L68-L112
-- 来源: modules/space/1module.go#L17-L52
-- 来源: modules/report/1module.go#L16-L40
-- 来源: modules/workplace/1module.go#L16-L33
+- 来源: modules/user/1module.go#L104-L113
+- 来源: modules/user/1module.go#L114-L123
+- 来源: modules/user/1module.go#L124-L133
+- 来源: modules/user/1module.go#L134-L143
+- 来源: modules/user/1module.go#L144-L153
+- 来源: modules/user/1module.go#L154-L163
+- 来源: modules/user/1module.go#L164-L173
+- 来源: modules/user/1module.go#L174-L183
+- 来源: modules/user/1module.go#L184-L185
+- 来源: modules/message/1module.go#L26-L35
+- 来源: modules/message/1module.go#L36-L45
+- 来源: modules/message/1module.go#L46-L55
+- 来源: modules/message/1module.go#L56-L57
+- 来源: modules/message/1module.go#L68-L77
+- 来源: modules/message/1module.go#L78-L87
+- 来源: modules/message/1module.go#L88-L97
+- 来源: modules/message/1module.go#L98-L107
+- 来源: modules/message/1module.go#L108-L112
+- 来源: modules/space/1module.go#L17-L26
+- 来源: modules/space/1module.go#L27-L36
+- 来源: modules/space/1module.go#L37-L46
+- 来源: modules/space/1module.go#L47-L52
+- 来源: modules/report/1module.go#L16-L25
+- 来源: modules/report/1module.go#L26-L35
+- 来源: modules/report/1module.go#L36-L40
+- 来源: modules/workplace/1module.go#L16-L25
+- 来源: modules/workplace/1module.go#L26-L33
 
 #### 适用范围
 
@@ -146,7 +185,9 @@
 
 #### 证据
 
-- 来源: main.go#L454-L483
+- 来源: main.go#L454-L463
+- 来源: main.go#L464-L473
+- 来源: main.go#L474-L483
 
 #### 适用范围
 
@@ -164,9 +205,17 @@
 
 #### 证据
 
-- 来源: modules/conversation_ext/1module.go#L73-L105
-- 来源: modules/thread/1module.go#L24-L73
-- 来源: modules/webhook/1module.go#L13-L28
+- 来源: modules/conversation_ext/1module.go#L73-L82
+- 来源: modules/conversation_ext/1module.go#L83-L92
+- 来源: modules/conversation_ext/1module.go#L93-L102
+- 来源: modules/conversation_ext/1module.go#L103-L105
+- 来源: modules/thread/1module.go#L24-L33
+- 来源: modules/thread/1module.go#L34-L43
+- 来源: modules/thread/1module.go#L44-L53
+- 来源: modules/thread/1module.go#L54-L63
+- 来源: modules/thread/1module.go#L64-L73
+- 来源: modules/webhook/1module.go#L13-L22
+- 来源: modules/webhook/1module.go#L23-L28
 - 来源: modules/oidc/1module.go#L13-L25
 - 来源: modules/messages_search/1module.go#L13-L24
 
@@ -186,8 +235,11 @@
 
 #### 证据
 
-- 来源: modules/thread/1module.go#L24-L43
-- 来源: modules/thread/1module.go#L45-L73
+- 来源: modules/thread/1module.go#L24-L33
+- 来源: modules/thread/1module.go#L34-L43
+- 来源: modules/thread/1module.go#L45-L54
+- 来源: modules/thread/1module.go#L55-L64
+- 来源: modules/thread/1module.go#L65-L73
 
 #### 适用范围
 
@@ -205,10 +257,30 @@
 
 #### 证据
 
-- 来源: modules/user/1module.go#L40-L100
-- 来源: modules/group/1module.go#L50-L105
-- 来源: modules/thread/1module.go#L73-L140
-- 来源: modules/thread/1module.go#L141-L180
+- 来源: modules/user/1module.go#L40-L49
+- 来源: modules/user/1module.go#L50-L59
+- 来源: modules/user/1module.go#L60-L69
+- 来源: modules/user/1module.go#L70-L79
+- 来源: modules/user/1module.go#L80-L89
+- 来源: modules/user/1module.go#L90-L99
+- 来源: modules/user/1module.go#L100-L100
+- 来源: modules/group/1module.go#L50-L59
+- 来源: modules/group/1module.go#L60-L69
+- 来源: modules/group/1module.go#L70-L79
+- 来源: modules/group/1module.go#L80-L89
+- 来源: modules/group/1module.go#L90-L99
+- 来源: modules/group/1module.go#L100-L105
+- 来源: modules/thread/1module.go#L73-L82
+- 来源: modules/thread/1module.go#L83-L92
+- 来源: modules/thread/1module.go#L93-L102
+- 来源: modules/thread/1module.go#L103-L112
+- 来源: modules/thread/1module.go#L113-L122
+- 来源: modules/thread/1module.go#L123-L132
+- 来源: modules/thread/1module.go#L133-L140
+- 来源: modules/thread/1module.go#L141-L150
+- 来源: modules/thread/1module.go#L151-L160
+- 来源: modules/thread/1module.go#L161-L170
+- 来源: modules/thread/1module.go#L171-L180
 
 #### 适用范围
 
@@ -226,9 +298,19 @@ WuKongIM 侧如何消费 IMDatasource、缓存多久、错误如何降级，需�
 
 #### 证据
 
-- 来源: modules/group/1module.go#L22-L43
-- 来源: modules/message/1module.go#L59-L103
-- 来源: modules/message/1module.go#L134-L180
+- 来源: modules/group/1module.go#L22-L31
+- 来源: modules/group/1module.go#L32-L41
+- 来源: modules/group/1module.go#L42-L43
+- 来源: modules/message/1module.go#L59-L68
+- 来源: modules/message/1module.go#L69-L78
+- 来源: modules/message/1module.go#L79-L88
+- 来源: modules/message/1module.go#L89-L98
+- 来源: modules/message/1module.go#L99-L103
+- 来源: modules/message/1module.go#L134-L143
+- 来源: modules/message/1module.go#L144-L153
+- 来源: modules/message/1module.go#L154-L163
+- 来源: modules/message/1module.go#L164-L173
+- 来源: modules/message/1module.go#L174-L180
 
 #### 适用范围
 
@@ -272,7 +354,12 @@ Bot 相关功能分散在多个注册包：`robot` 是传统机器人资料/基�
 
 #### 证据
 
-- 来源: internal/modules.go#L22-L78
+- 来源: internal/modules.go#L22-L31
+- 来源: internal/modules.go#L32-L41
+- 来源: internal/modules.go#L42-L51
+- 来源: internal/modules.go#L52-L61
+- 来源: internal/modules.go#L62-L71
+- 来源: internal/modules.go#L72-L78
 - 来源: main.go#L29-L34
 
 #### 适用范围
@@ -291,8 +378,15 @@ Bot 相关功能分散在多个注册包：`robot` 是传统机器人资料/基�
 
 #### 证据
 
-- 来源: main.go#L23-L39
-- 来源: main.go#L952-L1015
+- 来源: main.go#L23-L32
+- 来源: main.go#L33-L39
+- 来源: main.go#L952-L961
+- 来源: main.go#L962-L971
+- 来源: main.go#L972-L981
+- 来源: main.go#L982-L991
+- 来源: main.go#L992-L1001
+- 来源: main.go#L1002-L1011
+- 来源: main.go#L1012-L1015
 
 #### 适用范围
 

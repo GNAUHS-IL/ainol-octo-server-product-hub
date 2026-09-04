@@ -8,7 +8,9 @@
 
 ### 证据
 
-- 来源: main.go#L205-L227
+- 来源: main.go#L205-L214
+- 来源: main.go#L215-L224
+- 来源: main.go#L225-L227
 - 来源: pkg/auth/parser.go#L59-L72
 
 ### 适用范围
@@ -55,7 +57,11 @@
 
 ### 证据
 
-- 来源: pkg/auth/validator.go#L76-L123
+- 来源: pkg/auth/validator.go#L76-L85
+- 来源: pkg/auth/validator.go#L86-L95
+- 来源: pkg/auth/validator.go#L96-L105
+- 来源: pkg/auth/validator.go#L106-L115
+- 来源: pkg/auth/validator.go#L116-L123
 
 ### 适用范围
 
@@ -78,7 +84,8 @@ token 的签发入口和用户登录接口需要继续在 `modules/user` 中逐�
 
 ### 证据
 
-- 来源: modules/bot_api/auth.go#L25-L42
+- 来源: modules/bot_api/auth.go#L25-L34
+- 来源: modules/bot_api/auth.go#L35-L42
 - 来源: modules/bot_api/auth.go#L143-L150
 - 来源: modules/bot_api/bot_api.go#L400-L408
 
@@ -107,8 +114,17 @@ Bot token 的签发、刷新和 WuKongIM token 同步需继续结合 `modules/bo
 
 - 来源: pkg/auth/tokeninfo.go#L26-L37
 - 来源: pkg/auth/tokeninfo.go#L53-L63
-- 来源: pkg/auth/tokeninfo.go#L86-L119
-- 来源: pkg/auth/tokeninfo.go#L122-L188
+- 来源: pkg/auth/tokeninfo.go#L86-L95
+- 来源: pkg/auth/tokeninfo.go#L96-L105
+- 来源: pkg/auth/tokeninfo.go#L106-L115
+- 来源: pkg/auth/tokeninfo.go#L116-L119
+- 来源: pkg/auth/tokeninfo.go#L122-L131
+- 来源: pkg/auth/tokeninfo.go#L132-L141
+- 来源: pkg/auth/tokeninfo.go#L142-L151
+- 来源: pkg/auth/tokeninfo.go#L152-L161
+- 来源: pkg/auth/tokeninfo.go#L162-L171
+- 来源: pkg/auth/tokeninfo.go#L172-L181
+- 来源: pkg/auth/tokeninfo.go#L182-L188
 
 #### 适用范围
 
@@ -126,10 +142,20 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 
 #### 证据
 
-- 来源: modules/user/api.go#L228-L244
-- 来源: modules/user/api.go#L264-L287
-- 来源: modules/user/api.go#L317-L359
-- 来源: modules/user/api.go#L376-L409
+- 来源: modules/user/api.go#L228-L237
+- 来源: modules/user/api.go#L238-L244
+- 来源: modules/user/api.go#L264-L273
+- 来源: modules/user/api.go#L274-L283
+- 来源: modules/user/api.go#L284-L287
+- 来源: modules/user/api.go#L317-L326
+- 来源: modules/user/api.go#L327-L336
+- 来源: modules/user/api.go#L337-L346
+- 来源: modules/user/api.go#L347-L356
+- 来源: modules/user/api.go#L357-L359
+- 来源: modules/user/api.go#L376-L385
+- 来源: modules/user/api.go#L386-L395
+- 来源: modules/user/api.go#L396-L405
+- 来源: modules/user/api.go#L406-L409
 
 #### 适用范围
 
@@ -147,10 +173,21 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 
 #### 证据
 
-- 来源: modules/user/api.go#L1841-L1877
-- 来源: modules/user/api.go#L1879-L1907
-- 来源: modules/user/api.go#L2004-L2024
-- 来源: pkg/auth/session_v3.go#L582-L626
+- 来源: modules/user/api.go#L1841-L1850
+- 来源: modules/user/api.go#L1851-L1860
+- 来源: modules/user/api.go#L1861-L1870
+- 来源: modules/user/api.go#L1871-L1877
+- 来源: modules/user/api.go#L1879-L1888
+- 来源: modules/user/api.go#L1889-L1898
+- 来源: modules/user/api.go#L1899-L1907
+- 来源: modules/user/api.go#L2004-L2013
+- 来源: modules/user/api.go#L2014-L2023
+- 来源: modules/user/api.go#L2024-L2024
+- 来源: pkg/auth/session_v3.go#L582-L591
+- 来源: pkg/auth/session_v3.go#L592-L601
+- 来源: pkg/auth/session_v3.go#L602-L611
+- 来源: pkg/auth/session_v3.go#L612-L621
+- 来源: pkg/auth/session_v3.go#L622-L626
 
 #### 适用范围
 
@@ -168,7 +205,8 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 
 #### 证据
 
-- 来源: modules/user/api.go#L449-L468
+- 来源: modules/user/api.go#L449-L458
+- 来源: modules/user/api.go#L459-L468
 - 来源: modules/user/api.go#L2050-L2057
 
 #### 适用范围
@@ -187,11 +225,32 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 
 #### 证据
 
-- 来源: modules/user/api_manager.go#L316-L333
-- 来源: modules/user/api_manager.go#L333-L384
-- 来源: modules/user/api_manager.go#L386-L427
-- 来源: modules/user/api_manager.go#L430-L470
-- 来源: modules/user/api_manager.go#L634-L710
+- 来源: modules/user/api_manager.go#L316-L325
+- 来源: modules/user/api_manager.go#L326-L333
+- 来源: modules/user/api_manager.go#L333-L342
+- 来源: modules/user/api_manager.go#L343-L352
+- 来源: modules/user/api_manager.go#L353-L362
+- 来源: modules/user/api_manager.go#L363-L372
+- 来源: modules/user/api_manager.go#L373-L382
+- 来源: modules/user/api_manager.go#L383-L384
+- 来源: modules/user/api_manager.go#L386-L395
+- 来源: modules/user/api_manager.go#L396-L405
+- 来源: modules/user/api_manager.go#L406-L415
+- 来源: modules/user/api_manager.go#L416-L425
+- 来源: modules/user/api_manager.go#L426-L427
+- 来源: modules/user/api_manager.go#L430-L439
+- 来源: modules/user/api_manager.go#L440-L449
+- 来源: modules/user/api_manager.go#L450-L459
+- 来源: modules/user/api_manager.go#L460-L469
+- 来源: modules/user/api_manager.go#L470-L470
+- 来源: modules/user/api_manager.go#L634-L643
+- 来源: modules/user/api_manager.go#L644-L653
+- 来源: modules/user/api_manager.go#L654-L663
+- 来源: modules/user/api_manager.go#L664-L673
+- 来源: modules/user/api_manager.go#L674-L683
+- 来源: modules/user/api_manager.go#L684-L693
+- 来源: modules/user/api_manager.go#L694-L703
+- 来源: modules/user/api_manager.go#L704-L710
 
 #### 适用范围
 
@@ -209,10 +268,18 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 
 #### 证据
 
-- 来源: modules/user/api.go#L4740-L4763
-- 来源: modules/user/api.go#L4765-L4803
+- 来源: modules/user/api.go#L4740-L4749
+- 来源: modules/user/api.go#L4750-L4759
+- 来源: modules/user/api.go#L4760-L4763
+- 来源: modules/user/api.go#L4765-L4774
+- 来源: modules/user/api.go#L4775-L4784
+- 来源: modules/user/api.go#L4785-L4794
+- 来源: modules/user/api.go#L4795-L4803
 - 来源: modules/user/api.go#L4803-L4816
-- 来源: modules/user/api.go#L4819-L4857
+- 来源: modules/user/api.go#L4819-L4828
+- 来源: modules/user/api.go#L4829-L4838
+- 来源: modules/user/api.go#L4839-L4848
+- 来源: modules/user/api.go#L4849-L4857
 
 #### 适用范围
 

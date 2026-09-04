@@ -8,8 +8,16 @@
 
 ### 证据
 
-- 来源: modules/bot_api/bot_api.go#L377-L408
-- 来源: modules/bot_api/bot_api.go#L410-L467
+- 来源: modules/bot_api/bot_api.go#L377-L386
+- 来源: modules/bot_api/bot_api.go#L387-L396
+- 来源: modules/bot_api/bot_api.go#L397-L406
+- 来源: modules/bot_api/bot_api.go#L407-L408
+- 来源: modules/bot_api/bot_api.go#L410-L419
+- 来源: modules/bot_api/bot_api.go#L420-L429
+- 来源: modules/bot_api/bot_api.go#L430-L439
+- 来源: modules/bot_api/bot_api.go#L440-L449
+- 来源: modules/bot_api/bot_api.go#L450-L459
+- 来源: modules/bot_api/bot_api.go#L460-L467
 
 ### 适用范围
 
@@ -32,8 +40,15 @@
 
 ### 证据
 
-- 来源: modules/bot_api/bot_api.go#L298-L339
-- 来源: modules/bot_api/bot_api.go#L341-L375
+- 来源: modules/bot_api/bot_api.go#L298-L307
+- 来源: modules/bot_api/bot_api.go#L308-L317
+- 来源: modules/bot_api/bot_api.go#L318-L327
+- 来源: modules/bot_api/bot_api.go#L328-L337
+- 来源: modules/bot_api/bot_api.go#L338-L339
+- 来源: modules/bot_api/bot_api.go#L341-L350
+- 来源: modules/bot_api/bot_api.go#L351-L360
+- 来源: modules/bot_api/bot_api.go#L361-L370
+- 来源: modules/bot_api/bot_api.go#L371-L375
 
 ### 适用范围
 
@@ -56,7 +71,10 @@ BotFather 的 Route 注释明确 `/v1/bot/*` 已迁移到 `modules/bot_api/`；B
 
 ### 证据
 
-- 来源: modules/botfather/api.go#L83-L121
+- 来源: modules/botfather/api.go#L83-L92
+- 来源: modules/botfather/api.go#L93-L102
+- 来源: modules/botfather/api.go#L103-L112
+- 来源: modules/botfather/api.go#L113-L121
 
 ### 适用范围
 
@@ -80,8 +98,11 @@ User API Key 的具体认证逻辑需继续查 `modules/botfather/api_user*.go`�
 ### 证据
 
 - 来源: modules/botidentity/resolver.go#L1-L4
-- 来源: modules/botidentity/resolver.go#L59-L76
-- 来源: modules/botidentity/resolver.go#L92-L120
+- 来源: modules/botidentity/resolver.go#L59-L68
+- 来源: modules/botidentity/resolver.go#L69-L76
+- 来源: modules/botidentity/resolver.go#L92-L101
+- 来源: modules/botidentity/resolver.go#L102-L111
+- 来源: modules/botidentity/resolver.go#L112-L120
 
 ### 适用范围
 
@@ -106,9 +127,17 @@ User API Key 的具体认证逻辑需继续查 `modules/botfather/api_user*.go`�
 
 #### 证据
 
-- 来源: modules/bot_api/auth.go#L25-L40
-- 来源: modules/bot_api/auth.go#L46-L61
-- 来源: modules/bot_api/auth.go#L64-L129
+- 来源: modules/bot_api/auth.go#L25-L34
+- 来源: modules/bot_api/auth.go#L35-L40
+- 来源: modules/bot_api/auth.go#L46-L55
+- 来源: modules/bot_api/auth.go#L56-L61
+- 来源: modules/bot_api/auth.go#L64-L73
+- 来源: modules/bot_api/auth.go#L74-L83
+- 来源: modules/bot_api/auth.go#L84-L93
+- 来源: modules/bot_api/auth.go#L94-L103
+- 来源: modules/bot_api/auth.go#L104-L113
+- 来源: modules/bot_api/auth.go#L114-L123
+- 来源: modules/bot_api/auth.go#L124-L129
 - 来源: modules/bot_api/auth.go#L143-L149
 
 #### 适用范围
@@ -127,8 +156,13 @@ Bot API 主组顺序是 `authBot → requireBotIdentity → rateLimit`。`requir
 
 #### 证据
 
-- 来源: modules/bot_api/bot_api.go#L377-L408
-- 来源: modules/bot_api/ratelimit.go#L176-L203
+- 来源: modules/bot_api/bot_api.go#L377-L386
+- 来源: modules/bot_api/bot_api.go#L387-L396
+- 来源: modules/bot_api/bot_api.go#L397-L406
+- 来源: modules/bot_api/bot_api.go#L407-L408
+- 来源: modules/bot_api/ratelimit.go#L176-L185
+- 来源: modules/bot_api/ratelimit.go#L186-L195
+- 来源: modules/bot_api/ratelimit.go#L196-L203
 
 #### 适用范围
 
@@ -146,9 +180,27 @@ Bot API 主组顺序是 `authBot → requireBotIdentity → rateLimit`。`requir
 
 #### 证据
 
-- 来源: modules/bot_api/register.go#L304-L382
-- 来源: modules/bot_api/register.go#L437-L506
-- 来源: modules/bot_api/register.go#L181-L231
+- 来源: modules/bot_api/register.go#L304-L313
+- 来源: modules/bot_api/register.go#L314-L323
+- 来源: modules/bot_api/register.go#L324-L333
+- 来源: modules/bot_api/register.go#L334-L343
+- 来源: modules/bot_api/register.go#L344-L353
+- 来源: modules/bot_api/register.go#L354-L363
+- 来源: modules/bot_api/register.go#L364-L373
+- 来源: modules/bot_api/register.go#L374-L382
+- 来源: modules/bot_api/register.go#L437-L446
+- 来源: modules/bot_api/register.go#L447-L456
+- 来源: modules/bot_api/register.go#L457-L466
+- 来源: modules/bot_api/register.go#L467-L476
+- 来源: modules/bot_api/register.go#L477-L486
+- 来源: modules/bot_api/register.go#L487-L496
+- 来源: modules/bot_api/register.go#L497-L506
+- 来源: modules/bot_api/register.go#L181-L190
+- 来源: modules/bot_api/register.go#L191-L200
+- 来源: modules/bot_api/register.go#L201-L210
+- 来源: modules/bot_api/register.go#L211-L220
+- 来源: modules/bot_api/register.go#L221-L230
+- 来源: modules/bot_api/register.go#L231-L231
 
 #### 适用范围
 
@@ -166,9 +218,22 @@ Bot API 限流设计把通道拆成 business、heartbeat、register。business �
 
 #### 证据
 
-- 来源: modules/bot_api/ratelimit.go#L23-L47
-- 来源: modules/bot_api/ratelimit.go#L332-L375
-- 来源: modules/bot_api/bot_api.go#L298-L375
+- 来源: modules/bot_api/ratelimit.go#L23-L32
+- 来源: modules/bot_api/ratelimit.go#L33-L42
+- 来源: modules/bot_api/ratelimit.go#L43-L47
+- 来源: modules/bot_api/ratelimit.go#L332-L341
+- 来源: modules/bot_api/ratelimit.go#L342-L351
+- 来源: modules/bot_api/ratelimit.go#L352-L361
+- 来源: modules/bot_api/ratelimit.go#L362-L371
+- 来源: modules/bot_api/ratelimit.go#L372-L375
+- 来源: modules/bot_api/bot_api.go#L298-L307
+- 来源: modules/bot_api/bot_api.go#L308-L317
+- 来源: modules/bot_api/bot_api.go#L318-L327
+- 来源: modules/bot_api/bot_api.go#L328-L337
+- 来源: modules/bot_api/bot_api.go#L338-L347
+- 来源: modules/bot_api/bot_api.go#L348-L357
+- 来源: modules/bot_api/bot_api.go#L358-L367
+- 来源: modules/bot_api/bot_api.go#L368-L375
 
 #### 适用范围
 
@@ -186,7 +251,10 @@ App Bot 管理面包含 `/v1/admin/app_bot` 平台路由、`/v1/space/:space_id/
 
 #### 证据
 
-- 来源: modules/app_bot/app_bot.go#L116-L152
+- 来源: modules/app_bot/app_bot.go#L116-L125
+- 来源: modules/app_bot/app_bot.go#L126-L135
+- 来源: modules/app_bot/app_bot.go#L136-L145
+- 来源: modules/app_bot/app_bot.go#L146-L152
 - 来源: modules/app_bot/app_bot.go#L171-L183
 
 #### 适用范围
@@ -205,9 +273,27 @@ handler 内部还包含管理员/Space admin 检查；本条只覆盖路由分�
 
 #### 证据
 
-- 来源: modules/app_bot/app_bot.go#L330-L440
-- 来源: modules/app_bot/app_bot.go#L664-L705
-- 来源: modules/app_bot/app_bot.go#L253-L290
+- 来源: modules/app_bot/app_bot.go#L330-L339
+- 来源: modules/app_bot/app_bot.go#L340-L349
+- 来源: modules/app_bot/app_bot.go#L350-L359
+- 来源: modules/app_bot/app_bot.go#L360-L369
+- 来源: modules/app_bot/app_bot.go#L370-L379
+- 来源: modules/app_bot/app_bot.go#L380-L389
+- 来源: modules/app_bot/app_bot.go#L390-L399
+- 来源: modules/app_bot/app_bot.go#L400-L409
+- 来源: modules/app_bot/app_bot.go#L410-L419
+- 来源: modules/app_bot/app_bot.go#L420-L429
+- 来源: modules/app_bot/app_bot.go#L430-L439
+- 来源: modules/app_bot/app_bot.go#L440-L440
+- 来源: modules/app_bot/app_bot.go#L664-L673
+- 来源: modules/app_bot/app_bot.go#L674-L683
+- 来源: modules/app_bot/app_bot.go#L684-L693
+- 来源: modules/app_bot/app_bot.go#L694-L703
+- 来源: modules/app_bot/app_bot.go#L704-L705
+- 来源: modules/app_bot/app_bot.go#L253-L262
+- 来源: modules/app_bot/app_bot.go#L263-L272
+- 来源: modules/app_bot/app_bot.go#L273-L282
+- 来源: modules/app_bot/app_bot.go#L283-L290
 
 #### 适用范围
 
@@ -225,10 +311,26 @@ OBO REST 挂在 `/v1/obo`，使用普通用户认证，不是 Bot token 主组�
 
 #### 证据
 
-- 来源: modules/bot_api/obo_api.go#L100-L117
-- 来源: modules/bot_api/obo_api.go#L187-L250
-- 来源: modules/bot_api/obo_check.go#L20-L67
-- 来源: modules/bot_api/obo_check.go#L78-L132
+- 来源: modules/bot_api/obo_api.go#L100-L109
+- 来源: modules/bot_api/obo_api.go#L110-L117
+- 来源: modules/bot_api/obo_api.go#L187-L196
+- 来源: modules/bot_api/obo_api.go#L197-L206
+- 来源: modules/bot_api/obo_api.go#L207-L216
+- 来源: modules/bot_api/obo_api.go#L217-L226
+- 来源: modules/bot_api/obo_api.go#L227-L236
+- 来源: modules/bot_api/obo_api.go#L237-L246
+- 来源: modules/bot_api/obo_api.go#L247-L250
+- 来源: modules/bot_api/obo_check.go#L20-L29
+- 来源: modules/bot_api/obo_check.go#L30-L39
+- 来源: modules/bot_api/obo_check.go#L40-L49
+- 来源: modules/bot_api/obo_check.go#L50-L59
+- 来源: modules/bot_api/obo_check.go#L60-L67
+- 来源: modules/bot_api/obo_check.go#L78-L87
+- 来源: modules/bot_api/obo_check.go#L88-L97
+- 来源: modules/bot_api/obo_check.go#L98-L107
+- 来源: modules/bot_api/obo_check.go#L108-L117
+- 来源: modules/bot_api/obo_check.go#L118-L127
+- 来源: modules/bot_api/obo_check.go#L128-L132
 
 #### 适用范围
 
@@ -246,10 +348,24 @@ OBO fanout、搜索、DM friend gate 的细节分布在 `obo_fanout.go`、`obo_f
 
 #### 证据
 
-- 来源: modules/bot_mention/api.go#L70-L90
-- 来源: modules/bot_mention/api.go#L106-L136
-- 来源: modules/bot_mention/api.go#L148-L226
-- 来源: modules/bot_mention/api_i18n.go#L13-L40
+- 来源: modules/bot_mention/api.go#L70-L79
+- 来源: modules/bot_mention/api.go#L80-L89
+- 来源: modules/bot_mention/api.go#L90-L90
+- 来源: modules/bot_mention/api.go#L106-L115
+- 来源: modules/bot_mention/api.go#L116-L125
+- 来源: modules/bot_mention/api.go#L126-L135
+- 来源: modules/bot_mention/api.go#L136-L136
+- 来源: modules/bot_mention/api.go#L148-L157
+- 来源: modules/bot_mention/api.go#L158-L167
+- 来源: modules/bot_mention/api.go#L168-L177
+- 来源: modules/bot_mention/api.go#L178-L187
+- 来源: modules/bot_mention/api.go#L188-L197
+- 来源: modules/bot_mention/api.go#L198-L207
+- 来源: modules/bot_mention/api.go#L208-L217
+- 来源: modules/bot_mention/api.go#L218-L226
+- 来源: modules/bot_mention/api_i18n.go#L13-L22
+- 来源: modules/bot_mention/api_i18n.go#L23-L32
+- 来源: modules/bot_mention/api_i18n.go#L33-L40
 
 #### 适用范围
 
@@ -267,9 +383,22 @@ Agent Mail gateway 挂在 `/v1/mail-gateway/*path`，进入代理前必须通过
 
 #### 证据
 
-- 来源: modules/agentmailgateway/gateway.go#L186-L228
-- 来源: modules/agentmailgateway/gateway.go#L302-L352
-- 来源: modules/agentmailgateway/gateway.go#L410-L457
+- 来源: modules/agentmailgateway/gateway.go#L186-L195
+- 来源: modules/agentmailgateway/gateway.go#L196-L205
+- 来源: modules/agentmailgateway/gateway.go#L206-L215
+- 来源: modules/agentmailgateway/gateway.go#L216-L225
+- 来源: modules/agentmailgateway/gateway.go#L226-L228
+- 来源: modules/agentmailgateway/gateway.go#L302-L311
+- 来源: modules/agentmailgateway/gateway.go#L312-L321
+- 来源: modules/agentmailgateway/gateway.go#L322-L331
+- 来源: modules/agentmailgateway/gateway.go#L332-L341
+- 来源: modules/agentmailgateway/gateway.go#L342-L351
+- 来源: modules/agentmailgateway/gateway.go#L352-L352
+- 来源: modules/agentmailgateway/gateway.go#L410-L419
+- 来源: modules/agentmailgateway/gateway.go#L420-L429
+- 来源: modules/agentmailgateway/gateway.go#L430-L439
+- 来源: modules/agentmailgateway/gateway.go#L440-L449
+- 来源: modules/agentmailgateway/gateway.go#L450-L457
 
 #### 适用范围
 
@@ -287,8 +416,16 @@ Agent Mail gateway 挂在 `/v1/mail-gateway/*path`，进入代理前必须通过
 
 #### 证据
 
-- 来源: modules/agentmailgateway/provisioning.go#L21-L56
-- 来源: modules/agentmailgateway/provisioning.go#L62-L118
+- 来源: modules/agentmailgateway/provisioning.go#L21-L30
+- 来源: modules/agentmailgateway/provisioning.go#L31-L40
+- 来源: modules/agentmailgateway/provisioning.go#L41-L50
+- 来源: modules/agentmailgateway/provisioning.go#L51-L56
+- 来源: modules/agentmailgateway/provisioning.go#L62-L71
+- 来源: modules/agentmailgateway/provisioning.go#L72-L81
+- 来源: modules/agentmailgateway/provisioning.go#L82-L91
+- 来源: modules/agentmailgateway/provisioning.go#L92-L101
+- 来源: modules/agentmailgateway/provisioning.go#L102-L111
+- 来源: modules/agentmailgateway/provisioning.go#L112-L118
 
 #### 适用范围
 

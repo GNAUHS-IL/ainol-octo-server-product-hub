@@ -61,29 +61,36 @@
 
 | 包目录 | register.Module 现象 | 证据 |
 |---|---|---|
-| `modules/user` | 注册 `user`、`friend`、`user_manager` | 来源: modules/user/1module.go#L26-L39；来源: modules/user/1module.go#L104-L185 |
-| `modules/message` | 注册 `message`、`conversation`、匿名 manager router、`conversation_ext_thread_auth`、`sidebar` | 来源: modules/message/1module.go#L26-L57；来源: modules/message/1module.go#L68-L112 |
-| `modules/space` | 共享同一个 `Space` 实例注册 `space`、`space_manager` | 来源: modules/space/1module.go#L17-L52 |
-| `modules/report` | 注册 `report`、`report_manager` | 来源: modules/report/1module.go#L16-L40 |
-| `modules/workplace` | 注册 `workplace`、`workplace_manager` | 来源: modules/workplace/1module.go#L16-L33 |
-| `modules/common` | 注册 `common` 与匿名 manager router | 来源: modules/common/1module.go#L16-L34 |
+| `modules/user` | 注册 `user`、`friend`、`user_manager` | 来源: modules/user/1module.go#L26-L39；来源: modules/user/1module.go#L104-L113；来源: modules/user/1module.go#L114-L123；来源: modules/user/1module.go#L124-L133；来源: modules/user/1module.go#L134-L143；来源: modules/user/1module.go#L144-L153；来源: modules/user/1module.go#L154-L163；来源: modules/user/1module.go#L164-L173；来源: modules/user/1module.go#L174-L183；来源: modules/user/1module.go#L184-L185 |
+| `modules/message` | 注册 `message`、`conversation`、匿名 manager router、`conversation_ext_thread_auth`、`sidebar` | 来源: modules/message/1module.go#L26-L35；来源: modules/message/1module.go#L36-L45；来源: modules/message/1module.go#L46-L55；来源: modules/message/1module.go#L56-L57；来源: modules/message/1module.go#L68-L77；来源: modules/message/1module.go#L78-L87；来源: modules/message/1module.go#L88-L97；来源: modules/message/1module.go#L98-L107；来源: modules/message/1module.go#L108-L112 |
+| `modules/space` | 共享同一个 `Space` 实例注册 `space`、`space_manager` | 来源: modules/space/1module.go#L17-L26；来源: modules/space/1module.go#L27-L36；来源: modules/space/1module.go#L37-L46；来源: modules/space/1module.go#L47-L52 |
+| `modules/report` | 注册 `report`、`report_manager` | 来源: modules/report/1module.go#L16-L25；来源: modules/report/1module.go#L26-L35；来源: modules/report/1module.go#L36-L40 |
+| `modules/workplace` | 注册 `workplace`、`workplace_manager` | 来源: modules/workplace/1module.go#L16-L25；来源: modules/workplace/1module.go#L26-L33 |
+| `modules/common` | 注册 `common` 与匿名 manager router | 来源: modules/common/1module.go#L16-L25；来源: modules/common/1module.go#L26-L34 |
 | `modules/base` | 注册匿名 app/base router 与 SQLDir | 来源: modules/base/1module.go#L14-L24 |
 | `modules/qrcode` | 注册匿名 qrcode router | 来源: modules/qrcode/1module.go#L8-L17 |
-| `modules/webhook` | 注册匿名 webhook router，带 SQLDir、Start、Stop | 来源: modules/webhook/1module.go#L13-L28 |
+| `modules/webhook` | 注册匿名 webhook router，带 SQLDir、Start、Stop | 来源: modules/webhook/1module.go#L13-L22；来源: modules/webhook/1module.go#L23-L28 |
 
 ### 条件运行 / 非单纯 HTTP API 模块
 
 | 模块 | 运行特征 | 证据 |
 |---|---|---|
-| `thread` | `DM_THREAD_ON` 未开启时仅注册 `Name: "thread"` 与 SQLDir；开启后才注册 API、archive worker、IMDatasource | 来源: modules/thread/1module.go#L24-L73 |
-| `conversation_ext` | 第一条模块只初始化全局 service/db 并注册 SQLDir/Service；Follow API 是第二条 `conversation_ext_follow` | 来源: modules/conversation_ext/1module.go#L73-L105 |
+| `thread` | `DM_THREAD_ON` 未开启时仅注册 `Name: "thread"` 与 SQLDir；开启后才注册 API、archive worker、IMDatasource | 来源: modules/thread/1module.go#L24-L33；来源: modules/thread/1module.go#L34-L43；来源: modules/thread/1module.go#L44-L53；来源: modules/thread/1module.go#L54-L63；来源: modules/thread/1module.go#L64-L73 |
+| `conversation_ext` | 第一条模块只初始化全局 service/db 并注册 SQLDir/Service；Follow API 是第二条 `conversation_ext_follow` | 来源: modules/conversation_ext/1module.go#L73-L82；来源: modules/conversation_ext/1module.go#L83-L92；来源: modules/conversation_ext/1module.go#L93-L102；来源: modules/conversation_ext/1module.go#L103-L105 |
 | `oidc` | 注册 API、SQLDir，并通过 `Start: o.Init` / `Stop: o.Close` 管理生命周期 | 来源: modules/oidc/1module.go#L13-L25 |
 | `messages_search` | 无 SQLDir，注册 Shared handler 与 Swagger | 来源: modules/messages_search/1module.go#L13-L24 |
-| `voice_adapter` | 从 env 构造配置，缺 `SPEECH_SERVICE_URL` 只告警；注册 API 与 SQLDir | 来源: modules/voice_adapter/1module.go#L14-L31 |
+| `voice_adapter` | 从 env 构造配置，缺 `SPEECH_SERVICE_URL` 只告警；注册 API 与 SQLDir | 来源: modules/voice_adapter/1module.go#L14-L23；来源: modules/voice_adapter/1module.go#L24-L31 |
 
 ### 启动级编排不在 `modules/*/1module.go`
 
 `main.go` 直接负责部分启动级控制面，例如 session rollout：`main.go:958` 调用 `auth.InitializeSessionRollout(ctx)`，随后绑定 writer lease、启动 reconciler 并打印 runtime 信息。不能把所有运行时能力都归因到 `register.Module`。
 
-- 来源: main.go#L23-L39
-- 来源: main.go#L952-L1015
+- 来源: main.go#L23-L32
+- 来源: main.go#L33-L39
+- 来源: main.go#L952-L961
+- 来源: main.go#L962-L971
+- 来源: main.go#L972-L981
+- 来源: main.go#L982-L991
+- 来源: main.go#L992-L1001
+- 来源: main.go#L1002-L1011
+- 来源: main.go#L1012-L1015

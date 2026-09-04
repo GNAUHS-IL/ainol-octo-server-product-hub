@@ -8,7 +8,9 @@
 
 ### 证据
 
-- 来源: BUILDING.md#L3-L27
+- 来源: BUILDING.md#L3-L12
+- 来源: BUILDING.md#L13-L22
+- 来源: BUILDING.md#L23-L27
 
 ### 适用范围
 
@@ -55,9 +57,12 @@
 
 ### 证据
 
-- 来源: Dockerfile#L11-L32
+- 来源: Dockerfile#L11-L20
+- 来源: Dockerfile#L21-L30
+- 来源: Dockerfile#L31-L32
 - 来源: Dockerfile#L35-L48
-- 来源: Dockerfile.ghcr#L1-L17
+- 来源: Dockerfile.ghcr#L1-L10
+- 来源: Dockerfile.ghcr#L11-L17
 
 ### 适用范围
 
@@ -126,9 +131,14 @@ Unit Test job 调用 `ci/run-unit-tests.sh`；该脚本先通过 `ci/list-unit-p
 
 #### 证据
 
-- 来源: .github/workflows/ci.yml#L102-L121
-- 来源: ci/list-unit-packages.sh#L1-L21
-- 来源: ci/run-unit-tests.sh#L1-L26
+- 来源: .github/workflows/ci.yml#L102-L111
+- 来源: .github/workflows/ci.yml#L112-L121
+- 来源: ci/list-unit-packages.sh#L1-L10
+- 来源: ci/list-unit-packages.sh#L11-L20
+- 来源: ci/list-unit-packages.sh#L21-L21
+- 来源: ci/run-unit-tests.sh#L1-L10
+- 来源: ci/run-unit-tests.sh#L11-L20
+- 来源: ci/run-unit-tests.sh#L21-L26
 
 #### 适用范围
 
@@ -146,10 +156,31 @@ E2E job 的 matrix 是 4 个 shard，每个 runner 启动独立 MySQL 8.0 与 Re
 
 #### 证据
 
-- 来源: .github/workflows/ci.yml#L123-L160
-- 来源: .github/workflows/ci.yml#L285-L328
-- 来源: ci/list-e2e-shard.sh#L1-L73
-- 来源: ci/run-e2e-shard.sh#L31-L101
+- 来源: .github/workflows/ci.yml#L123-L132
+- 来源: .github/workflows/ci.yml#L133-L142
+- 来源: .github/workflows/ci.yml#L143-L152
+- 来源: .github/workflows/ci.yml#L153-L160
+- 来源: .github/workflows/ci.yml#L285-L294
+- 来源: .github/workflows/ci.yml#L295-L304
+- 来源: .github/workflows/ci.yml#L305-L314
+- 来源: .github/workflows/ci.yml#L315-L324
+- 来源: .github/workflows/ci.yml#L325-L328
+- 来源: ci/list-e2e-shard.sh#L1-L10
+- 来源: ci/list-e2e-shard.sh#L11-L20
+- 来源: ci/list-e2e-shard.sh#L21-L30
+- 来源: ci/list-e2e-shard.sh#L31-L40
+- 来源: ci/list-e2e-shard.sh#L41-L50
+- 来源: ci/list-e2e-shard.sh#L51-L60
+- 来源: ci/list-e2e-shard.sh#L61-L70
+- 来源: ci/list-e2e-shard.sh#L71-L73
+- 来源: ci/run-e2e-shard.sh#L31-L40
+- 来源: ci/run-e2e-shard.sh#L41-L50
+- 来源: ci/run-e2e-shard.sh#L51-L60
+- 来源: ci/run-e2e-shard.sh#L61-L70
+- 来源: ci/run-e2e-shard.sh#L71-L80
+- 来源: ci/run-e2e-shard.sh#L81-L90
+- 来源: ci/run-e2e-shard.sh#L91-L100
+- 来源: ci/run-e2e-shard.sh#L101-L101
 
 #### 适用范围
 
@@ -169,7 +200,9 @@ WuKongIM 可达性与部分测试 skip 条件需要查对应测试文件；CI �
 
 - 来源: .github/workflows/docker-publish.yml#L1-L15
 - 来源: .github/workflows/docker-publish.yml#L37-L45
-- 来源: .github/workflows/docker-publish.yml#L49-L70
+- 来源: .github/workflows/docker-publish.yml#L49-L58
+- 来源: .github/workflows/docker-publish.yml#L59-L68
+- 来源: .github/workflows/docker-publish.yml#L69-L70
 - 来源: .github/workflows/docker-publish.yml#L127-L135
 
 #### 适用范围
@@ -188,9 +221,19 @@ Docker Publish 对 `linux/amd64` 与 `linux/arm64` 分别 buildx build，并以 
 
 #### 证据
 
-- 来源: .github/workflows/docker-publish.yml#L127-L173
-- 来源: .github/workflows/docker-publish.yml#L200-L236
-- 来源: .github/workflows/docker-publish.yml#L236-L272
+- 来源: .github/workflows/docker-publish.yml#L127-L136
+- 来源: .github/workflows/docker-publish.yml#L137-L146
+- 来源: .github/workflows/docker-publish.yml#L147-L156
+- 来源: .github/workflows/docker-publish.yml#L157-L166
+- 来源: .github/workflows/docker-publish.yml#L167-L173
+- 来源: .github/workflows/docker-publish.yml#L200-L209
+- 来源: .github/workflows/docker-publish.yml#L210-L219
+- 来源: .github/workflows/docker-publish.yml#L220-L229
+- 来源: .github/workflows/docker-publish.yml#L230-L236
+- 来源: .github/workflows/docker-publish.yml#L236-L245
+- 来源: .github/workflows/docker-publish.yml#L246-L255
+- 来源: .github/workflows/docker-publish.yml#L256-L265
+- 来源: .github/workflows/docker-publish.yml#L266-L272
 
 #### 适用范围
 
@@ -208,7 +251,9 @@ Docker Publish 对 `linux/amd64` 与 `linux/arm64` 分别 buildx build，并以 
 
 #### 证据
 
-- 来源: .github/workflows/release-publish.yml#L1-L30
+- 来源: .github/workflows/release-publish.yml#L1-L10
+- 来源: .github/workflows/release-publish.yml#L11-L20
+- 来源: .github/workflows/release-publish.yml#L21-L30
 
 #### 适用范围
 
@@ -226,10 +271,22 @@ reusable workflow 的内部行为不在本仓，需要查 `Mininglamp-OSS/.githu
 
 #### 证据
 
-- 来源: .github/workflows/docker-lint.yml#L1-L22
+- 来源: .github/workflows/docker-lint.yml#L1-L10
+- 来源: .github/workflows/docker-lint.yml#L11-L20
+- 来源: .github/workflows/docker-lint.yml#L21-L22
 - 来源: .github/workflows/secret-scan.yml#L1-L15
-- 来源: .github/workflows/codeql.yml#L1-L28
-- 来源: .github/workflows/ci.yml#L378-L466
+- 来源: .github/workflows/codeql.yml#L1-L10
+- 来源: .github/workflows/codeql.yml#L11-L20
+- 来源: .github/workflows/codeql.yml#L21-L28
+- 来源: .github/workflows/ci.yml#L378-L387
+- 来源: .github/workflows/ci.yml#L388-L397
+- 来源: .github/workflows/ci.yml#L398-L407
+- 来源: .github/workflows/ci.yml#L408-L417
+- 来源: .github/workflows/ci.yml#L418-L427
+- 来源: .github/workflows/ci.yml#L428-L437
+- 来源: .github/workflows/ci.yml#L438-L447
+- 来源: .github/workflows/ci.yml#L448-L457
+- 来源: .github/workflows/ci.yml#L458-L466
 
 #### 适用范围
 
@@ -266,8 +323,12 @@ reusable workflow 的具体规则、版本更新策略、告警处理 SLA 需查
 
 #### 证据
 
-- 来源: Dockerfile#L11-L48
-- 来源: Dockerfile.ghcr#L1-L17
+- 来源: Dockerfile#L11-L20
+- 来源: Dockerfile#L21-L30
+- 来源: Dockerfile#L31-L40
+- 来源: Dockerfile#L41-L48
+- 来源: Dockerfile.ghcr#L1-L10
+- 来源: Dockerfile.ghcr#L11-L17
 - 来源: .github/workflows/docker-publish.yml#L163-L172
 
 #### 适用范围
