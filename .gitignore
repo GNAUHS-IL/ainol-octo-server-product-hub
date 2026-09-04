@@ -1,0 +1,27 @@
+# Local real runtime logs/state are not committed; keep only examples.
+/logs/*.jsonl
+!/logs/scan-log.example.jsonl
+/state/*.json
+!/state/scan-state.example.json
+/state/*.md
+!/state/README.md
+/state/*.redacted.json
+/state/deep-audit/
+
+# Secrets and local env
+.gh-config/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.token
+*.secret
+
+# OS/editor/cache
+.DS_Store
+.idea/
+.vscode/
+__pycache__/

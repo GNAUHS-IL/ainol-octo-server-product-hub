@@ -1,0 +1,62 @@
+name: Bug Report
+description: Report a reproducible bug or unexpected behavior in octo-server product flow
+title: "[Bug] "
+labels: ["type/bug", "status/inbox"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 用户遇到的问题
+      description: 发生了什么？用户期望是什么？请勿填写 token、cookie、私钥等敏感信息。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请写清 1/2/3 步。如果无法复现，请说明触发条件。
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+  - type: input
+    id: source_area
+    attributes:
+      label: 可能相关领域
+      placeholder: area/auth / area/bot-agent / area/im / area/unknown
+    validations:
+      required: false
+  - type: textarea
+    id: source_paths
+    attributes:
+      label: 涉及源码路径 / 模块
+      placeholder: modules/bot_api / pkg/auth / configs/tsdd.yaml / unknown
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 代码/文档证据
+      description: 格式：来源: <相对路径>#L<起>-L<止>
+    validations:
+      required: false
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: 待确认问题
+    validations:
+      required: false

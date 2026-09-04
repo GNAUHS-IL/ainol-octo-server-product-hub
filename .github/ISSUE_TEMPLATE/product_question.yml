@@ -1,0 +1,31 @@
+name: Product Question
+description: Ask a source-backed product or code question
+title: "[Question] "
+labels: ["type/question", "status/inbox"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: 问题
+      description: 你想了解 octo-server 的哪个功能、模块、配置或行为？
+    validations:
+      required: true
+  - type: textarea
+    id: answer_summary
+    attributes:
+      label: Agent 回答摘要
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 证据
+      description: 格式：来源: <相对路径>#L<起>-L<止>
+    validations:
+      required: false
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: 不确定点 / 待补查
+    validations:
+      required: false

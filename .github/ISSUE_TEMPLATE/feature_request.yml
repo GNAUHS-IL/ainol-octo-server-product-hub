@@ -1,0 +1,57 @@
+name: Feature Request
+description: Request a new product capability or improvement
+title: "[Feature] "
+labels: ["type/feature", "status/inbox", "pm/needs-prd"]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      description: 用户在什么场景下需要这个能力？
+    validations:
+      required: true
+  - type: textarea
+    id: user_goal
+    attributes:
+      label: 用户目标
+      description: 用户希望完成什么？
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: 业务价值
+    validations:
+      required: true
+  - type: textarea
+    id: expected_capability
+    attributes:
+      label: 期望能力（What，不写 How）
+      description: 描述用户可见能力，不写 Redis、数据库表、接口字段或代码。
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 初步验收标准
+      description: 用用户能感知的语言描述，不写接口/数据库/Redis。
+      value: |
+        - [ ] 用户可以在 <场景> 下完成 <动作>。
+        - [ ] 操作完成后，用户能在 3 秒内看到成功或失败结果。
+        - [ ] 失败时，用户能看到可理解的原因和下一步建议。
+    validations:
+      required: false
+  - type: textarea
+    id: source_paths
+    attributes:
+      label: 涉及源码路径 / 模块
+      placeholder: modules/bot_api / pkg/auth / configs/tsdd.yaml / unknown
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 相关代码/产品证据
+      description: 格式：来源: <相对路径>#L<起>-L<止>
+    validations:
+      required: false
