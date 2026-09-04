@@ -2,7 +2,7 @@
 
 ## 消息回复格式用例
 
-详见 `evaluation/mock-exam-message-testset.md`。核心必测：
+核心必测：
 
 - 群内 sender.name = 助力梦想时，第一行必须 `@助力梦想`。
 - 群内模拟考不能只写“模拟考官您好”。
