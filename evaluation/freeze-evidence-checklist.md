@@ -17,6 +17,7 @@
 | Cross-module quick reference | `knowledge/10-cross-module-quickref.md` | Present |
 | Label system | `labels.yml` | Present |
 | GitHub issue templates | `.github/ISSUE_TEMPLATE/` | Present |
+| GitHub issue live smoke test | `evaluation/github-issue-flow-smoke-test.md`, issues `#4` and `#5` | Pass |
 | PRD template | `prd/TEMPLATE.md` | Present |
 | Review checklist | `review/REVIEW_CHECKLIST.md` | Present |
 | Cron / scheduler evidence | `docs/cron-evidence.md` | Present |
