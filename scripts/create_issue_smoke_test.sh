@@ -36,7 +36,7 @@ import json, sys
 print(json.dumps({
   'title': sys.argv[1],
   'body': sys.argv[2],
-  'labels': ['type/feature','priority/P2','status/inbox','area/bot-agent','source/evaluation']
+  'labels': ['type/feature','priority/P2','status/prd-drafting','area/bot-agent','source/evaluation','evidence/source-needed']
 }, ensure_ascii=False))
 PY
 )"
@@ -64,7 +64,7 @@ curl -fsSL \
   -H 'Accept: application/vnd.github+json' \
   -H 'X-GitHub-Api-Version: 2022-11-28' \
   -X PUT "$api/$number/labels" \
-  -d '{"labels":["type/feature","priority/P2","status/triaged","area/bot-agent","source/evaluation","pm/needs-prd"]}' >/dev/null
+  -d '{"labels":["type/feature","priority/P2","status/done","area/bot-agent","source/evaluation","pm/needs-prd","evidence/source-needed"]}' >/dev/null
 
 comment_payload="$(python3 - <<'PY'
 import json

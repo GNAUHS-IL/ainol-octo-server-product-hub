@@ -45,18 +45,17 @@ Label 只用于已经进入 GitHub 需求池的 issue。普通群聊问答如果
 
 ## 状态规则
 
-`status/*` 是唯一生命周期状态，不允许同一 issue 同时挂多个 `status/*`。
+`status/*` 是 issue 进入需求池后的唯一生命周期状态，不覆盖建单前的收集/澄清阶段。未完成最小信息澄清时，不创建 issue。
 
 常用流转：
 
 ```text
-status/inbox → status/triaged
-status/triaged → status/needs-clarification
-status/triaged → status/prd-drafting → status/prd-review
+status/prd-drafting → status/prd-review
 status/prd-review → status/accepted 或 status/rework
+status/rework → status/prd-drafting 或 status/prd-review
 status/accepted → status/done
-status/triaged → status/wontfix / status/duplicate / status/invalid
 任意状态 → status/blocked（遇到权限、安全、证据冲突、限流等阻塞）
+任意状态 → status/wontfix / status/duplicate / status/invalid（关闭原因）
 ```
 
 ## 典型组合
@@ -66,7 +65,7 @@ status/triaged → status/wontfix / status/duplicate / status/invalid
 ```text
 type/bug
 priority/P1
-status/needs-clarification
+status/blocked
 area/rbac
 source/group
 evidence/source-needed
@@ -90,7 +89,7 @@ pm/needs-prd
 ```text
 type/bug
 priority/P2
-status/triaged
+status/accepted
 area/docs
 evidence/source-verified
 source/group
@@ -124,7 +123,7 @@ pm/human-needed
 
 ## 强制一致性规则
 
-1. 不建 issue，不打 label。
+1. 不建 issue，不打 label；信息不完整时先在对话中澄清，不用 `status/*` 占位。
 2. 每个 issue 必须且只能有一个 `type/*`。
 3. 每个 issue 必须且只能有一个 `priority/*`。
 4. 每个 issue 必须且只能有一个 `status/*`。

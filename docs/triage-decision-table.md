@@ -2,7 +2,7 @@
 
 ## 入口原则
 
-Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，不创建 issue，也不打 label。
+Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，不创建 issue，也不打 label；信息不足时先澄清，不用 issue 当收集箱。
 
 只有当事项需要追踪、修复、新增、补文档、进入 PRD / Review、风险接管或沉淀为公开需求池工作项时，才创建 issue 并打 label。
 
@@ -11,10 +11,10 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 | 输入场景 | 处理 |
 |---|---|
 | 用户问已有能力，能直接源码回答 | 直接回答，不建 issue |
-| 问答暴露文档错误 | 建 issue：`type/bug + area/docs` |
-| 问答暴露文档缺失/需要补说明 | 建 issue：`type/feature + area/docs` |
-| 现有功能疑似异常 | 建 issue：`type/bug` |
-| 需要新增/增强能力 | 建 issue：`type/feature` |
+| 问答暴露文档错误且已具备最小证据 | 建 issue：`type/bug + area/docs + status/accepted` |
+| 问答暴露文档缺失/需要补说明且已具备最小背景 | 建 issue：`type/feature + area/docs + status/prd-drafting` |
+| 现有功能异常且复现/证据达到最小建单标准 | 建 issue：`type/bug + status/accepted` |
+| 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/prd-drafting` |
 | 涉及 token、cookie、私钥、生产权限 | 建 issue 或转人工：`priority/P0 + risk/token-leak + pm/human-needed`，不公开敏感内容 |
 
 ## 建 issue 后的主类型
@@ -28,9 +28,6 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 
 | 状态 | 含义 |
 |---|---|
-| `status/inbox` | 刚进入需求池，未分诊 |
-| `status/triaged` | 已完成初始分诊 |
-| `status/needs-clarification` | 信息不足，需要追问 |
 | `status/prd-drafting` | 正在草拟 PRD |
 | `status/prd-review` | PRD 等待 Review |
 | `status/rework` | Review 打回，需要修改 |

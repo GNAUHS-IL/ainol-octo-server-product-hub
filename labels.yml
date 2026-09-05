@@ -10,9 +10,6 @@ priority/P1: 核心功能异常或重要需求
 priority/P2: 常规缺陷或普通增强
 priority/P3: 低优先级建议、体验优化
 
-status/inbox: 新进入，未分诊
-status/triaged: 已分诊
-status/needs-clarification: 信息不足，需要澄清
 status/prd-drafting: PRD 草稿中
 status/prd-review: 等待 Review
 status/rework: Review 打回，需修改

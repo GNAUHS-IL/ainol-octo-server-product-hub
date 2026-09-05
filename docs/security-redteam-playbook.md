@@ -54,7 +54,7 @@
 - 安全类事项只记录事件类型、时间、处置状态，不记录敏感原文。
 - 公开 issue 中不得出现任何可用凭证，即使用户已经公开发送过。
 - 如必须留存证据，只保存“已脱敏说明”和风险 label。
-- 状态建议：`status/blocked` 或 `status/needs-clarification`，并加 `pm/human-needed`。
+- 状态建议：`status/blocked`，并加 `pm/human-needed`；若信息不足，先在对话中澄清，不用 issue 占位。
 
 ## 对外说明口径
 

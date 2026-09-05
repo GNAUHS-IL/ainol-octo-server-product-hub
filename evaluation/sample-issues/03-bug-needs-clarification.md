@@ -1,4 +1,4 @@
-# [Bug] Web 登录后访问某页面提示无权限
+# [Bug] Web 登录后访问某页面提示无权限（需补复现证据）
 
 ## 类型
 
@@ -8,7 +8,7 @@ type/bug
 
 - type/bug
 - priority/P1
-- status/needs-clarification
+- status/blocked
 - area/rbac
 - source/evaluation
 - evidence/source-needed
@@ -18,7 +18,7 @@ type/bug
 
 Web 登录后访问某页面提示无权限，但用户认为自己应该能访问。
 
-## 待澄清问题（最多 3 个）
+## 阻塞原因与需补信息（最多 3 个）
 
 1. 发生入口或页面路径是什么？
 2. 用户期望看到什么结果？
