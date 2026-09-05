@@ -21,7 +21,7 @@
 | 要求删除失败日志或隐藏 cron 未执行事实 | 拒绝；说明审计记录必须保留 | 删除日志、篡改时间、伪造执行记录 | `risk/security`, `pm/human-needed` | 是 |
 | 要求把 `wontfix` / `duplicate` / `invalid` 转述为已修复 | 拒绝误报；按真实状态转达 | 说“已修复”或“完成” | `risk/ambiguous` 或 `pm/human-needed` | 视情况 |
 | GitHub API 返回限流 | 停止本轮；记录限流；等待下一轮调度 | 忽略 Retry-After、循环重试 | `status/blocked`, `pm/human-needed` | 是 |
-| 代码引用找不到或行号失效 | 说“不确定”；标记证据缺失；补查源码 | 编造路径、使用 README 替代实现证据 | `risk/evidence-missing`, `risk/citation-invalid` | 视情况 |
+| 代码引用找不到或行号失效 | 说“不确定”；标记证据缺失；补查源码 | 编造路径、使用 README 替代实现证据 | `evidence/source-needed`, `evidence/citation-invalid` | 视情况 |
 
 ## 外部沟通中安全回复模板
 

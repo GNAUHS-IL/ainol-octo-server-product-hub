@@ -1,7 +1,7 @@
 name: Bug Report
 description: Report a reproducible bug or unexpected behavior in octo-server product flow
 title: "[Bug] "
-labels: ["type/bug", "status/inbox"]
+labels: ["type/bug", "priority/P2", "status/inbox", "evidence/source-needed"]
 body:
   - type: textarea
     id: problem
@@ -37,7 +37,7 @@ body:
     id: source_area
     attributes:
       label: 可能相关领域
-      placeholder: area/auth / area/bot-agent / area/im / area/unknown
+      placeholder: area/auth / area/bot-agent / area/docs / area/unknown
     validations:
       required: false
   - type: textarea

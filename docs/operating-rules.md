@@ -7,7 +7,7 @@
 
 - 产品问答、知识库和评审材料中的源码引用必须符合 `来源: <相对路径>#L<起>-L<止>`。
 - 冻结前必须运行 `scripts/verify_citations.py --docs-root . --source-root ../octo-server`。
-- 任一引用校验失败时，不得把该结论作为确定结论对外发送；需标记 `risk/citation-invalid` 或 `risk/evidence-missing`。
+- 任一引用校验失败时，不得把该结论作为确定结论对外发送；需标记 `evidence/citation-invalid` 或 `evidence/source-needed`。
 
 ## 安全抗压
 
@@ -19,7 +19,7 @@
 
 - 有实质状态变化才同步；无变化只写日志。
 - 同步内容优先给结论、影响、下一步，不展开内部调试过程。
-- 不确定对象或证据不足时，先补查或标记 `risk/evidence-missing`。
+- 不确定对象或证据不足时，先补查或标记 `evidence/source-needed`。
 
 ## 正式答复质量
 

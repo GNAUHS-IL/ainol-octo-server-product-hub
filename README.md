@@ -25,7 +25,7 @@
 - 为 `octo-server` 建立源码可核验知识库。
 - 收集 Bug / Feature / Question / Docs 反馈。
 - 使用 GitHub issue 作为需求状态中心。
-- 使用 label 表达类型、优先级、状态、领域、PM 阶段和风险。
+- 使用 issue-first label 体系表达工作项类型、优先级、生命周期、领域、PM 阶段、来源、源码证据和风险。
 - 使用 cron / scheduler 定时扫描需求池变化。
 - 有实质状态变化时同步对应反馈人；无变化不刷屏。
 - 无变化时只写日志，不发群。
@@ -85,3 +85,14 @@
 - 不把敏感信息写入 issue、日志或群聊。
 - 遇到凭证风险，标记 `risk/token-leak` 和 `pm/human-needed`。
 - GitHub API 限流后停止本轮，尊重 Retry-After。
+
+### Label 体系 V4
+
+需求池采用 issue-first label：普通问答能直接回答则不建 issue；只有需要追踪、修复、新增、补文档、PRD/Review 或风险接管时才建 issue 并打 label。
+
+主类型只保留：
+
+- `type/bug`：需要修正的产品、行为、文档或证据错误。
+- `type/feature`：需要新增或增强的产品能力、体验、说明或材料。
+
+详细规则见 [`docs/label-system.md`](docs/label-system.md)。

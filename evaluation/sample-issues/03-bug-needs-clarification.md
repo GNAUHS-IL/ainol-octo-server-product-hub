@@ -11,6 +11,7 @@ type/bug
 - status/needs-clarification
 - area/rbac
 - source/evaluation
+- evidence/source-needed
 - risk/ambiguous
 
 ## 用户反馈

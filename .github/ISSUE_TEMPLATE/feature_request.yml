@@ -1,7 +1,7 @@
 name: Feature Request
 description: Request a new product capability or improvement
 title: "[Feature] "
-labels: ["type/feature", "status/inbox", "pm/needs-prd"]
+labels: ["type/feature", "priority/P2", "status/inbox", "pm/needs-prd", "evidence/source-needed"]
 body:
   - type: textarea
     id: scenario
