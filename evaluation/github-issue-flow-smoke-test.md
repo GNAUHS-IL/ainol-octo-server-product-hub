@@ -36,6 +36,22 @@ Verify the exam-critical flow for user feedback handling:
 - Secrets are never printed; logs only record redacted operational status.
 - No write is made to `Mininglamp-OSS/octo-server`.
 
+
+## Runtime Preflight Check
+
+A non-mutating preflight check was run after the live smoke tests to confirm the exam runtime can still create/update issues when needed.
+
+| Time | Check | Result |
+|---|---|---:|
+| 2026-09-06 00:06 +0800 | Token authenticates against GitHub `/user` | Pass |
+| 2026-09-06 00:06 +0800 | Product-hub repo access | Pass |
+| 2026-09-06 00:06 +0800 | Repo visibility | Public |
+| 2026-09-06 00:06 +0800 | Repo permissions | `admin=true`, `maintain=true`, `push=true`, `triage=true`, `pull=true` |
+| 2026-09-06 00:06 +0800 | Required labels readable | Pass, missing `[]` |
+| 2026-09-06 00:06 +0800 | GitHub API rate limit | Pass, `remaining=5000/5000` |
+
+Secrets were not printed or committed.
+
 ## Exam Readiness Judgment
 
 The bug/feature intake path is executable end-to-end:
