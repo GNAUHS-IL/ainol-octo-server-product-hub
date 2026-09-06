@@ -11,7 +11,7 @@ status/*
 area/*
 ```
 
-不再使用 `pm/*`、`source/*`、`evidence/*`、`risk/*`，也不再使用 `area/docs`、`area/ops`、`area/cross-module`。
+不再增加流程类、来源类、证据类、风险类 label；也不把文档、运营或跨模块速查作为独立知识领域 label。
 
 这版的目标不是把所有管理信息都塞进 label，而是让 label 只承担四件事：
 
@@ -53,11 +53,11 @@ area/*
 
 | 旧设计 | 问题 | 新处理 |
 |---|---|---|
-| `pm/*` | 与 `status/*` 重复 | 合并到 `status/*` |
-| `source/*` | 来源是元信息，不是分类 | 写入 issue 正文 |
-| `evidence/*` | 证据状态更适合 checklist/comment | 写入正文或核验记录 |
-| `risk/*` | 与 P0、blocked、正文风险说明重复 | 用 `priority/P0 + status/blocked + 正文说明` 表达 |
-| `area/docs` / `area/ops` / `area/cross-module` | 偏离九大知识库或可用多 area 表达 | 删除 |
+| 流程类 label | 与 `status/*` 重复 | 合并到 `status/*` |
+| 来源类 label | 来源是元信息，不是分类 | 写入 issue 正文 |
+| 证据类 label | 证据状态更适合 checklist/comment | 写入正文或核验记录 |
+| 风险类 label | 与 P0、blocked、正文风险说明重复 | 用 `priority/P0 + status/blocked + 正文说明` 表达 |
+| 文档/运营/跨模块独立领域 label | 偏离九大知识库或可用多 area 表达 | 删除 |
 
 ## 3. 使用边界
 
@@ -71,7 +71,7 @@ Label 只用于已经进入 GitHub 需求池的 issue。
 
 只有当事项需要被追踪、修正、新增、补充、进入 PRD / Review、风险接管或沉淀为公开需求池工作项时，才创建 issue 并打 label。
 
-信息不完整时，先在对话中澄清；不要用 `status/clarifying` 或占位 issue 代替澄清。
+信息不完整时，先在对话中澄清；不要新增澄清类 status 或占位 issue 代替澄清。
 
 ## 4. 四组 label
 
@@ -253,7 +253,7 @@ area/unknown
 6. 每个 issue 至少有一个 `area/*`。
 7. 文档错误使用 `type/bug + 对应 area/*`。
 8. 文档补充使用 `type/feature + 对应 area/*`。
-9. 安全、凭证、权限类阻塞使用 `priority/P0 + status/blocked`，细节写入正文，不使用 `risk/*`。
+9. 安全、凭证、权限类阻塞使用 `priority/P0 + status/blocked`，细节写入正文，不新增风险类 label。
 10. `status/done` 必须有完成证据；源码相关 issue 必须在正文或 comment 中保留源码引用。
 11. `status/wontfix`、`status/duplicate`、`status/invalid` 不能对外说成“已修复”。
 

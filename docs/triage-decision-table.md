@@ -68,12 +68,12 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 
 ## 证据、来源、风险、PRD / Review 的承载位置
 
-| 信息 | 不再作为 label | 新承载位置 |
-|---|---|---|
-| 来源 | `source/*` | issue 正文“来源与上下文” |
-| 源码证据状态 | `evidence/*` | issue 正文、comment、引用校验记录 |
-| 风险类型 | `risk/*` | `priority/P0`、`status/blocked`、正文脱敏风险说明 |
-| PRD / Review 辅助状态 | `pm/*` | `status/prd-drafting`、`status/reviewing`、`status/rework`、`status/accepted` |
+| 信息 | 新承载位置 |
+|---|---|
+| 来源 | issue 正文“来源与上下文” |
+| 源码证据状态 | issue 正文、comment、引用校验记录 |
+| 风险类型 | `priority/P0`、`status/blocked`、正文脱敏风险说明 |
+| PRD / Review 辅助信息 | `status/prd-drafting`、`status/reviewing`、`status/rework`、`status/accepted`，以及 PRD / review checklist |
 
 ## PRD / Review 流程
 

@@ -1,6 +1,6 @@
 # 跨模块高频问题速查表
 
-本文件不是第十个“新领域”，而是九大知识库的交叉索引。用途是：当用户/考官按真实问题提问时，快速定位它同时牵涉哪些知识域、应先查什么、能否直接答复、是否需要收单或转人工。
+本文件不是第十个“新领域”，而是九大知识库的交叉索引。用途是：当用户/考官按真实问题提问时，快速定位它同时牵涉哪些知识域、应先查什么、能否直接答复、是否需要收单或人工复核确认。
 
 ## 使用原则
 
@@ -14,7 +14,7 @@
 | 高频问题 | 主要挂靠领域 | 还会牵涉 | 首查文件/证据 | 分诊建议 |
 |---|---|---|---|---|
 | Bot 为什么发不了消息 / 收不到消息？ | 7 Bot 与 Agent | 1 认证与身份、2 鉴权模型、5 API 与错误、6 IM 控制面 | `modules/bot_api/`、`modules/group/`、`modules/thread/`、`main.go` | 若涉及 bot token/跨群/跨空间，使用 `priority/P0` 或 `status/blocked` 表达阻塞，并在正文写脱敏风险说明；无法复现则补充 bot uid、channel、时间、错误码 |
-| Bot token 怎么来、谁能取？ | 1 认证与身份 | 2 鉴权模型、7 Bot 与 Agent、8 存储 | `modules/bot_provision/bot_api.go` | 涉及 token 展示/泄露直接转人工，不能在群内展示凭证 |
+| Bot token 怎么来、谁能取？ | 1 认证与身份 | 2 鉴权模型、7 Bot 与 Agent、8 存储 | `modules/bot_provision/bot_api.go` | 涉及 token 展示/泄露时发起人工复核确认，不能在群内展示凭证 |
 | Bot 代用户读取群/Thread 消息的边界是什么？ | 2 鉴权模型 | 6 IM 控制面、7 Bot 与 Agent | `modules/bot_api/obo_api.go` | 重点判断 grantor 是否有频道读取权；未知 channel type / DB 错误按 fail-closed 理解 |
 | Webhook 调不通 / 是否安全？ | 3 配置 | 1 认证与身份、5 API 与错误、8 存储与外部依赖 | `configs/tsdd.yaml`、`modules/incomingwebhook/api.go`、`main.go` | 涉及 webhook secret、URL token、日志泄露时使用 `priority/P0 + status/blocked`，正文只写脱敏风险说明 |
 | 卡片按钮点了没反应 / Action 回调失败？ | 5 API 与错误约定 | 2 鉴权模型、6 IM 控制面、7 Bot 与 Agent | `internal/carddispatch/`、`modules/card_template_catalog/`、`modules/message/` | 区分模板发布、发送权限、回调分发、幂等/CAS；缺回调日志则收单补证据 |
@@ -33,7 +33,7 @@
 - mint 到某个 space 前，会校验调用者确实是目标 space 成员，避免任意登录用户往任意 space 投放 bot。来源: modules/bot_provision/bot_api.go#L70-L79
 - `GET /v1/bot/:uid/token` 是 daemon 使用 `Authorization: Bearer uk_<key>` 获取 bot token 的路径，并要求 bot 创建者、bot 状态、space membership 同时满足。来源: modules/bot_provision/bot_api.go#L96-L108
 
-分诊口径：涉及“把 token 发我看一下”“帮我绕过 token”“直接查 bot token”的请求，不能在群内展示凭证，转人工并标记安全风险。
+分诊口径：涉及“把 token 发我看一下”“帮我绕过 token”“直接查 bot token”的请求，不能在群内展示凭证，由产品运营负责人发起人工复核确认；如需归档使用 priority/P0 + status/blocked + 对应 area/*，风险细节只写脱敏说明。
 
 ### 2. Bot 代用户读群/Thread 的边界是什么？
 

@@ -43,14 +43,7 @@ status/*
 area/*
 ```
 
-不再使用：
-
-```text
-pm/*
-source/*
-evidence/*
-risk/*
-```
+除这四组外，不再增加流程类、来源类、证据类或风险类 label。
 
 来源、证据、风险说明、PRD 检查项、Review 记录，应写入 issue 正文、comment、PRD 或 review checklist，不作为 label。
 
