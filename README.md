@@ -36,10 +36,10 @@
 本需求池不是简单照搬目标仓 issue / spec 流程，而是在源码证据基础上增加 **Evidence-to-PRD Gate**：
 
 ```text
-用户反馈 → 源码证据卡 → PRD Gate → 直接回答 / Bug 快速通道 / Feature PRD / Review / 仲裁
+用户反馈 → 源码/知识库判断 → PRD 必要性判断 → 直接回答 / Bug 快速通道 / Feature PRD / blocked
 ```
 
-核心原则：建 issue 不等于必须补 PRD；只有新增能力、用户可见规则变化、重要行为变更或需要明确验收标准时，才进入 PRD。详见 [`docs/innovative-demand-flow.md`](docs/innovative-demand-flow.md)。
+核心原则：建 issue 不等于必须补 PRD；先判断是否已有源码依据，再判断是否需要定义新的用户可见能力或规则。只有新增能力、用户可见规则变化、重要行为变更或需要明确验收标准时，才进入 PRD。详见 [`docs/innovative-demand-flow.md`](docs/innovative-demand-flow.md)。
 
 ## 运营分工
 

@@ -2,20 +2,24 @@
 
 ## 1. 设计目标
 
-本流程不是照搬 `octo-server` 目标仓的 GitHub issue / spec 机制，而是在目标仓已有 Bug / Feature / Spec / Review 结构上，增加一层适合产品管家 Agent 的判断机制：
+这套流程可以用一句话解释：
 
-> 先做证据归因，再决定是否进入 PRD。
+> **先判断用户反馈有没有源码依据，再判断它需不需要 PRD。**
+
+它不是照搬 `octo-server` 目标仓的 GitHub issue / spec 机制，而是在目标仓已有 Bug / Feature / Spec / Review 结构上，增加一层适合产品管家 Agent 的判断机制。
 
 核心创新点是 **Evidence-to-PRD Gate**：
 
 ```text
-用户反馈 / 群内问题
+用户反馈
 ↓
-源码证据卡 Evidence Card
+先查源码/知识库，判断它是什么问题
 ↓
-需求闸门 Decision Gate
-↓
-直接回答 / 建 Bug / 建 Feature / 补 PRD / Review / 仲裁
+再决定走哪条路：
+1. 能直接回答 → 直接答，不建 issue
+2. 明确 bug → 建 bug，不默认 PRD
+3. 新能力/新规则 → 建 feature，补 PRD
+4. 安全/权限/证据冲突 → blocked，转人工或补证据
 ```
 
 这样可以避免两个极端：
@@ -33,8 +37,7 @@
 - 源码可核验问答；
 - 是否建 issue 的初判；
 - `type/*`、`priority/*`、`status/*`、`area/*` 初始分诊；
-- PRD Review；
-- 最终状态仲裁；
+- PRD Review 与最终状态仲裁；
 - 群内主回复。
 
 ### Octo 需求管理员
@@ -271,9 +274,9 @@ status/blocked
 
 可以这样解释：
 
-> 我没有把目标仓流程原样照搬，而是在目标仓已有 Bug / Feature / Spec / Review 基础上，设计了一层 Evidence-to-PRD Gate。  
-> 每条反馈先做源码证据归因，再判断是直接回答、Bug 快速通道、Feature 需求、PRD 需求还是安全阻塞。  
-> 这样既保证源码可核验，又避免所有 issue 都补 PRD；需求管理员只负责 PRD 草拟和返工，我负责 Review 和最终状态仲裁。
+> 我没有把目标仓流程原样照搬，而是在目标仓已有 Bug / Feature / Spec / Review 基础上，设计了一层 Evidence-to-PRD Gate。
+> 简单说，就是每条反馈先过一个“源码证据 + PRD 必要性”的闸门：能回答就直接答，明确 bug 就走快速修正，新能力或新规则才进入 PRD，安全和权限问题直接 blocked。
+> 这样既保证源码可核验，又避免所有 issue 都补 PRD；需求管理员只负责 PRD 草拟和返工，我负责 PRD Review 与最终状态仲裁。
 
 ## 8. 最小执行规则
 
