@@ -1,25 +1,30 @@
 # Labels for ainol-octo-server-product-hub
-# V4 issue-first product backlog label system.
+# V5 knowledge-base-driven lightweight product backlog label system.
 # Labels are applied only after an item becomes a GitHub issue.
 
-type/bug: 需要修正的产品、行为、文档或证据错误
-type/feature: 需要新增或增强的产品能力、体验、说明或材料
+# Type: what kind of work the issue represents. Required, exactly one.
+type/bug: 修正已有能力、产品行为、文档或证据中的错误
+type/feature: 新增或增强产品能力、体验、说明或材料
 
+# Priority: handling order and urgency. Required, exactly one.
 priority/P0: 安全、凭证、登录不可用、Bot/Agent 断联、交付核心链路阻塞
 priority/P1: 核心功能异常或重要需求
 priority/P2: 常规缺陷或普通增强
 priority/P3: 低优先级建议、体验优化
 
-status/prd-drafting: PRD 草稿中
-status/prd-review: 等待 Review
-status/rework: Review 打回，需修改
-status/accepted: 已接受处理
-status/blocked: 被阻塞
-status/wontfix: 决定不做
-status/done: 已完成
-status/duplicate: 重复
-status/invalid: 无效
+# Status: current handling state. Required, exactly one.
+status/todo: 已进入需求池，待处理
+status/prd-drafting: PRD 草拟中
+status/reviewing: Review 中
+status/rework: Review 打回或内容需返工
+status/accepted: 已接受处理，但尚未完成
+status/blocked: 被权限、安全、证据冲突、限流或人工决策阻塞
+status/done: 已完成闭环
+status/wontfix: 有效但决定不处理
+status/duplicate: 与已有 issue 重复
+status/invalid: 无法成立为有效工作项
 
+# Area: maps the issue to the octo-server knowledge base. At least one; use multiple for cross-area issues.
 area/auth: 认证与身份
 area/rbac: 鉴权模型 / RBAC / ACL
 area/config: 配置
@@ -29,30 +34,4 @@ area/im: IM 控制面
 area/bot-agent: Bot 与 Agent
 area/storage: 存储与外部依赖
 area/build-release: 构建与发布
-area/cross-module: 跨模块高频问题速查
-area/docs: 文档、说明、示例、README、使用指引
-area/ops: 产品运营流程、需求池、巡检与验收材料
 area/unknown: 暂不能判断
-
-pm/needs-prd: 需要补 PRD
-pm/prd-ready: PRD 已准备好
-pm/review-requested: 已请求 Review
-pm/review-approved: Review 通过
-pm/review-rejected: Review 打回
-pm/human-needed: 需要人工接管
-
-source/group: 外部沟通渠道输入
-source/cron-detected: cron 扫描发现
-source/manual-triage: 人工分诊
-source/evaluation: 评测集输入
-source/agent: Agent 生成
-
-evidence/source-needed: 需要补源码证据
-evidence/source-verified: 已完成源码核验
-evidence/citation-invalid: 引用失效
-evidence/not-applicable: 不适用源码证据
-
-risk/security: 安全风险
-risk/privacy: 隐私风险
-risk/ambiguous: 信息模糊
-risk/token-leak: 凭证泄露风险

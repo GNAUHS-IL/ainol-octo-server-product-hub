@@ -95,9 +95,15 @@
 
 ## 11. 证据
 
-- 来源: modules/bot_api/bot_api.go#L341-L375
+- 来源: modules/bot_api/bot_api.go#L341-L345
+- 来源: modules/bot_api/bot_api.go#L365-L375
 - 来源: modules/botfather/const.go#L26-L28
-- 来源: modules/botfather/command.go#L770-L797
+- 来源: modules/botfather/command.go#L770-L783
+- 来源: modules/botfather/command.go#L786-L797
 - 来源: modules/botfather/templates/zh-CN/command.tmpl#L65-L70
-- 来源: modules/botfather/templates/zh-CN/command.tmpl#L126-L161
-- 来源: modules/bot_provision/bot_api.go#L96-L150
+- 来源: modules/botfather/templates/zh-CN/command.tmpl#L126-L140
+- 来源: modules/botfather/templates/zh-CN/command.tmpl#L143-L157
+- 来源: modules/bot_provision/bot_api.go#L96-L109
+- 来源: modules/bot_provision/bot_api.go#L122-L127
+- 来源: modules/bot_provision/bot_api.go#L134-L145
+- 来源: modules/bot_provision/bot_api.go#L146-L150

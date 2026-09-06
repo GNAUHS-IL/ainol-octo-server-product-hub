@@ -11,7 +11,7 @@
 | 目标仓自带文档/规格哪些有用 | `docs/upstream-reference-index.md` |
 | 具体源码问答依据 | `knowledge/00-index.md` |
 | API / 错误码 / 配置 / migration / workflow 索引 | `docs/source-audit/README.md` |
-| 提 Bug / Feature / Question / Review | GitHub Issues 与 `.github/ISSUE_TEMPLATE/` |
+| 提 Bug / Feature / Question / Review | GitHub Issues 与 `.github/ISSUE_TEMPLATE/`；普通 Question 能直接回答则不建 issue |
 | 写 PRD | `prd/TEMPLATE.md` |
 | 做 Review | `review/REVIEW_CHECKLIST.md` |
 | 跨模块高频问题速查 | `knowledge/10-cross-module-quickref.md` |
@@ -25,7 +25,7 @@
 - 为 `octo-server` 建立源码可核验知识库。
 - 收集 Bug / Feature / Question / Docs 反馈。
 - 使用 GitHub issue 作为需求状态中心。
-- 使用 issue-first label 体系表达工作项类型、优先级、生命周期、领域、PM 阶段、来源、源码证据和风险。
+- 使用 issue-first label 体系表达工作项类型、优先级、处理状态和知识库领域。
 - 使用 cron / scheduler 定时扫描需求池变化。
 - 有实质状态变化时同步对应反馈人；无变化不刷屏。
 - 无变化时只写日志，不发群。
@@ -72,6 +72,7 @@
 | area/bot-agent | Bot 与 Agent |
 | area/storage | 存储与外部依赖 |
 | area/build-release | 构建与发布 |
+| area/unknown | 暂不能判断 |
 
 
 ## 自动校验与安全抗压
@@ -83,16 +84,18 @@
 
 - 不展示、不保存 token / cookie / secret / 私钥。
 - 不把敏感信息写入 issue、日志或群聊。
-- 遇到凭证风险，标记 `risk/token-leak` 和 `pm/human-needed`。
+- 遇到凭证风险，不展示、不复述、不保存敏感值；如需归档，使用 `priority/P0 + status/blocked + 对应 area/*`，正文只写脱敏风险说明。
 - GitHub API 限流后停止本轮，尊重 Retry-After。
 
-### Label 体系 V4
+### Label 体系 V5
 
-需求池采用 issue-first label：普通问答能直接回答则不建 issue；只有需要追踪、修复、新增、补文档、PRD/Review 或风险接管时才建 issue 并打 label。
+需求池采用知识库驱动的轻量 issue-first label：普通问答能直接回答则不建 issue；只有需要追踪、修复、新增、补文档、PRD/Review 或风险接管时才建 issue 并打 label。
 
 主类型只保留：
 
 - `type/bug`：需要修正的产品、行为、文档或证据错误。
 - `type/feature`：需要新增或增强的产品能力、体验、说明或材料。
+
+最终只保留四组 label：`type/*`、`priority/*`、`status/*`、`area/*`。来源、证据、风险和 Review 细节写入 issue 正文、comment、PRD 或 review checklist。
 
 详细规则见 [`docs/label-system.md`](docs/label-system.md)。

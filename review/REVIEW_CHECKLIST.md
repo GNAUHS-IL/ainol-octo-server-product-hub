@@ -19,19 +19,18 @@
 
 ## 3. Label 完整性
 
-- [ ] type/*
-- [ ] priority/*
-- [ ] status/*
-- [ ] area/*
-- [ ] pm/*，如果需要 PRD / Review
-- [ ] risk/*，如果有安全、隐私、证据风险
+- [ ] 有且仅有一个 `type/*`
+- [ ] 有且仅有一个 `priority/*`
+- [ ] 有且仅有一个 `status/*`
+- [ ] 至少一个 `area/*`
+- [ ] 不使用 `pm/*`、`source/*`、`evidence/*`、`risk/*`
 
 ## 4. 状态真实性
 
-- [ ] 已修复、没复现、wontfix、duplicate、needs-clarification 没有混用
+- [ ] 已修复、没复现、wontfix、duplicate、invalid 没有混用
 - [ ] wontfix 有原因
-- [ ] needs-clarification 有最多 3 个明确问题
 - [ ] blocked 有阻塞原因
+- [ ] done 有完成证据
 
 ## 5. 群回报合规
 
@@ -57,5 +56,4 @@
 
 ## 7. What-only Gate
 
-PRD content must describe user-visible needs and acceptance criteria only. It must not prescribe Redis, database tables, internal field names, SQL, queues, code blocks, or HTTP status implementation details as the product requirement.
-
+PRD content must describe user-visible needs and acceptance criteria only. It must not prescribe Redis, database tables, internal field names, SQL, queues, code blocks, or HTTP status codes as acceptance criteria.

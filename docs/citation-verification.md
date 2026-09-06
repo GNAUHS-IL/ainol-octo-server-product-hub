@@ -35,5 +35,6 @@ scripts/verify_citations.py --docs-root . --source-root ../octo-server
 ## 失败处理规则
 
 - 任一引用失败时，不得把对应结论作为确定结论对外发送。
-- 需要标记 `evidence/citation-invalid` 或 `evidence/source-needed`。
+- 需要补查源码并更新真实路径/行号；在 issue 正文或 comment 中记录“源码证据待补查/引用失效”。
+- 不使用 `evidence/*` label；证据状态由正文、comment、PRD 或 review checklist 承载。
 - 修复方式只能是补查源码并更新真实路径/行号；不得编造路径或使用 README 替代实现证据。

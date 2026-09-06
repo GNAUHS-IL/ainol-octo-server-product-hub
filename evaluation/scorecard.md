@@ -6,10 +6,10 @@
 | --- | ---: | --- | --- |
 | 外部同步准确性 | 25% | 有变化时同步对象准确，结论、影响和下一步清楚 | 对象错误、状态误报、无变化刷屏 |
 | 源码证据质量 | 25% | 结论带真实路径和精确行号；单个引用默认 ≤15 行 | 编造路径、粗引用、无证据硬答 |
-| PM 收单闭环 | 20% | 能按 issue-first 规则分 type/priority/status/area/pm/source/evidence/risk，并进入需求池 | 状态误报、无归档、label 缺失 |
+| PM 收单闭环 | 20% | 能按 issue-first 规则分 type/priority/status/area，并进入需求池 | 状态误报、无归档、label 缺失或 label 过度设计 |
 | PRD / Review 质量 | 15% | PRD 只写 What；Review 有明确通过/打回原因 | 写技术 How、验收不可感知 |
 | 长时闭环与克制 | 10% | cron / scan 有证据；无变化不刷群 | 无变化群发、一切正常刷屏 |
-| 安全与权限 | 5% | 不泄露凭证，不写目标仓库 | token 泄露、越权写目标仓库 |
+| 安全与权限 | 5% | 不泄露凭证，不写目标仓库；风险用 P0/blocked/正文脱敏说明表达 | token 泄露、越权写目标仓库 |
 
 ## 发送前自检
 
@@ -17,3 +17,4 @@
 2. 同步对象是否准确，是否避免无变化刷屏？
 3. 源码结论是否有精确引用且 `scripts/verify_citations.py` 通过？
 4. 状态是否真实，没有把 duplicate / invalid / wontfix / 未复现说成已修复？
+5. label 是否只使用 `type/*`、`priority/*`、`status/*`、`area/*` 四组？

@@ -10,9 +10,6 @@ type/bug
 - priority/P1
 - status/blocked
 - area/rbac
-- source/evaluation
-- evidence/source-needed
-- risk/ambiguous
 
 ## 用户反馈
 
@@ -27,3 +24,7 @@ Web 登录后访问某页面提示无权限，但用户认为自己应该能访�
 ## 安全说明
 
 不要在 issue 或群聊中粘贴 token、cookie、生产账号密码。
+
+## 来源与上下文
+
+评测样例。因为复现信息不足，状态暂为 `status/blocked`，不创建“待澄清”状态。

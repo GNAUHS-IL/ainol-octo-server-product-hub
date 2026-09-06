@@ -13,10 +13,10 @@
 
 | 高频问题 | 主要挂靠领域 | 还会牵涉 | 首查文件/证据 | 分诊建议 |
 |---|---|---|---|---|
-| Bot 为什么发不了消息 / 收不到消息？ | 7 Bot 与 Agent | 1 认证与身份、2 鉴权模型、5 API 与错误、6 IM 控制面 | `modules/bot_api/`、`modules/group/`、`modules/thread/`、`main.go` | 若涉及 bot token/跨群/跨空间，标记 `risk/authz`；无法复现则补充 bot uid、channel、时间、错误码 |
+| Bot 为什么发不了消息 / 收不到消息？ | 7 Bot 与 Agent | 1 认证与身份、2 鉴权模型、5 API 与错误、6 IM 控制面 | `modules/bot_api/`、`modules/group/`、`modules/thread/`、`main.go` | 若涉及 bot token/跨群/跨空间，使用 `priority/P0` 或 `status/blocked` 表达阻塞，并在正文写脱敏风险说明；无法复现则补充 bot uid、channel、时间、错误码 |
 | Bot token 怎么来、谁能取？ | 1 认证与身份 | 2 鉴权模型、7 Bot 与 Agent、8 存储 | `modules/bot_provision/bot_api.go` | 涉及 token 展示/泄露直接转人工，不能在群内展示凭证 |
 | Bot 代用户读取群/Thread 消息的边界是什么？ | 2 鉴权模型 | 6 IM 控制面、7 Bot 与 Agent | `modules/bot_api/obo_api.go` | 重点判断 grantor 是否有频道读取权；未知 channel type / DB 错误按 fail-closed 理解 |
-| Webhook 调不通 / 是否安全？ | 3 配置 | 1 认证与身份、5 API 与错误、8 存储与外部依赖 | `configs/tsdd.yaml`、`modules/incomingwebhook/api.go`、`main.go` | 涉及 webhook secret、URL token、日志泄露时标记 `risk/token-leak` |
+| Webhook 调不通 / 是否安全？ | 3 配置 | 1 认证与身份、5 API 与错误、8 存储与外部依赖 | `configs/tsdd.yaml`、`modules/incomingwebhook/api.go`、`main.go` | 涉及 webhook secret、URL token、日志泄露时使用 `priority/P0 + status/blocked`，正文只写脱敏风险说明 |
 | 卡片按钮点了没反应 / Action 回调失败？ | 5 API 与错误约定 | 2 鉴权模型、6 IM 控制面、7 Bot 与 Agent | `internal/carddispatch/`、`modules/card_template_catalog/`、`modules/message/` | 区分模板发布、发送权限、回调分发、幂等/CAS；缺回调日志则收单补证据 |
 | 登录 / OIDC / token 失效怎么判断？ | 1 认证与身份 | 2 鉴权模型、3 配置、8 存储 | `modules/oidc/`、`pkg/auth/`、`main.go` | 涉及管理员降权、退出登录、token 续期时不要只看客户端状态，要看 Redis/session 语义 |
 | 文件上传 403 / 预签名 URL 失败？ | 8 存储与外部依赖 | 3 配置、5 API 与错误、2 鉴权模型 | `modules/file/api.go`、`configs/tsdd.yaml` | 先查是否直传、header 是否一致、bucket CORS 是否允许；对象 key 权限问题单独收单 |

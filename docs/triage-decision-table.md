@@ -11,11 +11,12 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 | 输入场景 | 处理 |
 |---|---|
 | 用户问已有能力，能直接源码回答 | 直接回答，不建 issue |
-| 问答暴露文档错误且已具备最小证据 | 建 issue：`type/bug + area/docs + status/accepted` |
-| 问答暴露文档缺失/需要补说明且已具备最小背景 | 建 issue：`type/feature + area/docs + status/prd-drafting` |
-| 现有功能异常且复现/证据达到最小建单标准 | 建 issue：`type/bug + status/accepted` |
-| 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/prd-drafting` |
-| 涉及 token、cookie、私钥、生产权限 | 建 issue 或转人工：`priority/P0 + risk/token-leak + pm/human-needed`，不公开敏感内容 |
+| 问答暴露文档错误且已具备最小证据 | 建 issue：`type/bug + 对应 area/* + status/accepted` |
+| 问答暴露文档缺失/需要补说明且已具备最小背景 | 建 issue：`type/feature + 对应 area/* + status/prd-drafting` |
+| 现有功能异常且复现/证据达到最小建单标准 | 建 issue：`type/bug + status/accepted + 对应 area/*` |
+| 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/prd-drafting + 对应 area/*` |
+| 涉及 token、cookie、私钥、生产权限 | 拒绝展示敏感信息；如需归档，使用 `priority/P0 + status/blocked + 对应 area/*`，正文只写脱敏说明 |
+| 暂不能判断所属领域 | 使用 `area/unknown`，后续分诊后替换或补充具体 `area/*` |
 
 ## 建 issue 后的主类型
 
@@ -24,40 +25,61 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 | 修正错误、异常、不一致、过期说明 | `type/bug` |
 | 新增能力、增强体验、补充说明、新增材料 | `type/feature` |
 
-## 常用状态
+不使用 `type/question`、`type/docs`、`type/prd`、`type/review`。
+
+## 优先级
+
+| 优先级 | 含义 |
+|---|---|
+| `priority/P0` | 安全、凭证、登录不可用、Bot/Agent 断联、交付核心链路阻塞 |
+| `priority/P1` | 核心功能异常或重要需求 |
+| `priority/P2` | 常规缺陷或普通增强 |
+| `priority/P3` | 低优先级建议、体验优化 |
+
+## 处理状态
 
 | 状态 | 含义 |
 |---|---|
-| `status/prd-drafting` | 正在草拟 PRD |
-| `status/prd-review` | PRD 等待 Review |
-| `status/rework` | Review 打回，需要修改 |
+| `status/todo` | 已进入需求池，待处理 |
+| `status/prd-drafting` | PRD 草拟中 |
+| `status/reviewing` | Review 中 |
+| `status/rework` | Review 打回或内容需返工 |
 | `status/accepted` | 已接受处理，但不能说已完成 |
-| `status/blocked` | 权限、安全、证据、限流等阻塞 |
-| `status/done` | 已完成或已给出可核验证据结论 |
-| `status/wontfix` | 决定不做 |
+| `status/blocked` | 权限、安全、证据、限流或人工决策等阻塞 |
+| `status/done` | 已完成闭环 |
+| `status/wontfix` | 有效但决定不处理 |
 | `status/duplicate` | 重复 issue |
-| `status/invalid` | 无效反馈 |
+| `status/invalid` | 无法成立为有效工作项 |
 
-## 证据与风险
+## 知识库领域
 
-| 场景 | label |
+| 领域 | 使用场景 |
 |---|---|
-| 需要补源码证据 | `evidence/source-needed` |
-| 已完成源码核验 | `evidence/source-verified` |
-| 引用失效 | `evidence/citation-invalid` |
-| 非源码型 issue | `evidence/not-applicable` |
-| 描述有歧义 | `risk/ambiguous` |
-| 安全/隐私风险 | `risk/security` / `risk/privacy` |
-| 凭证泄露风险 | `risk/token-leak` + `priority/P0` + `pm/human-needed` |
+| `area/auth` | 认证与身份 |
+| `area/rbac` | 鉴权模型 / RBAC / ACL |
+| `area/config` | 配置 |
+| `area/modules` | 业务模块清单 |
+| `area/api-error` | API 与错误约定 |
+| `area/im` | IM 控制面 |
+| `area/bot-agent` | Bot 与 Agent |
+| `area/storage` | 存储与外部依赖 |
+| `area/build-release` | 构建与发布 |
+| `area/unknown` | 暂不能判断 |
 
-## PRD / Review
+## 证据、来源、风险、PRD / Review 的承载位置
 
-PRD / Review 不作为 `type/*`。它们用 `status/* + pm/*` 表达：
+| 信息 | 不再作为 label | 新承载位置 |
+|---|---|---|
+| 来源 | `source/*` | issue 正文“来源与上下文” |
+| 源码证据状态 | `evidence/*` | issue 正文、comment、引用校验记录 |
+| 风险类型 | `risk/*` | `priority/P0`、`status/blocked`、正文脱敏风险说明 |
+| PRD / Review 辅助状态 | `pm/*` | `status/prd-drafting`、`status/reviewing`、`status/rework`、`status/accepted` |
+
+## PRD / Review 流程
 
 | 阶段 | label 组合 |
 |---|---|
-| 需要 PRD | `status/prd-drafting + pm/needs-prd` |
-| PRD 已可提交 Review | `pm/prd-ready` |
-| 已请求 Review | `status/prd-review + pm/review-requested` |
-| Review 通过 | `status/accepted + pm/review-approved` |
-| Review 打回 | `status/rework + pm/review-rejected` |
+| 需要 PRD | `type/feature + status/prd-drafting + 对应 area/*` |
+| 已请求 Review | `type/feature + status/reviewing + 对应 area/*` |
+| Review 通过 | `type/feature + status/accepted + 对应 area/*` |
+| Review 打回 | `type/feature + status/rework + 对应 area/*` |

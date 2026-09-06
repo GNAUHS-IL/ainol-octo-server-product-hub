@@ -10,9 +10,6 @@ type/feature
 - priority/P1
 - status/prd-drafting
 - area/bot-agent
-- pm/needs-prd
-- source/evaluation
-- evidence/source-needed
 
 ## 使用场景
 
@@ -29,3 +26,7 @@ type/feature
 ## PRD 状态
 
 需要 Octo 需求管理专员补充 What-only PRD，不写技术实现。
+
+## 证据状态
+
+源码证据待补查；确认后在正文或 comment 中补充真实路径和行号。

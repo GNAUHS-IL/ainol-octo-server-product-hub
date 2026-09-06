@@ -1,7 +1,7 @@
 name: Feature Request
 description: Request a new product capability or improvement
 title: "[Feature] "
-labels: ["type/feature", "priority/P2", "status/prd-drafting", "pm/needs-prd", "evidence/source-needed"]
+labels: ["type/feature", "priority/P2", "status/prd-drafting", "area/unknown"]
 body:
   - type: textarea
     id: scenario
@@ -37,8 +37,15 @@ body:
       description: 用用户能感知的语言描述，不写接口/数据库/Redis。
       value: |
         - [ ] 用户可以在 <场景> 下完成 <动作>。
-        - [ ] 操作完成后，用户能在 3 秒内看到成功或失败结果。
+        - [ ] 操作完成后，用户能看到成功或失败结果。
         - [ ] 失败时，用户能看到可理解的原因和下一步建议。
+    validations:
+      required: false
+  - type: input
+    id: source_area
+    attributes:
+      label: 可能相关知识库领域
+      placeholder: area/auth / area/bot-agent / area/im / area/unknown
     validations:
       required: false
   - type: textarea
@@ -52,6 +59,13 @@ body:
     id: evidence
     attributes:
       label: 相关代码/产品证据
-      description: 格式：来源: <相对路径>#L<起>-L<止>
+      description: 格式：来源: <相对路径>#L<起>-L<止>。没有证据时写“待补查”，不要编造。
+    validations:
+      required: false
+  - type: textarea
+    id: risk_notes
+    attributes:
+      label: 风险说明 / 阻塞原因
+      description: 如涉及凭证、权限、隐私、限流或证据冲突，只写脱敏说明。
     validations:
       required: false

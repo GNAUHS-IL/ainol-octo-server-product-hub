@@ -9,11 +9,7 @@
 - type/feature
 - priority/P2
 - status/prd-drafting
-- area/docs
 - area/auth
-- source/evaluation
-- evidence/source-verified
-- pm/needs-prd
 
 ## 背景
 
@@ -22,6 +18,10 @@
 ## 需求
 
 补充用户可理解的认证入口和鉴权方式说明，避免用户必须阅读源码才能完成基本配置。
+
+## 来源与上下文
+
+评测样例。
 
 ## 证据
 

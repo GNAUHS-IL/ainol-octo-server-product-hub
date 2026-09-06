@@ -26,7 +26,7 @@ BODY='## 测试目的
 - 类型：Feature
 - 领域：Bot 与 Agent
 - 优先级：P2
-- 状态：inbox → triaged
+- 状态：status/prd-drafting → status/done
 
 ## 安全说明
 本 issue 为流程连通性测试，不包含 token、cookie、secret 或真实用户隐私。'
@@ -36,7 +36,7 @@ import json, sys
 print(json.dumps({
   'title': sys.argv[1],
   'body': sys.argv[2],
-  'labels': ['type/feature','priority/P2','status/prd-drafting','area/bot-agent','source/evaluation','evidence/source-needed']
+  'labels': ['type/feature','priority/P2','status/prd-drafting','area/bot-agent']
 }, ensure_ascii=False))
 PY
 )"
@@ -64,7 +64,7 @@ curl -fsSL \
   -H 'Accept: application/vnd.github+json' \
   -H 'X-GitHub-Api-Version: 2022-11-28' \
   -X PUT "$api/$number/labels" \
-  -d '{"labels":["type/feature","priority/P2","status/done","area/bot-agent","source/evaluation","pm/needs-prd","evidence/source-needed"]}' >/dev/null
+  -d '{"labels":["type/feature","priority/P2","status/done","area/bot-agent"]}' >/dev/null
 
 comment_payload="$(python3 - <<'PY'
 import json

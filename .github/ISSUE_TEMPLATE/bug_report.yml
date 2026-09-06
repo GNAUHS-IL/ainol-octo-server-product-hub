@@ -1,7 +1,7 @@
 name: Bug Report
 description: Report a reproducible bug or unexpected behavior in octo-server product flow
 title: "[Bug] "
-labels: ["type/bug", "priority/P2", "status/accepted", "evidence/source-needed"]
+labels: ["type/bug", "priority/P2", "status/todo", "area/unknown"]
 body:
   - type: textarea
     id: problem
@@ -36,8 +36,8 @@ body:
   - type: input
     id: source_area
     attributes:
-      label: 可能相关领域
-      placeholder: area/auth / area/bot-agent / area/docs / area/unknown
+      label: 可能相关知识库领域
+      placeholder: area/auth / area/bot-agent / area/im / area/unknown
     validations:
       required: false
   - type: textarea
@@ -51,12 +51,20 @@ body:
     id: evidence
     attributes:
       label: 代码/文档证据
-      description: 格式：来源: <相对路径>#L<起>-L<止>
+      description: 格式：来源: <相对路径>#L<起>-L<止>。没有证据时写“待补查”，不要编造。
     validations:
       required: false
   - type: textarea
-    id: open_questions
+    id: source_context
     attributes:
-      label: 待确认问题
+      label: 来源与上下文
+      description: 例如群聊反馈、人工分诊、cron 扫描；请勿写入敏感原文。
+    validations:
+      required: false
+  - type: textarea
+    id: risk_notes
+    attributes:
+      label: 风险说明 / 阻塞原因
+      description: 如涉及凭证、权限、隐私、限流或证据冲突，只写脱敏说明。
     validations:
       required: false
