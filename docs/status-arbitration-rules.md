@@ -15,7 +15,7 @@ GitHub issue 不是原始收集箱。只有在建单前已经完成最小必要�
 | `status/reviewing` | Review 中 | 等产品运营负责人 Review 需求管理员提交的 PRD / 材料 | 已通过、已完成 |
 | `status/rework` | Review 打回或内容需返工 | 范围不清、验收标准不可验证、写了 How | 已接受、已完成 |
 | `status/accepted` | 已确认接受处理 | Bug 成立或 PRD Review 通过，进入处理队列 | 已完成 |
-| `status/blocked` | 当前被阻塞 | 权限、安全、证据冲突、限流、人工确认；通常不要求需求管理员介入 | 已完成、wontfix |
+| `status/blocked` | 当前被阻塞 | 权限、安全、证据冲突、限流、人工复核确认；通常不要求需求管理员介入 | 已完成、wontfix |
 | `status/done` | 已完成闭环 | 修复/补充/处理完成，或结论已可核验归档 | wontfix、duplicate、invalid |
 | `status/wontfix` | 有效但决定不处理 | 不符合产品方向或成本收益不合理 | 已修复、无效 |
 | `status/duplicate` | 与已有 issue 重复 | 关联原 issue，以原 issue 为准 | 已完成、无效 |

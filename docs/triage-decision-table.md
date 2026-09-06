@@ -94,7 +94,7 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 | `status/prd-drafting` | 是 | 草拟 What-only PRD，整理用户场景、目标、范围和验收标准 |
 | `status/rework` | 是 | 按产品运营负责人 Review 意见修改 PRD / 材料 |
 | `status/reviewing` | 否 | 这是产品运营负责人的 Review 状态，不能让需求管理员自己写自己审 |
-| `status/blocked` | 否 | blocked 代表权限、安全、证据冲突、限流或人工决策阻塞，通常由产品运营负责人或人工处理 |
+| `status/blocked` | 否 | blocked 代表权限、安全、证据冲突、限流或人工决策阻塞，通常由产品运营负责人或人工复核确认 |
 | `status/accepted` / `status/done` | 通常否 | 由产品运营负责人跟踪和仲裁；需求管理员只在被要求补材料时协助 |
 | `status/wontfix` / `status/duplicate` / `status/invalid` | 否 | 关闭原因由产品运营负责人最终仲裁 |
 

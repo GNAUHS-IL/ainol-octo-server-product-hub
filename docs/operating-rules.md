@@ -43,5 +43,5 @@
 - `status/prd-drafting`：需求管理员介入，草拟 What-only PRD。
 - `status/rework`：需求管理员介入，按 Review 意见修改 PRD / 材料。
 - `status/reviewing`：产品运营负责人介入并执行 Review；需求管理员不能自写自审。
-- `status/blocked`：通常不要求需求管理员介入，由产品运营负责人判断是补证据、转人工、等待权限/限流恢复，还是关闭。
+- `status/blocked`：通常不要求需求管理员介入，由产品运营负责人判断是补证据、发起人工复核确认、等待权限/限流恢复，还是关闭。
 - 最终状态仲裁始终由产品运营负责人负责。
