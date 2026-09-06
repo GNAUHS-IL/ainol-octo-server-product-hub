@@ -77,9 +77,25 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 
 ## PRD / Review 流程
 
-| 阶段 | label 组合 |
-|---|---|
-| 需要 PRD | `type/feature + status/prd-drafting + 对应 area/*` |
-| 已请求 Review | `type/feature + status/reviewing + 对应 area/*` |
-| Review 通过 | `type/feature + status/accepted + 对应 area/*` |
-| Review 打回 | `type/feature + status/rework + 对应 area/*` |
+| 阶段 | label 组合 | 责任边界 |
+|---|---|---|
+| 需要 PRD | `type/feature + status/prd-drafting + 对应 area/*` | 需求管理员草拟 PRD |
+| 已请求 Review | `type/feature + status/reviewing + 对应 area/*` | 产品运营负责人 Review |
+| Review 通过 | `type/feature + status/accepted + 对应 area/*` | 产品运营负责人仲裁 |
+| Review 打回 | `type/feature + status/rework + 对应 area/*` | 需求管理员按意见修改 |
+
+
+## 需求管理员介入边界
+
+需求管理员只在需要产出或修改 PRD / 需求材料时介入，不常驻处理所有 issue。
+
+| 状态/场景 | 是否介入 | 说明 |
+|---|---|---|
+| `status/prd-drafting` | 是 | 草拟 What-only PRD，整理用户场景、目标、范围和验收标准 |
+| `status/rework` | 是 | 按产品运营负责人 Review 意见修改 PRD / 材料 |
+| `status/reviewing` | 否 | 这是产品运营负责人的 Review 状态，不能让需求管理员自己写自己审 |
+| `status/blocked` | 否 | blocked 代表权限、安全、证据冲突、限流或人工决策阻塞，通常由产品运营负责人或人工处理 |
+| `status/accepted` / `status/done` | 通常否 | 由产品运营负责人跟踪和仲裁；需求管理员只在被要求补材料时协助 |
+| `status/wontfix` / `status/duplicate` / `status/invalid` | 否 | 关闭原因由产品运营负责人最终仲裁 |
+
+职责边界：需求管理员写 PRD；产品运营负责人 Review PRD 并决定通过、打回、接受或关闭。

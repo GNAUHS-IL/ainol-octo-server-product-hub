@@ -37,3 +37,11 @@
 - 目标仓变化由 `scripts/scan_upstream_changes.sh` 只读扫描。
 - 无变化只写本地日志，不发群。
 - 命中认证、鉴权、Bot、配置、存储等高风险领域时，先人工复核再更新知识库或同步。
+
+## 需求管理员协作边界
+
+- `status/prd-drafting`：需求管理员介入，草拟 What-only PRD。
+- `status/rework`：需求管理员介入，按 Review 意见修改 PRD / 材料。
+- `status/reviewing`：产品运营负责人介入并执行 Review；需求管理员不能自写自审。
+- `status/blocked`：通常不要求需求管理员介入，由产品运营负责人判断是补证据、转人工、等待权限/限流恢复，还是关闭。
+- 最终状态仲裁始终由产品运营负责人负责。

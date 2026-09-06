@@ -133,11 +133,11 @@ status/invalid
 | Label | 含义 | 不能误报为 |
 |---|---|---|
 | `status/todo` | 已进入需求池，待处理 | 已接受、已完成 |
-| `status/prd-drafting` | PRD 草拟中 | 已接受、已完成 |
-| `status/reviewing` | Review 中 | 已通过、已完成 |
-| `status/rework` | Review 打回或内容需返工 | 已接受、已完成 |
+| `status/prd-drafting` | PRD 草拟中；需求管理员负责产出 PRD | 已接受、已完成 |
+| `status/reviewing` | Review 中；产品运营负责人负责 Review | 已通过、已完成 |
+| `status/rework` | Review 打回或内容需返工；需求管理员按意见修改 | 已接受、已完成 |
 | `status/accepted` | 已接受处理，但尚未完成 | 已完成 |
-| `status/blocked` | 被权限、安全、证据冲突、限流或人工决策阻塞 | 已完成、wontfix |
+| `status/blocked` | 被权限、安全、证据冲突、限流或人工决策阻塞；通常不要求需求管理员介入 | 已完成、wontfix |
 | `status/done` | 已完成闭环 | wontfix、duplicate、invalid |
 | `status/wontfix` | 有效但决定不处理 | 已修复、无效 |
 | `status/duplicate` | 与已有 issue 重复 | 已完成、无效 |
@@ -206,6 +206,8 @@ status/reviewing
 area/bot-agent
 ```
 
+责任边界：需求管理员提交 PRD 后，由产品运营负责人 Review，不能自写自审。
+
 ### 5.4 Review 打回
 
 ```text
@@ -214,6 +216,8 @@ priority/P1
 status/rework
 area/bot-agent
 ```
+
+责任边界：需求管理员只负责按 Review 意见修改，是否再次通过由产品运营负责人判断。
 
 ### 5.5 安全或凭证阻塞
 
