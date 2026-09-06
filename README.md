@@ -16,6 +16,7 @@
 | 做 Review | `review/REVIEW_CHECKLIST.md` |
 | 跨模块高频问题速查 | `knowledge/10-cross-module-quickref.md` |
 | 收单分诊决策 | `docs/triage-decision-table.md` |
+| 创新需求流转方案 | `docs/innovative-demand-flow.md` |
 | 最终状态仲裁 | `docs/status-arbitration-rules.md` |
 | 上游变更影响扫描 | `docs/upstream-change-scan.md` |
 | 校验引用 | `scripts/verify_citations.py` |
@@ -29,6 +30,16 @@
 - 使用 cron / scheduler 定时扫描需求池变化。
 - 有实质状态变化时同步对应反馈人；无变化不刷屏。
 - 无变化时只写日志，不发群。
+
+## 创新流程亮点
+
+本需求池不是简单照搬目标仓 issue / spec 流程，而是在源码证据基础上增加 **Evidence-to-PRD Gate**：
+
+```text
+用户反馈 → 源码证据卡 → PRD Gate → 直接回答 / Bug 快速通道 / Feature PRD / Review / 仲裁
+```
+
+核心原则：建 issue 不等于必须补 PRD；只有新增能力、用户可见规则变化、重要行为变更或需要明确验收标准时，才进入 PRD。详见 [`docs/innovative-demand-flow.md`](docs/innovative-demand-flow.md)。
 
 ## 运营分工
 
