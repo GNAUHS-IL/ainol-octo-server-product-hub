@@ -17,6 +17,7 @@
 | 跨模块高频问题速查 | `knowledge/10-cross-module-quickref.md` |
 | 收单分诊决策 | `docs/triage-decision-table.md` |
 | 创新需求流转方案 | `docs/innovative-demand-flow.md` |
+| 需求管理员工作手册 | `docs/demand-manager-playbook.md` |
 | 最终状态仲裁 | `docs/status-arbitration-rules.md` |
 | 上游变更影响扫描 | `docs/upstream-change-scan.md` |
 | 校验引用 | `scripts/verify_citations.py` |
