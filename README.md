@@ -15,6 +15,7 @@
 | 写 PRD | `prd/TEMPLATE.md` |
 | 做 Review | `review/REVIEW_CHECKLIST.md` |
 | 跨模块高频问题速查 | `knowledge/10-cross-module-quickref.md` |
+| 用户交互分流协议 | `docs/user-interaction-decision-protocol.md` |
 | 收单分诊决策 | `docs/triage-decision-table.md` |
 | 创新需求流转方案 | `docs/innovative-demand-flow.md` |
 | 需求管理员工作手册 | `docs/demand-manager-playbook.md` |
