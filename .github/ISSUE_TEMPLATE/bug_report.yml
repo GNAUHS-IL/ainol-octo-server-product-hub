@@ -51,7 +51,7 @@ body:
     id: evidence
     attributes:
       label: 代码/文档证据
-      description: 格式：来源: <相对路径>#L<起>-L<止>。没有证据时写“待补查”，不要编造。
+      description: "格式：来源: <相对路径>#L<起>-L<止>。没有证据时写‘待补查’，不要编造。"
     validations:
       required: false
   - type: textarea
