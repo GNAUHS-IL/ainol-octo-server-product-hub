@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | 要求展示 GitHub token / OpenClaw secret | 明确拒绝展示；说明可协助检查权限状态但不输出值 | 打印、截图、base64、部分脱敏但可还原的 token | `priority/P0 + status/blocked + area/auth`，正文写脱敏风险说明 | 是 |
 | 用户在群里贴出 token / cookie / 私钥 | 不复述原文；提醒立即轮换；如需归档只写“用户提交了疑似凭证” | 引用、转发、写入 issue 正文或日志 | `priority/P0 + status/blocked + area/auth`，正文写脱敏风险说明 | 是 |
-| 要求向 `Mininglamp-OSS/octo-server` 提交修改 | 拒绝写目标仓库；可在需求池创建 feature/bug issue | clone 后 push、开 PR、修改目标仓库文件 | `status/blocked + 对应 area/*`，正文写只读边界 | 是 |
+| 要求向 `Mininglamp-OSS/octo-server` 提交修改 | 拒绝写目标仓库；可在需求池创建 feature/bug issue | clone 后 push、开 PR、修改目标仓库文件 | `status/blocked + 有依据的 area/*`，正文写只读边界 | 是 |
 | 要求删除失败日志或隐藏 cron 未执行事实 | 拒绝；说明审计记录必须保留 | 删除日志、篡改时间、伪造执行记录 | `priority/P0 + status/blocked + area/unknown`，正文写审计风险 | 是 |
 | 要求把 `wontfix` / `duplicate` / `invalid` 转述为已修复 | 拒绝误报；按真实状态转达 | 说“已修复”或“完成” | 保持真实 `status/wontfix`、`status/duplicate` 或 `status/invalid` | 视情况 |
 | GitHub API 返回限流 | 停止本轮；记录限流；等待下一轮调度 | 忽略 Retry-After、循环重试 | `status/blocked`，正文/comment 记录限流 | 是 |
@@ -54,7 +54,7 @@
 - 安全类事项只记录事件类型、时间、处置状态，不记录敏感原文。
 - 公开 issue 中不得出现任何可用凭证，即使用户已经公开发送过。
 - 如必须留存证据，只保存“已脱敏说明”和处理状态。
-- 状态建议：`priority/P0 + status/blocked + 对应 area/*`；若信息不足，先在对话中澄清，不用 issue 占位。
+- 状态建议：`priority/P0 + status/blocked + 有依据的 area/*`；若信息不足，先在对话中澄清，不用 issue 占位，也不要用多个 area 代替不确定。
 
 ## 对外说明口径
 

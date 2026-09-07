@@ -44,8 +44,9 @@ body:
   - type: input
     id: source_area
     attributes:
-      label: 可能相关知识库领域
-      placeholder: area/auth / area/bot-agent / area/im / area/unknown
+      label: 有依据的知识库领域
+      description: 先填写主 area；只有问题事实、源码/知识库证据或验收范围明确覆盖第二领域时，才补充关联 area。不要把“可能涉及”的领域都写成标签。
+      placeholder: 主 area，如 area/bot-agent；不确定时 area/unknown
     validations:
       required: false
   - type: textarea

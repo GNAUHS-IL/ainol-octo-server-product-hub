@@ -10,7 +10,7 @@
 
 - 使用 `priority/P0` 表达高风险或核心阻塞。
 - 使用 `status/blocked` 表达当前不能继续推进。
-- 使用对应 `area/*` 表达影响的 octo-server 知识库领域；无法判断时用 `area/unknown`。
+- 使用有明确依据的 `area/*` 表达影响的 octo-server 知识库领域；无法判断时用 `area/unknown`，不要用多个 area 代替不确定。
 - 在 issue 正文或 comment 中写脱敏后的“人工复核确认原因”。
 
 需求管理员可以协助整理脱敏事实、风险提醒和待确认问题，但不负责决定是否需要人工复核确认。
