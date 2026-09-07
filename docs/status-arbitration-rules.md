@@ -37,6 +37,20 @@ Blocked: 任意状态 → status/blocked → 原状态或 status/accepted/done
 Close reasons: 任意状态 → status/wontfix / status/duplicate / status/invalid
 ```
 
+
+## 外部状态转达模板
+
+| 真实状态 | 可以转达 | 禁止转达 |
+|---|---|---|
+| 已修复 / `status/done` 且有证据 | “已完成/已修复，证据是 ……” | 无证据时说已修复 |
+| 未复现 | “当前未复现，已有证据不足，需补充复现条件” | “已修复” |
+| `status/wontfix` | “确认暂不处理/不处理，原因是 ……” | “已修复”“无效” |
+| `status/duplicate` | “与 #N 重复，后续以原 issue 为准” | “已修复”“已关闭=已完成” |
+| `status/invalid` | “无法成立为有效工作项，原因是 ……” | “wontfix”“已修复” |
+| `status/blocked` | “当前被阻塞，缺少 <证据/权限/人工复核确认>” | “已完成”“不做” |
+
+状态转达以 GitHub issue 当前 label、comment、PRD/Review 记录和源码证据为准；如果这些证据冲突，先说“不确定，需要人工复核确认”，不得替任何一方美化结论。
+
 ## 口径红线
 
 - `status/accepted` 只能说“已接受处理”，不能说“已修复”。
