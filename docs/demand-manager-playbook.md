@@ -47,7 +47,7 @@ area/*
 
 来源、证据、风险说明、PRD 检查项、Review 记录，应写入 issue 正文、comment、PRD 或 review checklist，不作为 label。
 
-每个 issue 必须且只能有一个 `type/*`、一个 `priority/*`、一个 `status/*`，并至少有一个 `area/*`。
+每个 issue 必须且只能有一个 `type/*`、一个 `priority/*`、一个 `status/*`，并至少有一个有依据的 `area/*`。`area/*` 不是越多越好：默认主 area + 必要且有证据的关联 area；弱相关或推测范围写正文/comment，不打 label。
 
 ## 4. Issue、PRD 与需求管理员介入边界
 

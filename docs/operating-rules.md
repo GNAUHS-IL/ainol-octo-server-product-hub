@@ -31,7 +31,7 @@
 
 - 收到反馈后按 `docs/triage-decision-table.md` 判断 type、priority、status、area。
 - 最终状态按 `docs/status-arbitration-rules.md` 仲裁；没有完成证据不得标记 `status/done`。
-- 跨模块问题优先查 `knowledge/10-cross-module-quickref.md`，再回到九大知识库与源码引用；label 上直接打多个相关 `area/*`。
+- 跨模块问题优先查 `knowledge/10-cross-module-quickref.md`，再回到九大知识库与源码引用；label 只打有明确依据的 `area/*`，默认主 area + 必要关联 area，弱相关或推测范围写正文/comment。
 
 ## 上游变更影响扫描
 

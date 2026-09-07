@@ -24,7 +24,7 @@ status/wontfix: 有效但决定不处理
 status/duplicate: 与已有 issue 重复
 status/invalid: 无法成立为有效工作项
 
-# Area: maps the issue to the octo-server knowledge base. At least one; use multiple for cross-area issues.
+# Area: maps the issue to the octo-server knowledge base. At least one; use multiple only when each area has clear evidence.
 area/auth: 认证与身份
 area/rbac: 鉴权模型 / RBAC / ACL
 area/config: 配置

@@ -6,6 +6,8 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 
 只有当事项需要追踪、修复、新增、补文档、进入 PRD / Review、风险接管或沉淀为公开需求池工作项时，才创建 issue 并打 label。
 
+`area/*` 标签必须有依据：先选核心主 area；只有 issue 事实、源码/知识库证据或验收范围明确覆盖第二领域时，才追加关联 area。不要为了“看起来全面”打多个 area；弱相关写正文/comment。
+
 
 ## 用户输入识别流程
 
@@ -71,7 +73,7 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 | 现有功能异常且复现/证据达到最小建单标准 | 建 issue：`type/bug + status/accepted + 对应 area/*` |
 | 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/prd-drafting + 对应 area/*` |
 | 涉及 token、cookie、私钥、生产权限 | 拒绝展示敏感信息；如需归档，使用 `priority/P0 + status/blocked + 对应 area/*`，正文只写脱敏说明 |
-| 暂不能判断所属领域 | 使用 `area/unknown`，后续分诊后替换或补充具体 `area/*` |
+| 暂不能判断所属领域 | 使用 `area/unknown`，后续分诊后替换为有依据的具体 `area/*`；不要用多个 area 代替不确定 |
 
 ## 建 issue 后的主类型
 
