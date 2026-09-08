@@ -276,7 +276,7 @@ status/blocked
 
 > 我没有把目标仓流程原样照搬，而是在目标仓已有 Bug / Feature / Spec / Review 基础上，设计了一层 Evidence-to-PRD Gate。
 > 简单说，就是每条反馈先过一个“源码证据 + PRD 必要性”的闸门：能回答就直接答，明确 bug 就走快速修正，新能力或新规则才进入 PRD，安全和权限问题直接 blocked。
-> 这样既保证源码可核验，又避免所有 issue 都补 PRD；需求管理员只负责 PRD 草拟和返工，我负责 PRD Review 与最终状态仲裁。
+> 这样既保证源码可核验，又避免所有 issue 都补 PRD；PRD 草拟/返工等执行性工作不写成我的职责，我负责 PRD Review 与最终状态仲裁。
 
 ## 8. 最小执行规则
 

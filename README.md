@@ -26,7 +26,7 @@
 ## 目标
 
 - 为 `octo-server` 建立源码可核验知识库。
-- 收集 Bug / Feature / Question / Docs 反馈。
+- 收集 Bug / Feature 反馈；Question 先答复，必要时归档。
 - 使用 GitHub issue 作为需求状态中心。
 - 使用 issue-first label 体系表达工作项类型、优先级、处理状态和知识库领域。
 - 使用 cron / scheduler 定时扫描需求池变化。
@@ -51,7 +51,7 @@
 
 ### 需求管理专员
 
-负责：PRD 草拟与按 Review 意见修改、引用材料整理、label 初检、cron 巡检、状态变化发现、异常提醒；不 Review 自己产出的 PRD，不做最终状态仲裁。
+负责：PRD 草拟与按 Review 意见修改、引用材料整理、label 初检、调度巡检执行、状态变化发现、异常提醒；不 Review 自己产出的 PRD，不做最终状态仲裁。
 
 ## 目标仓库只读
 
