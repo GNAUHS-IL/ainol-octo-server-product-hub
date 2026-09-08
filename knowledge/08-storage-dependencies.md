@@ -440,3 +440,35 @@ Agent Mail Gateway 从 `OCTO_MAIL_GATEWAY_URL`、`OCTO_MAIL_GATEWAY_SECRET`、`O
 #### 不确定边界
 
 octo-mail 上游自身的存储、账号和邮件 API 不属于 `octo-server` 源码定义范围。
+
+### 知识点：Project、AI Team、Bot Task 与 OIDC redemption ledger 新增了多种持久化/缓存依赖
+
+#### 结论
+
+Project 新增 `octo_project`、`octo_project_member`、`octo_project_member_removal_cleanup` 与 `octo_project_provisioning`：前两张承载 Space 内项目与成员，removal cleanup 是项目侧成员移除级联 outbox，provisioning 兼做 fleet/drive 容器预置工单与映射表。AI Team 新增 `ai_team_agent` 与 `ai_team_session`。Bot Task 不新增 SQL 表，但用 Redis claim 记录 pending/done，实现幂等与 replay/conflict 判断。OIDC bearer JWT redemption ledger 用 Redis key 存 token 摘要的兑换台账，不保存明文 token，TTL 依据 token 剩余寿命并有上限。
+
+#### 证据
+
+- 来源: modules/project/sql/20260904000001_project_core.sql#L78-L87
+- 来源: modules/project/sql/20260904000001_project_core.sql#L118-L130
+- 来源: modules/project/sql/20260906000001_project_group_binding.sql#L99-L107
+- 来源: modules/project/sql/20260906000001_project_group_binding.sql#L108-L120
+- 来源: modules/project/sql/20260907000001_project_provisioning.sql#L46-L57
+- 来源: modules/project/sql/20260907000001_project_provisioning.sql#L61-L66
+- 来源: modules/project/sql/20260907000001_project_provisioning.sql#L67-L75
+- 来源: modules/project/sql/20260907000001_project_provisioning.sql#L76-L79
+- 来源: modules/ai_team/sql/20260907000001_ai_team_sessions.sql#L3-L17
+- 来源: modules/ai_team/sql/20260907000001_ai_team_sessions.sql#L19-L27
+- 来源: modules/ai_team/sql/20260907000001_ai_team_sessions.sql#L28-L34
+- 来源: modules/bot_task/idempotency.go#L18-L25
+- 来源: modules/bot_task/idempotency.go#L76-L88
+- 来源: modules/oidc/redemption_ledger.go#L62-L65
+- 来源: modules/oidc/redemption_ledger.go#L80-L85
+
+#### 适用范围
+
+适用于解释新增表、outbox、Redis 幂等、防重放和对象/容器映射类存储边界。
+
+#### 不确定边界
+
+fleet workspace 与 drive space 的最终创建和状态真实性由对应子系统确认；octo-server 本地 `ready` 只表示曾经成功调用过 ensure，不应作为读路径权限门。

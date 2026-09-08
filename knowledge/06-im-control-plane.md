@@ -387,3 +387,30 @@ FollowChannel 在写 `auto_follow_threads=1` 和清除 `group_unfollowed` 前先
 #### 不确定边界
 
 `AuthorizeThreadFollow` 内部还复用父群 Space 可见性规则；更细的 internal/external/legacy Space 判定已在 `knowledge/02-authorization-model.md` 中覆盖。
+
+### 知识点：Project 绑定群与 AI Team 会话容器把 IM 群成员准入前移到 server 侧统一控制
+
+#### 结论
+
+Project P1 后，群成员能否进入绑定 Project 的群不再由单个 handler 各自判断，而是收敛到 `admitOrRestoreMembersTx` 背后的 admission gate；该 gate 明确服务于 Project 层安全 invariant：绑定 project 的群里，活跃 group_member 必须同时是活跃 Space member 与活跃 Project member。AI Team 会话使用受保护 group/thread 容器，`pkg/aiteam` 会识别 `purpose=ai_session_container` 的群并从相关列表中过滤保护对象，避免普通群操作路径误处理 AI 私有容器。
+
+#### 证据
+
+- 来源: modules/group/admission.go#L19-L28
+- 来源: modules/group/admission.go#L40-L46
+- 来源: modules/group/admission.go#L142-L149
+- 来源: modules/group/admission.go#L158-L164
+- 来源: modules/group/api.go#L1029-L1037
+- 来源: modules/group/api.go#L1038-L1046
+- 来源: modules/group/api.go#L1057-L1067
+- 来源: pkg/aiteam/aiteam.go#L38-L45
+- 来源: pkg/aiteam/aiteam.go#L82-L90
+- 来源: pkg/aiteam/aiteam.go#L91-L104
+
+#### 适用范围
+
+适用于解释“哪些操作走 server 控制面而不是 WuKongIM 直接决定”：Project 群准入、AI Team 容器保护、群成员写入与订阅恢复链路。
+
+#### 不确定边界
+
+WuKongIM 对已同步成员/订阅的底层投递仍在 IM 侧；本条只覆盖 octo-server 在写入 group_member 与生成受保护容器前的控制面约束。

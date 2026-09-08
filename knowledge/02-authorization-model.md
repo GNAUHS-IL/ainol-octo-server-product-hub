@@ -375,3 +375,31 @@ grant/scope 的创建、撤销 API 和数据库约束需继续查 `obo_api.go`�
 #### 不确定边界
 
 如果考官追问其它服务（如 marketplace）最终是否接受某角色，需要到对应服务仓库核验；octo-server 只能确认自身能力图谱与 token verify 输出。
+
+### 知识点：Project 成员、Group admission 与 AI Team 都新增了资源级授权边界
+
+#### 结论
+
+Project 不是单纯 Space 列表能力：`/v1/projects/:project_id/*` 先经 `projectMiddleware` 解析项目成员角色，项目成员缓存会把 `removing=1` 的席位视为非成员；群绑定 Project 后，所有可写入 group_member 的路径必须经过统一 admission gate，条件是 active Space member 且如果绑定 project，则也是 active project member，系统 bot 另有豁免。AI Team 的 agent/session 操作要求人和 bot 都在同一个 Space，且 bot 必须归该用户所有、状态有效；AI session container 的保护不受 `DM_AI_TEAM_ON` 关闭影响，避免回滚时放开已创建私有容器。
+
+#### 证据
+
+- 来源: modules/project/api.go#L185-L193
+- 来源: modules/project/api.go#L195-L200
+- 来源: modules/project/middleware.go#L147-L158
+- 来源: modules/group/admission.go#L142-L149
+- 来源: modules/group/admission.go#L150-L157
+- 来源: modules/group/admission.go#L175-L179
+- 来源: modules/ai_team/service.go#L37-L47
+- 来源: modules/ai_team/service.go#L57-L66
+- 来源: modules/ai_team/service.go#L67-L73
+- 来源: pkg/aiteam/aiteam.go#L20-L26
+- 来源: pkg/aiteam/aiteam.go#L38-L45
+
+#### 适用范围
+
+适用于回答 Project 群、项目成员、AI Team 私有会话容器、Space 成员移除/项目成员移除后的权限边界。
+
+#### 不确定边界
+
+群 admission 的所有入口清单在 `modules/group/admission.go` 中维护；如果未来新增写 group_member 的路径，必须看 guard test 是否覆盖。

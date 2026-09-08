@@ -463,3 +463,38 @@ provisioning 上游是否创建 mailbox、返回什么实体由 octo-mail 决定
 #### 不确定边界
 
 真正托管 agent runtime 的调度与进程生命周期不完全在 octo-server 内；本仓只能确认 register/provision/onboarding/identity 这些 server 侧边界。
+
+### 知识点：新增 Bot Task 内部入口与 AI Team sessions，扩展了 Bot/Agent 运行链路
+
+#### 结论
+
+`bot_task` 新增 `/v1/internal/bot-tasks` 服务间入口，不走普通用户 AuthMiddleware，而是按 `OCTO_BOT_TASK_SOURCES` 配置的 per-source Bearer token 认证，并叠加 IP 限流、source 限流、bot allowlist、Redis 幂等 claim，最终把任务准备为 bot typed event 并通知对应 bot。`ai_team` 新增 `/v1/ai-team` 用户侧 API，用户可以在 Space 内添加自己拥有且同 Space 的 bot 作为 agent，并基于 agent 创建/管理 sessions；会话创建要求 `Idempotency-Key`，底层落 `ai_team_agent` 与 `ai_team_session`。
+
+#### 证据
+
+- 来源: modules/bot_task/api.go#L64-L73
+- 来源: modules/bot_task/api.go#L74-L84
+- 来源: modules/bot_task/api.go#L85-L93
+- 来源: modules/bot_task/api.go#L96-L105
+- 来源: modules/bot_task/api.go#L107-L120
+- 来源: modules/bot_task/api.go#L123-L130
+- 来源: modules/bot_task/api.go#L146-L160
+- 来源: modules/bot_task/api.go#L169-L178
+- 来源: modules/bot_task/api.go#L179-L185
+- 来源: modules/bot_task/api.go#L211-L220
+- 来源: modules/bot_task/api.go#L221-L227
+- 来源: modules/ai_team/api.go#L30-L39
+- 来源: modules/ai_team/api.go#L40-L47
+- 来源: modules/ai_team/api.go#L92-L101
+- 来源: modules/ai_team/api.go#L102-L109
+- 来源: modules/ai_team/service.go#L76-L85
+- 来源: modules/ai_team/service.go#L86-L91
+- 来源: modules/ai_team/service.go#L227-L235
+
+#### 适用范围
+
+适用于回答最新 main 中 Agent/Bot 能力变化、任务入口、AI Team 会话、幂等与来源鉴权。
+
+#### 不确定边界
+
+Bot Task 的上游调用方是谁、实际任务执行 runtime 如何消费 bot typed event，可能在 octo-fleet 或外部 runtime，不完全由 octo-server 定义。

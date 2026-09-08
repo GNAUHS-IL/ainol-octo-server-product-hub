@@ -423,3 +423,25 @@ card action dispatch 的 routes registry 与 worker 细节需在 Bot/卡片专�
 #### 不确定边界
 
 “没被 blank import 注册”不等于代码完全没被运行；它可能作为库被其它模块 import。回答时要说清是“非独立注册模块”，不是“完全不用”。
+
+### 知识点：2026-09-08 增量后新增 `project`、`ai_team`、`bot_task` 三个独立注册模块
+
+#### 结论
+
+目标仓最新 `df7ef1d` 已把 `ai_team`、`bot_task`、`project` 纳入 `internal/modules.go` blank import，因此它们不再只是目录或实验代码，而是主进程启动时会注册的模块。`project` 是 Space 内部协作层，带 SQL migration 与 API；`ai_team` 注册 AI 团队会话相关 API 与 SQL；`bot_task` 注册内部 Bot task ingress，但没有 SQLDir，主要依赖 Redis 幂等 claim 与 robot event 队列。
+
+#### 证据
+
+- 来源: internal/modules.go#L24-L35
+- 来源: internal/modules.go#L51-L58
+- 来源: modules/project/1module.go#L21-L30
+- 来源: modules/ai_team/1module.go#L13-L22
+- 来源: modules/bot_task/1module.go#L8-L14
+
+#### 适用范围
+
+适用于回答“目标仓这两天新增了哪些业务模块”“模块清单是否已经更新到最新 main”。
+
+#### 不确定边界
+
+模块被注册不等于所有能力默认对用户开放；`project`、`ai_team`、`bot_task` 都有各自开关、鉴权或来源配置，需结合对应知识库条目判断是否可用。

@@ -509,3 +509,31 @@ OpenSearch 索引结构和 DSL 拼接需在 API/存储或消息搜索专题继�
 #### 不确定边界
 
 归档 worker 的实际启动点和每次 tick 的 SQL 行为需在 IM/Thread 控制面专题继续补充。
+
+### 知识点：Project、Bot Task、AI Team 与 OIDC redemption ledger 增加了新的运行时开关和安全配置
+
+#### 结论
+
+最新 main 增加了多组关键配置：Project 写能力由 `OCTO_PROJECT_CREATE_ENABLED` 及 `system_setting` 的 `project_on` 共同决定，读取保持可见、写入 fail-closed；Project provisioning 通过 `OCTO_PROJECT_PROVISION_TARGETS` 按 fleet/drive 目标启用，并要求目标 URL、目标 secret、重试/批量/超时等参数；Bot Task 通过 `OCTO_BOT_TASK_SOURCES` 配置来源 token 与允许 bot，并有 IP/source 双层限流；AI Team 由 `DM_AI_TEAM_ON` 控制公开 API 与 AI routing；OIDC `/exchange-jwt` 在启用 bearer JWT 时会装配 Redis redemption ledger，用首次兑换窗口 F 与空闲窗口 T 收窄 token 复用风险。
+
+#### 证据
+
+- 来源: modules/project/config.go#L14-L24
+- 来源: modules/project/api.go#L217-L224
+- 来源: modules/project/api.go#L229-L243
+- 来源: modules/project/config_provisioning.go#L35-L45
+- 来源: modules/project/config_provisioning.go#L46-L57
+- 来源: modules/project/config_provisioning.go#L114-L127
+- 来源: modules/bot_task/config.go#L14-L24
+- 来源: modules/bot_task/config.go#L33-L40
+- 来源: modules/bot_task/api.go#L64-L73
+- 来源: pkg/aiteam/aiteam.go#L20-L26
+- 来源: modules/oidc/api.go#L315-L322
+
+#### 适用范围
+
+适用于部署、开关、回滚、限流、凭据隔离与考试中“为什么功能看起来存在但不可用”的解释。
+
+#### 不确定边界
+
+具体生产环境是否已设置这些环境变量或 system_setting，需要看运行时配置；源码只能证明支持的配置项与默认/回退逻辑。

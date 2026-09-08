@@ -317,3 +317,29 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 #### 不确定边界
 
 WuKongIM 自身 WebSocket 握手参数和校验细节不在本仓完整实现内；本仓只能确认 octo-server 如何生成/同步 IM token 与返回 WS URL。
+
+### 知识点：OIDC `/exchange-jwt` 新鲜度改为 redemption ledger 判定，而不是只看 JWT `iat`
+
+#### 结论
+
+最新 main 中，`/v1/auth/oidc/<id>/exchange-jwt` 仍先本地校验 HS256 bearer JWT，但“能否兑换成 octo session”由 redemption ledger 再判定：首次兑换必须在 F 窗口内，重复兑换必须在 T 空闲窗口内；拒绝时对客户端仍返回统一 401，避免枚举“签名有效但兑换过期”的信息。ledger key 存 token sha256 摘要，不保存明文 assertion；Redis 记录丢失时按 fail-closed 方向要求客户端重走 SSO。
+
+#### 证据
+
+- 来源: modules/oidc/api_exchange_jwt.go#L40-L48
+- 来源: modules/oidc/api_exchange_jwt.go#L93-L104
+- 来源: modules/oidc/api_exchange_jwt.go#L112-L120
+- 来源: modules/oidc/api_exchange_jwt.go#L121-L135
+- 来源: modules/oidc/redemption_ledger.go#L12-L20
+- 来源: modules/oidc/redemption_ledger.go#L24-L31
+- 来源: modules/oidc/redemption_ledger.go#L62-L65
+- 来源: modules/oidc/redemption_ledger.go#L68-L78
+- 来源: modules/oidc/redemption_ledger.go#L80-L85
+
+#### 适用范围
+
+适用于回答 OIDC bearer JWT 登录、原生客户端 SSO、token 重放窗口、Redis 台账异常后的认证口径。
+
+#### 不确定边界
+
+上游业务后端如何签发 HS256 JWT、客户端多久兑换一次，不在 octo-server 仓库内；本仓只能确认兑换端点的校验与台账策略。
