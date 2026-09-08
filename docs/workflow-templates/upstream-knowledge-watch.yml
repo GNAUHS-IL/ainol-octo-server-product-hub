@@ -1,0 +1,156 @@
+name: Upstream knowledge watch
+
+on:
+  schedule:
+    # Asia/Shanghai 09:00, 13:00, 17:00 on weekdays.
+    - cron: '0 1,5,9 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout product hub
+        uses: actions/checkout@v4
+
+      - name: Read recorded upstream baseline
+        id: baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          data=json.load(open('knowledge/upstream-baseline.json'))
+          print('commit=' + data['baseline_commit'])
+          print('short=' + data.get('baseline_short', data['baseline_commit'][:7]))
+          print('url=' + data.get('target_url', 'https://github.com/Mininglamp-OSS/octo-server.git'))
+          print('branch=' + data.get('branch', 'main'))
+          PY
+
+      - name: Clone target repo read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 300 --branch "${{ steps.baseline.outputs.branch }}" "${{ steps.baseline.outputs.url }}" ../octo-server
+          echo "head=$(git -C ../octo-server rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "head_short=$(git -C ../octo-server rev-parse --short HEAD)" >> "$GITHUB_ENV"
+
+      - name: Skip if no upstream change
+        id: changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$head" = "${{ steps.baseline.outputs.commit }}" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No upstream change: $head_short"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Upstream changed: ${{ steps.baseline.outputs.short }}..$head_short"
+          fi
+
+      - name: Fetch baseline commit when changed
+        if: steps.changed.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C ../octo-server fetch --depth 300 origin "${{ steps.baseline.outputs.commit }}" || git -C ../octo-server fetch --unshallow || true
+
+      - name: Run knowledge delta audit
+        if: steps.changed.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p state/exam
+          python3 scripts/knowledge_delta_audit.py \
+            --source-root ../octo-server \
+            --docs-root . \
+            --base "${{ steps.baseline.outputs.commit }}" \
+            --head HEAD \
+            --json-out state/exam/upstream-delta-audit.json \
+            --md-out state/exam/upstream-delta-audit.md
+
+      - name: Verify citations
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p state/exam
+          python3 scripts/verify_citations.py \
+            --docs-root . \
+            --source-root ../octo-server \
+            --json > state/exam/citation-verify.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('state/exam/citation-verify.json'))
+          print(d['summary'])
+          if d['summary']['failed']:
+              raise SystemExit(1)
+          PY
+
+      - name: Upload audit artifact
+        if: steps.changed.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-delta-audit-${{ env.head_short }}
+          path: |
+            state/exam/upstream-delta-audit.json
+            state/exam/upstream-delta-audit.md
+            state/exam/citation-verify.json
+
+      - name: Create or update knowledge drift issue
+        if: steps.changed.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const audit = JSON.parse(fs.readFileSync('state/exam/upstream-delta-audit.json', 'utf8'));
+            const verify = JSON.parse(fs.readFileSync('state/exam/citation-verify.json', 'utf8'));
+            const headShort = process.env.head_short;
+            const title = `[Knowledge Drift] octo-server ${audit.base.slice(0,7)}..${headShort}`;
+            const labels = ['type/docs', 'priority/P1', 'status/todo', 'area/unknown'];
+            const body = [
+              '## 自动巡检结论',
+              '',
+              `目标仓 Mininglamp-OSS/octo-server 已从 \`${audit.base.slice(0,12)}\` 更新到 \`${audit.head.slice(0,12)}\`。`,
+              '',
+              `- 变更文件数：${audit.changed_count}`,
+              `- 影响领域：${audit.impacted_areas.length ? audit.impacted_areas.join(', ') : '未命中九大领域规则'}`,
+              `- 需复核知识库：${audit.review_files.length ? audit.review_files.map(x => '`'+x+'`').join(', ') : '无'}`,
+              `- 引用校验：${verify.summary.passed}/${verify.summary.total} passed, failed=${verify.summary.failed}`,
+              '',
+              '## 必须处理',
+              '',
+              '- [ ] 按 audit 报告逐项补齐知识库。',
+              '- [ ] 重新运行 `scripts/verify_citations.py`。',
+              '- [ ] 更新 `knowledge/upstream-baseline.json` 到新目标仓 commit。',
+              '- [ ] commit + push，并在 issue comment 回填校验结果。',
+              '',
+              '## Commits',
+              '',
+              ...(audit.commits || []).slice(0, 30).map(c => `- ${c}`),
+              '',
+              '## Uncovered terms',
+              '',
+              audit.uncovered_terms && Object.keys(audit.uncovered_terms).length
+                ? Object.entries(audit.uncovered_terms).map(([k,v]) => `- ${k}: ${v.join(', ')}`).join('\n')
+                : '- none by keyword gate',
+              '',
+              '## Changed paths sample',
+              '',
+              ...(audit.changed_paths_sample || []).slice(0, 80).map(p => `- \`${p}\``),
+              '',
+              '<!-- upstream-knowledge-watch -->'
+            ].join('\n');
+            const {owner, repo} = context.repo;
+            const existing = await github.rest.issues.listForRepo({owner, repo, state: 'open', labels: 'type/docs', per_page: 100});
+            const issue = existing.data.find(i => i.title === title || (i.body || '').includes('<!-- upstream-knowledge-watch -->'));
+            if (issue) {
+              await github.rest.issues.update({owner, repo, issue_number: issue.number, title, body, labels});
+              core.notice(`Updated issue #${issue.number}`);
+            } else {
+              const created = await github.rest.issues.create({owner, repo, title, body, labels});
+              core.notice(`Created issue #${created.data.number}`);
+            }

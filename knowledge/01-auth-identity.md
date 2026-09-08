@@ -322,7 +322,7 @@ WuKongIM 自身 WebSocket 握手参数和校验细节不在本仓完整实现内
 
 #### 结论
 
-最新 main 中，`/v1/auth/oidc/<id>/exchange-jwt` 仍先本地校验 HS256 bearer JWT，但“能否兑换成 octo session”由 redemption ledger 再判定：首次兑换必须在 F 窗口内，重复兑换必须在 T 空闲窗口内；拒绝时对客户端仍返回统一 401，避免枚举“签名有效但兑换过期”的信息。ledger key 存 token sha256 摘要，不保存明文 assertion；Redis 记录丢失时按 fail-closed 方向要求客户端重走 SSO。
+最新 main 中，`/v1/auth/oidc/<id>/exchange-jwt` 仍先本地校验 HS256 bearer JWT，但“能否兑换成 octo session”由 redemption ledger 再判定，OIDC handler 内部字段为 `redeemLedger`：首次兑换必须在 F 窗口内，重复兑换必须在 T 空闲窗口内；拒绝时对客户端仍返回统一 401，避免枚举“签名有效但兑换过期”的信息。ledger key 存 token sha256 摘要，不保存明文 assertion；Redis 记录丢失时按 fail-closed 方向要求客户端重走 SSO。
 
 #### 证据
 

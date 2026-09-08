@@ -477,7 +477,7 @@ fleet workspace 与 drive space 的最终创建和状态真实性由对应子系
 
 #### 结论
 
-最新 main 把 v1 服务间签名 primitive 下沉到 `pkg/octosign`，作为 stdlib-only leaf package，避免 `internal/projectprovision` 复用 cardactiondispatch 签名时形成 import cycle，也避免多个子系统各自复制 canonical string 后漂移。签名 canonical string 固定为版本、HTTP method、path、timestamp、event id、body sha256 六行，签名头为 `v1=<hex hmac-sha256>`；`Verify` 只校验 MAC，不校验时间新鲜度，接收方必须自行检查 timestamp 防重放。
+最新 main 把 v1 服务间签名 primitive 下沉到 `pkg/octosign`，作为 stdlib-only leaf package，避免 `internal/projectprovision` 复用 cardactiondispatch 签名时形成 import cycle，也避免多个子系统各自复制 canonical string 后漂移。签名 `CanonicalRequest` 固定为版本、HTTP method、path、timestamp、event id、body sha256 六行，签名头使用 `X-Octo-Signature`，值为 `v1=<hex hmac-sha256>`；`Verify` 只校验 MAC，不校验时间新鲜度，接收方必须自行检查 timestamp 防重放。
 
 #### 证据
 

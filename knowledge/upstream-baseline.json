@@ -1,0 +1,11 @@
+{
+  "target_repo": "Mininglamp-OSS/octo-server",
+  "target_url": "https://github.com/Mininglamp-OSS/octo-server.git",
+  "branch": "main",
+  "baseline_commit": "df7ef1d1188278a3d7b5bf980ef0d0835681e7fb",
+  "baseline_short": "df7ef1d",
+  "baseline_time": "2026-09-08 14:00:33 +0800",
+  "updated_by": "Octo 产品运营负责人",
+  "updated_at": "2026-09-08T15:47:00+08:00",
+  "note": "九大知识库已按该目标仓 commit 完成增量吸收，并通过引用校验。目标仓继续更新时，定时 workflow 会生成 upstream delta audit。"
+}
