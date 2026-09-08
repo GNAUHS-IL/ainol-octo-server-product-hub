@@ -11,7 +11,7 @@ GitHub issue 不是原始收集箱。只有在建单前已经完成最小必要�
 | status | 含义 | 典型使用 | 不能误报为 |
 |---|---|---|---|
 | `status/todo` | 已进入需求池，待处理 | 已有最小信息，但尚未进入 PRD/处理队列 | 已接受、已完成 |
-| `status/prd-drafting` | PRD 草拟中 | 需求成立，需要补 What-only PRD | 已接受、已完成 |
+| `status/prd-drafting` | PRD 草拟中 | PRD Gate 已通过，需要补 What-only PRD | 已接受、已完成 |
 | `status/reviewing` | Review 中 | 等产品运营负责人 Review 需求管理员提交的 PRD / 材料 | 已通过、已完成 |
 | `status/rework` | Review 打回或内容需返工 | 范围不清、验收标准不可验证、写了 How | 已接受、已完成 |
 | `status/accepted` | 已确认接受处理 | Bug 成立或 PRD Review 通过，进入处理队列 | 已完成 |
@@ -30,7 +30,7 @@ GitHub issue 不是原始收集箱。只有在建单前已经完成最小必要�
 ## 常见流转
 
 ```text
-Feature: status/todo → status/prd-drafting（需求管理员写 PRD）→ status/reviewing（产品运营负责人 Review）→ status/accepted → status/done
+Feature: status/todo → 可选 status/prd-drafting（仅 PRD Gate 通过时，需求管理员写 PRD）→ status/reviewing（产品运营负责人 Review）→ status/accepted → status/done
 Feature rework: status/reviewing → status/rework（需求管理员按 Review 意见修改）→ status/prd-drafting/reviewing
 Bug: status/todo → status/accepted → status/done
 Blocked: 任意状态 → status/blocked → 原状态或 status/accepted/done

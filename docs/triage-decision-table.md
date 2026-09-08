@@ -40,7 +40,7 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 |---|---|---|---|
 | 直接问答 | 问题对象明确，能通过知识库/源码/issue 状态查证 | 能查则先查完；查完无证据则说明已查范围和“不能确认支持/不支持” | 不建 issue |
 | Bug | 现有能力/页面/接口/Bot 行为、期望结果、实际结果、复现入口或影响范围至少基本明确 | 缺用户侧事实时追问最多 3 个关键问题；不得用 issue 当原始收集箱 | `status/todo` 或证据已充分时 `status/accepted`；风险/证据冲突用 `status/blocked` |
-| Feature | 用户场景、用户目标、期望能力、业务价值或验收方向至少基本明确 | 缺用户目标/范围时追问；不得直接写实现方案 | `status/prd-drafting`；简单文档补充可直接 `status/todo` |
+| Feature | 用户场景、用户目标、期望能力、业务价值或验收方向至少基本明确 | 缺用户目标/范围时追问；不得直接写实现方案；建单后必须再过 PRD Gate | 默认 `status/todo`；只有 PRD Gate 通过才用 `status/prd-drafting` |
 | Docs/知识库补充 | 能判断是“现有材料错误”还是“缺少说明” | 先查源码确认；已查无证据时记录已查范围，不编造成结论 | 错误用 `type/bug`；缺失/补充用 `type/feature` |
 | 安全/权限/凭证 | 可脱敏描述风险对象和影响 | 拒绝展示敏感信息，要求最小脱敏材料 | `priority/P0 + status/blocked` |
 
@@ -69,9 +69,9 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 |---|---|
 | 用户问已有能力，能直接源码回答 | 直接回答，不建 issue |
 | 问答暴露文档错误且已具备最小证据 | 建 issue：`type/bug + 对应 area/* + status/accepted` |
-| 问答暴露文档缺失/需要补说明且已具备最小背景 | 建 issue：`type/feature + 对应 area/* + status/prd-drafting` |
+| 问答暴露文档缺失/需要补说明且已具备最小背景 | 建 issue：`type/feature + 对应 area/* + status/todo`；只有需要定义用户可见规则/验收标准时才 `status/prd-drafting` |
 | 现有功能异常且复现/证据达到最小建单标准 | 建 issue：`type/bug + status/accepted + 对应 area/*` |
-| 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/prd-drafting + 对应 area/*` |
+| 需要新增/增强能力且目标清楚 | 建 issue：`type/feature + status/todo + 对应 area/*`；过 PRD Gate 后才改 `status/prd-drafting` |
 | 涉及 token、cookie、私钥、生产权限 | 拒绝展示敏感信息；如需归档，使用 `priority/P0 + status/blocked + 对应 area/*`，正文只写脱敏说明 |
 | 暂不能判断所属领域 | 使用 `area/unknown`，后续分诊后替换为有依据的具体 `area/*`；不要用多个 area 代替不确定 |
 
@@ -136,7 +136,7 @@ Label 只用于 GitHub issue。普通问题如果可以直接用源码回答，�
 
 | 阶段 | label 组合 | 责任边界 |
 |---|---|---|
-| 需要 PRD | `type/feature + status/prd-drafting + 对应 area/*` | 需求管理员草拟 PRD |
+| PRD Gate 通过、需要 PRD | `type/feature + status/prd-drafting + 对应 area/*` | 需求管理员草拟 PRD |
 | 已请求 Review | `type/feature + status/reviewing + 对应 area/*` | 产品运营负责人 Review |
 | Review 通过 | `type/feature + status/accepted + 对应 area/*` | 产品运营负责人仲裁 |
 | Review 打回 | `type/feature + status/rework + 对应 area/*` | 需求管理员按意见修改 |

@@ -26,7 +26,7 @@ BODY='## 测试目的
 - 类型：Feature
 - 领域：Bot 与 Agent
 - 优先级：P2
-- 状态：status/prd-drafting → status/done
+- 状态：status/todo → status/done
 
 ## 安全说明
 本 issue 为流程连通性测试，不包含 token、cookie、secret 或真实用户隐私。'
@@ -36,7 +36,7 @@ import json, sys
 print(json.dumps({
   'title': sys.argv[1],
   'body': sys.argv[2],
-  'labels': ['type/feature','priority/P2','status/prd-drafting','area/bot-agent']
+  'labels': ['type/feature','priority/P2','status/todo','area/bot-agent']
 }, ensure_ascii=False))
 PY
 )"

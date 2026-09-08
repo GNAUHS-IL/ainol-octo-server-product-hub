@@ -4,7 +4,7 @@
 
 ```text
 status/todo
-  → status/prd-drafting
+  → 可选 status/prd-drafting（仅 PRD Gate 通过）
   → status/reviewing
   → status/accepted
   → status/done

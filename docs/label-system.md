@@ -133,7 +133,7 @@ status/invalid
 | Label | 含义 | 不能误报为 |
 |---|---|---|
 | `status/todo` | 已进入需求池，待处理 | 已接受、已完成 |
-| `status/prd-drafting` | PRD 草拟中；需求管理员负责产出 PRD | 已接受、已完成 |
+| `status/prd-drafting` | PRD 草拟中；仅 PRD Gate 通过后使用，需求管理员负责产出 PRD | 已接受、已完成 |
 | `status/reviewing` | Review 中；产品运营负责人负责 Review | 已通过、已完成 |
 | `status/rework` | Review 打回或内容需返工；需求管理员按意见修改 | 已接受、已完成 |
 | `status/accepted` | 已接受处理，但尚未完成 | 已完成 |
