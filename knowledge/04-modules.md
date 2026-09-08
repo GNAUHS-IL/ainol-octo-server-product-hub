@@ -395,3 +395,31 @@ Bot 相关功能分散在多个注册包：`robot` 是传统机器人资料/基�
 #### 不确定边界
 
 card action dispatch 的 routes registry 与 worker 细节需在 Bot/卡片专题继续展开。
+
+### 知识点：未启用/用不到的判断要同时看 blank import、`register.AddModule` 与库型目录
+
+#### 结论
+
+主入口的启用模块以 `internal/modules.go` blank import 和各模块 `register.AddModule` 为准；目录存在不等于独立启用。源码明确记录 `modules/runtime` 已移除，runtime/bot orchestration 归 octo-fleet；`botidentity` 虽被 `main.go` import 使用，但不是 `internal/modules.go` blank import 注册模块。答复“哪些模块真实启用/哪些没启用”时，不能只按 `modules/` 目录列表机械报数。
+
+#### 证据
+
+- 来源: internal/modules.go#L22-L31
+- 来源: internal/modules.go#L32-L41
+- 来源: internal/modules.go#L42-L51
+- 来源: internal/modules.go#L52-L61
+- 来源: internal/modules.go#L62-L71
+- 来源: internal/modules.go#L72-L78
+- 来源: modules/bot_provision/1module.go#L8-L16
+- 来源: modules/botfather/1module.go#L16-L26
+- 来源: modules/bot_api/1module.go#L13-L22
+- 来源: modules/app_bot/1module.go#L13-L22
+- 来源: main.go#L29-L34
+
+#### 适用范围
+
+适用于模块清单、模块职责、启用状态、库型目录、历史移除模块的问答。
+
+#### 不确定边界
+
+“没被 blank import 注册”不等于代码完全没被运行；它可能作为库被其它模块 import。回答时要说清是“非独立注册模块”，不是“完全不用”。

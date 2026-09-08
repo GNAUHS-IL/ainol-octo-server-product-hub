@@ -346,3 +346,32 @@ App Bot token 签发和 registry 源数据维护需继续查 `modules/bot_api/re
 #### 不确定边界
 
 grant/scope 的创建、撤销 API 和数据库约束需继续查 `obo_api.go`、`obo_db.go` 与 SQL migration。
+
+### 知识点：RBAC 与频道 ACL 是两层授权，不存在一个全局“万能 RBAC”替代所有资源门禁
+
+#### 结论
+
+管理端角色是固定角色/能力图谱模型：`admin`、`superAdmin`、`dashboardReader`、`marketAdmin` 等角色只在声明的能力面生效，窄角色不会自动获得全部 admin endpoint 权限。频道和会话访问则由资源 ACL 负责，例如 OBO 会在热路径检查 grant、scope 与授权人当前 channel 读权限；Thread/群消息等能力还会结合群成员、父群关系、App Bot scope guard 判断。考试回答“谁能做什么”时必须先区分管理面 RBAC、Space/频道 ACL、Bot/App Bot scope、OBO grant 四层。
+
+#### 证据
+
+- 来源: pkg/auth/manager_roles.go#L5-L17
+- 来源: pkg/auth/manager_roles.go#L63-L70
+- 来源: pkg/auth/manager_roles.go#L72-L80
+- 来源: pkg/auth/manager_roles.go#L83-L90
+- 来源: modules/bot_api/obo_check.go#L20-L29
+- 来源: modules/bot_api/obo_check.go#L30-L39
+- 来源: modules/bot_api/obo_check.go#L40-L49
+- 来源: modules/bot_api/obo_check.go#L188-L197
+- 来源: modules/bot_api/authtree_guard.go#L17-L26
+- 来源: modules/bot_api/authtree_guard.go#L27-L36
+- 来源: modules/bot_api/authtree_guard.go#L77-L86
+- 来源: modules/bot_api/authtree_guard.go#L87-L99
+
+#### 适用范围
+
+适用于回答 org/RBAC、频道 ACL、bot/agent 身份门禁、OBO 代用户操作边界。
+
+#### 不确定边界
+
+如果考官追问其它服务（如 marketplace）最终是否接受某角色，需要到对应服务仓库核验；octo-server 只能确认自身能力图谱与 token verify 输出。

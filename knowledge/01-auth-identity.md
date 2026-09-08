@@ -288,3 +288,32 @@ v3 rollout 当前生产写入模式需要结合运行时配置与 rollout state 
 #### 不确定边界
 
 调用方如何消费 `owned_bots_by_space` 不在本仓 `modules/user` 内，需要到对应服务仓库核验。
+
+### 知识点：HTTP token、IM WebSocket token 与 cookie 是三类不同边界，不能混答
+
+#### 结论
+
+普通登录路径会先写入 HTTP session token，再把最终 token 通过 `UpdateIMToken` 同步给 WuKongIM 设备态；Bot register 路径则返回 `im_token` 与 `ws_url`，User Bot 使用 `bf_` bot token 作为 IM token，App Bot 也复用 app token 作为 API 与 IM WebSocket 凭据。`ws_url` 由 server 配置推导，只是 IM 长连接入口地址，不等同于 HTTP API 的认证入口。当前源码可见的 cookie 主要出现在语言偏好、IdP 浏览器会话登出语义和代理层 `Set-Cookie` 过滤，不应把 cookie 说成 octo-server 普通 HTTP session 的主认证载体。
+
+#### 证据
+
+- 来源: modules/user/api.go#L1918-L1924
+- 来源: modules/bot_api/register.go#L278-L287
+- 来源: modules/bot_api/register.go#L331-L338
+- 来源: modules/bot_api/register.go#L371-L379
+- 来源: modules/bot_api/register.go#L478-L488
+- 来源: modules/bot_api/register.go#L500-L505
+- 来源: pkg/botutil/ws.go#L11-L25
+- 来源: pkg/botutil/ws.go#L26-L31
+- 来源: pkg/botutil/ws.go#L32-L44
+- 来源: modules/user/api.go#L4464-L4466
+- 来源: modules/oidc/api.go#L966-L970
+- 来源: modules/agentmailgateway/gateway.go#L937-L943
+
+#### 适用范围
+
+适用于考试中被问到“token / cookie / WebSocket 握手各自用在哪”的口径：HTTP API 看 session token；IM 长连接看 UpdateIMToken 后的 IM token；Bot register 返回 IM 连接所需参数；cookie 不是普通 API session 的主线。
+
+#### 不确定边界
+
+WuKongIM 自身 WebSocket 握手参数和校验细节不在本仓完整实现内；本仓只能确认 octo-server 如何生成/同步 IM token 与返回 WS URL。

@@ -434,3 +434,32 @@ Agent Mail gateway 挂在 `/v1/mail-gateway/*path`，进入代理前必须通过
 #### 不确定边界
 
 provisioning 上游是否创建 mailbox、返回什么实体由 octo-mail 决定，不属于本仓源码定义范围。
+
+### 知识点：Agent 会话起点主要经过 Bot register / provision / identity 三段，不是 BotFather 单独完成
+
+#### 结论
+
+`/v1/bot/register` 是 Bot 自愈和 IM 连接参数下发入口，按 token 前缀分流 User Bot 与 App Bot，并返回 `im_token`、`ws_url`、`api_url`。`bot_provision` 负责跨服务 JWT issuer 与 bot endpoint，挂 `/v1/bot/mint`、`/v1/bot/:uid/token`、`/.well-known/octo/bot-provision-jwks.json` 等路由；`botidentity` 则是运行期 bot UID 身份解析器。BotFather 负责 Bot 管理和 onboarding，但不能把它说成 `/v1/bot/*` 主 API 或 agent 会话唯一入口。
+
+#### 证据
+
+- 来源: modules/bot_api/register.go#L303-L315
+- 来源: modules/bot_api/register.go#L371-L379
+- 来源: modules/bot_api/register.go#L500-L505
+- 来源: modules/bot_api/bot_api.go#L331-L339
+- 来源: modules/bot_api/bot_api.go#L365-L375
+- 来源: modules/bot_provision/1module.go#L8-L16
+- 来源: modules/bot_provision/bot_api.go#L196-L205
+- 来源: modules/botidentity/resolver.go#L81-L90
+- 来源: modules/botidentity/resolver.go#L92-L101
+- 来源: modules/botfather/api.go#L84-L92
+- 来源: modules/botfather/api.go#L93-L102
+- 来源: modules/botfather/api_runtime_onboarding.go#L31-L40
+
+#### 适用范围
+
+适用于解释 app bot / botfather / bot provision / botidentity 的关系，以及 agent runtime 如何通过 bot 注册、自愈和 onboarding 获得连接上下文。
+
+#### 不确定边界
+
+真正托管 agent runtime 的调度与进程生命周期不完全在 octo-server 内；本仓只能确认 register/provision/onboarding/identity 这些 server 侧边界。
