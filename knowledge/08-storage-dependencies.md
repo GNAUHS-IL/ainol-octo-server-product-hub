@@ -472,3 +472,31 @@ Project 新增 `octo_project`、`octo_project_member`、`octo_project_member_rem
 #### 不确定边界
 
 fleet workspace 与 drive space 的最终创建和状态真实性由对应子系统确认；octo-server 本地 `ready` 只表示曾经成功调用过 ensure，不应作为读路径权限门。
+
+### 知识点：`pkg/octosign` 成为 Project provisioning 与 card action 共用的服务间签名 primitive
+
+#### 结论
+
+最新 main 把 v1 服务间签名 primitive 下沉到 `pkg/octosign`，作为 stdlib-only leaf package，避免 `internal/projectprovision` 复用 cardactiondispatch 签名时形成 import cycle，也避免多个子系统各自复制 canonical string 后漂移。签名 canonical string 固定为版本、HTTP method、path、timestamp、event id、body sha256 六行，签名头为 `v1=<hex hmac-sha256>`；`Verify` 只校验 MAC，不校验时间新鲜度，接收方必须自行检查 timestamp 防重放。
+
+#### 证据
+
+- 来源: pkg/octosign/octosign.go#L1-L10
+- 来源: pkg/octosign/octosign.go#L15-L20
+- 来源: pkg/octosign/octosign.go#L30-L39
+- 来源: pkg/octosign/octosign.go#L41-L54
+- 来源: pkg/octosign/octosign.go#L55-L64
+- 来源: pkg/octosign/octosign.go#L66-L70
+- 来源: pkg/octosign/octosign.go#L73-L81
+- 来源: internal/cardactiondispatch/signature.go#L5-L14
+- 来源: internal/projectprovision/client.go#L120-L129
+- 来源: internal/projectprovision/client.go#L130-L135
+- 来源: internal/projectprovision/client.go#L197-L210
+
+#### 适用范围
+
+适用于回答 Project provisioning 到 fleet/drive、card action dispatch 等服务间调用如何签名，以及为什么接收方还必须做 timestamp freshness 校验。
+
+#### 不确定边界
+
+fleet/drive 是否已经正确实现 octosign 验签与时间窗口检查，需要到对应子系统仓库确认；本仓只定义 octo-server 发起侧和共享 primitive。

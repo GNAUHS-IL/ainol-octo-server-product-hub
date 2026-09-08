@@ -343,3 +343,31 @@ WuKongIM 自身 WebSocket 握手参数和校验细节不在本仓完整实现内
 #### 不确定边界
 
 上游业务后端如何签发 HS256 JWT、客户端多久兑换一次，不在 octo-server 仓库内；本仓只能确认兑换端点的校验与台账策略。
+
+### 知识点：`/v1/auth/verify?include=context` 新增 Project membership context，消费者只能用来收窄权限
+
+#### 结论
+
+最新 main 在 auth verify 的 context 响应中加入 `projects` 字段，用于回答调用方明确传入的 project_ids。它只回答请求中的项目，不主动枚举用户项目；项目不属于该 Space、已解散或不存在，都统一返回 `member:false`，避免暴露项目所在 Space 或存在性。返回里包含 project role、capabilities 与 member_epoch，且注释明确消费者只能在现有 Space 检查基础上继续收窄，不能用 Project membership 替代 Space membership。
+
+#### 证据
+
+- 来源: modules/user/api_project_context.go#L10-L21
+- 来源: modules/user/api_project_context.go#L31-L37
+- 来源: modules/user/api_project_context.go#L47-L58
+- 来源: modules/user/api_project_context.go#L63-L68
+- 来源: modules/user/api_project_context.go#L70-L83
+- 来源: modules/user/api_project_context.go#L85-L95
+- 来源: modules/user/api_project_context.go#L98-L110
+- 来源: modules/user/api_project_context.go#L111-L120
+- 来源: modules/user/api.go#L4815-L4818
+- 来源: modules/user/api.go#L4886-L4893
+- 来源: modules/user/api.go#L4894-L4905
+
+#### 适用范围
+
+适用于回答 fleet/matter/外部子系统如何通过 octo-server 验证 project membership，以及为什么这个上下文不能用于放宽 Space 级权限。
+
+#### 不确定边界
+
+外部消费者是否已正确使用 `projects` 字段，需要到对应服务仓库核验；octo-server 只提供收窄用事实。

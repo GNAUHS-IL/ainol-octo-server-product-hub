@@ -414,3 +414,31 @@ Project P1 后，群成员能否进入绑定 Project 的群不再由单个 handl
 #### 不确定边界
 
 WuKongIM 对已同步成员/订阅的底层投递仍在 IM 侧；本条只覆盖 octo-server 在写入 group_member 与生成受保护容器前的控制面约束。
+
+### 知识点：Space directory 新增跨成员“云端 Agent”展示入口，但 agent_hosting 只作展示过滤
+
+#### 结论
+
+最新 main 在 `/v1/space/directory` 增加 Space 通讯录视图：接口要求普通登录态、UID 限流与 SpaceMiddleware，并且必须显式提供 `space_id`，handler 会使用中间件验证后的 SpaceID，而不是直接信任原始 query。返回内容是 Space 内活跃真人及其非 self-hosted User Bot；`agent_hosting` 是 Bot 自上报字段，只用于展示过滤，不能作为鉴权或租户隔离信号。查询支持 `keyword` 与 `only_with_agents`，并限制每个 owner 返回的 agent 明细数量，保留精确 agent_count。
+
+#### 证据
+
+- 来源: modules/space/api.go#L150-L159
+- 来源: modules/space/api_directory.go#L43-L52
+- 来源: modules/space/api_directory.go#L55-L60
+- 来源: modules/space/api_directory.go#L64-L76
+- 来源: modules/space/api_directory.go#L78-L90
+- 来源: modules/space/api_directory.go#L96-L107
+- 来源: modules/space/api_directory.go#L110-L119
+- 来源: modules/space/api_directory.go#L120-L127
+- 来源: modules/space/db_directory.go#L17-L24
+- 来源: modules/space/db_directory.go#L80-L84
+- 来源: modules/space/db_directory.go#L89-L100
+
+#### 适用范围
+
+适用于回答 Space cloud agent directory、为什么必须带 space_id、为什么 self-hosted bot 不展示、为什么 hosting 不能用于权限判断。
+
+#### 不确定边界
+
+agent_hosting 的真实性来自 Bot 自上报；本仓只把它作为展示过滤，不确认其可作为安全信号。

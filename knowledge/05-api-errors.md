@@ -577,3 +577,31 @@ Bot API per-bot 限流层使用三类通道：business、heartbeat、register。
 #### 不确定边界
 
 Agent Mail upstream 的错误码/响应体不属于 `octo-server` 源码定义范围。
+
+### 知识点：最新 Project / AI Team / Bot Task 新增错误码仍遵循注册制、反枚举与 Internal 隐藏规则
+
+#### 结论
+
+最新 main 新增了 `err.server.project.*`、`err.server.ai_team.*`、`err.server.bot_task.*` 错误码。Project 错误码按 validation、permission/policy、quota、not_found、conflict、internal 分层；其中 `ErrProjectNotFound` 故意合并“不存在、在别的 Space、不可见未加入”等情况，避免成为跨租户项目枚举 oracle。AI Team 提供 disabled、forbidden、not_found、idempotency_conflict、container_protected、store_failed、im_unavailable 等错误；Bot Task 提供 forbidden、in_progress、idempotency_conflict、store_failed。内部错误继续标记 `Internal: true`，避免把底层存储/IM 细节透给客户端。
+
+#### 证据
+
+- 来源: pkg/errcode/project.go#L9-L21
+- 来源: pkg/errcode/project.go#L23-L33
+- 来源: pkg/errcode/project.go#L66-L75
+- 来源: pkg/errcode/project.go#L83-L90
+- 来源: pkg/errcode/project.go#L148-L155
+- 来源: pkg/errcode/project.go#L163-L172
+- 来源: pkg/errcode/project.go#L173-L180
+- 来源: pkg/errcode/project.go#L182-L190
+- 来源: pkg/errcode/project.go#L192-L198
+- 来源: pkg/errcode/ai_team.go#L9-L18
+- 来源: pkg/errcode/bot_task.go#L9-L14
+
+#### 适用范围
+
+适用于回答最新新增模块的 API 错误口径，特别是 Project 反枚举、AI Team 容器保护、Bot Task 幂等冲突。
+
+#### 不确定边界
+
+错误码注册证明服务端响应分类；具体客户端如何展示，需要结合前端/调用方实现确认。
