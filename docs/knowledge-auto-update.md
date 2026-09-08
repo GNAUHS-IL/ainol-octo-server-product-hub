@@ -1,24 +1,32 @@
-# 九大知识库自动更新机制
+# 九大知识库定时巡检与更新机制
 
 ## 原则
 
-知识库必须做到“自动发现、自动校验、人工裁定后更新”。目标仓源码结论不能由脚本无审核自动改写，因为这会引入假引用、错行号或错误产品口径；可自动化的是发现变化、定位影响面、生成待办、校验引用和留痕。
+知识库维护采用 OpenClaw / 本地 cron / 外部 scheduler 调用脚本的方式完成定时巡检。
+
+自动化负责：发现目标仓变化、映射九大知识领域、生成差异报告、校验引用、留下可追踪状态。
+
+人工负责：阅读源码证据、补充知识库、裁定产品口径、提交并推送。源码结论不能由脚本无审核自动改写，避免假引用、错行号或错误产品判断。
 
 ## 自动闭环
 
-1. 定时任务建议启用 GitHub Actions 模板 `docs/workflow-templates/upstream-knowledge-watch.yml`，或由本地 cron/外部 scheduler 调用同一套脚本。当前仓库凭证若缺少 GitHub `workflow` scope，则不能直接创建 `.github/workflows/*`，先以模板方式落库。
-2. 调度任务读取 `knowledge/upstream-baseline.json` 中已覆盖的目标仓 commit。
-3. 只读 clone `Mininglamp-OSS/octo-server` 最新 `main`。
-4. 若目标仓 HEAD 未变化：静默结束，不刷 issue、不发通知。
+1. 定时任务执行：
+
+```bash
+scripts/run_upstream_knowledge_watch.sh
+```
+
+2. 脚本读取 `knowledge/upstream-baseline.json`，确认当前知识库已覆盖的目标仓 commit。
+3. 脚本只读同步 `Mininglamp-OSS/octo-server` 最新 `main`。
+4. 若目标仓 HEAD 未变化：静默退出，不刷消息、不创建无意义记录。
 5. 若目标仓 HEAD 有变化：
    - 运行 `scripts/knowledge_delta_audit.py` 生成增量审计；
    - 将变更路径映射到九大知识领域；
    - 跑 `scripts/verify_citations.py` 校验现有引用；
-   - 上传 audit artifact；
-   - 创建或更新 `[Knowledge Drift]` issue，列出需复核知识库。
-
-> 启用说明：将 `docs/workflow-templates/upstream-knowledge-watch.yml` 复制到 `.github/workflows/upstream-knowledge-watch.yml` 后提交。该操作需要 GitHub token 具备 `workflow` scope；没有该 scope 时，GitHub 会拒绝推送 workflow 文件。
-6. 产品运营负责人根据 issue 补知识库、重新校验、提交推送，并更新 `knowledge/upstream-baseline.json`。
+   - 输出 `state/exam/upstream-delta-audit.json`；
+   - 输出 `state/exam/upstream-delta-audit.md`；
+   - 脚本以非 0 状态退出，方便 scheduler 标记需要人工复核。
+6. 产品运营负责人根据审计报告补知识库、重新校验、提交推送，并更新 `knowledge/upstream-baseline.json`。
 
 ## 九大领域映射
 
@@ -37,14 +45,32 @@
 ## 本地手工复跑
 
 ```bash
+cd ainol-octo-server-product-hub
+
+scripts/run_upstream_knowledge_watch.sh
+```
+
+如果要指定目标仓路径：
+
+```bash
+TARGET_REPO=/path/to/octo-server scripts/run_upstream_knowledge_watch.sh
+```
+
+如果只想生成某两个 commit 之间的增量审计：
+
+```bash
 python3 scripts/knowledge_delta_audit.py \
   --source-root ../octo-server \
   --docs-root . \
-  --base $(python3 -c 'import json; print(json.load(open("knowledge/upstream-baseline.json"))["baseline_commit"])') \
-  --head HEAD \
+  --base <old-commit> \
+  --head <new-commit> \
   --json-out state/exam/upstream-delta-audit.json \
   --md-out state/exam/upstream-delta-audit.md
+```
 
+引用校验：
+
+```bash
 python3 scripts/verify_citations.py \
   --docs-root . \
   --source-root ../octo-server \
@@ -56,4 +82,5 @@ python3 scripts/verify_citations.py \
 - 目标仓最新 commit 已记录到 `knowledge/upstream-baseline.json`。
 - 九大知识库对应领域已补齐，不把 README 当唯一实现证据。
 - 引用校验通过，引用跨度不超过 15 行。
-- GitHub 远端已推送，local 与 origin/main 同步。
+- 远端已推送，local 与 origin/main 同步。
+- 无目标仓变化时保持静默，不发送“无更新”类消息。
