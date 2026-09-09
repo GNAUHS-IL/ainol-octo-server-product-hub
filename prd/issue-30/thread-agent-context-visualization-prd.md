@@ -196,7 +196,7 @@ AI Team 已有 Agent 与 Session 概念，Session 响应包含 session 标识、
 
 - type/*：`type/feature`
 - priority/*：`priority/P2`
-- status/*：当前为 `status/prd-drafting`；PRD 交付后应更新为唯一 `status/reviewing`
+- status/*：当前返工前为 `status/rework`；本次修正完成后应更新为唯一 `status/reviewing`
 - area/*：`area/im`、`area/bot-agent`、`area/api-error`
 - V5 only：当前未使用 `pm/*`、`source/*`、`evidence/*`、`risk/*`
 - Blocking risk：未发现必须建议 `priority/P0 + status/blocked` 的阻塞级凭证或安全风险；但本需求涉及跨对象链路、跨 session 转述、私聊/群/Space 权限、防枚举和审计，Review 应重点核验。
@@ -219,6 +219,6 @@ AI Team 已有 Agent 与 Session 概念，Session 响应包含 session 标识、
 
 - 技术 How：通过。PRD 只定义用户/运营可见的上下文链路、反查、展示、信任级别、闭环状态、权限边界和验收；未定义数据库、缓存、队列、SQL、代码或内部实现路径。
 - 引用核验：通过。源码引用覆盖 Thread 创建与来源消息、来源内容不可信边界、父群通知展示基础、AI Team session 创建/查询、消息读取权限和 Space / Agent 权限边界。
-- Label 完整性：通过。Issue #30 当前具备 `type/feature`、`priority/P2`、`status/prd-drafting`、`area/im`、`area/bot-agent`、`area/api-error`；PRD 完成后建议唯一状态更新为 `status/reviewing`。
-- 状态真实性：通过。当前为 PRD 草拟中；完成远端 PRD、issue 回填和群内交接后可进入 `status/reviewing`。
+- Label 完整性：通过。Issue #30 当前具备 `type/feature`、`priority/P2`、`status/rework`、`area/im`、`area/bot-agent`、`area/api-error`；本次返工完成后建议唯一状态更新为 `status/reviewing`。
+- 状态真实性：通过。当前为 PRD 返工中；完成越界引用修正、远端 PRD 更新、issue 回填和群内交接后可重新进入 `status/reviewing`。
 - 风险提醒 / 待人工确认：是。需产品运营负责人确认首版反查入口范围、群内最后回复摘要展示边界、闭环状态是否允许人工标记。
