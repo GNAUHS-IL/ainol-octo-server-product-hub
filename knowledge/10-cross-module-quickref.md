@@ -120,3 +120,14 @@
 | 7 Bot 与 Agent | Bot mint、token、OBO grant/scope、card 能力、群/Thread 消息入口 |
 | 8 存储与外部依赖 | Redis session、Redis 限流、MySQL group_member/robot/space_member、对象存储 |
 | 9 构建与发布 | 本仓 go build/server；完整 compose 栈在 octo-deployment |
+
+## V3 增量速查（2026-09-09，目标仓 98d20920）
+
+| 高频问题 | 主要挂靠领域 | 还会牵涉 | 首查文件/证据 | 分诊建议 |
+|---|---|---|---|---|
+| AI Team 为什么分成云端分身/个人助理/数字员工？ | 7 Bot 与 Agent | 1 认证与身份、2 鉴权模型 | `modules/ai_team/model.go`、`modules/ai_team/service.go` | 先说明 `agent_hosting` 只做展示分组；`digital_employee` 当前保留为空，不代表 App Bot 会话已实现。来源: modules/ai_team/model.go#L20-L29；来源: modules/ai_team/service.go#L215-L229；来源: modules/ai_team/service.go#L230-L237 |
+| 项目为什么会自动有全员群？ | 4 业务模块清单 | 2 鉴权模型、6 IM 控制面、8 存储 | `modules/project/all_member_group_registry.go`、`modules/group/all_member_group.go`、`modules/project/sql/20260907000002_project_all_member_group.sql` | 先区分项目席位和群成员；全员群由 group 反向注册 hook 创建/准入，失败后靠租约补建与 I4 扫描暴露。来源: modules/project/all_member_group_registry.go#L55-L67；来源: modules/project/reconcile_p2.go#L12-L23；来源: modules/project/reconcile_p2.go#L25-L30 |
+| 为什么不能直接退出/解散/踢人/转让/拉黑项目全员群？ | 2 鉴权模型 | 5 API 与错误、6 IM 控制面 | `modules/group/all_member_group_guard.go`、`pkg/errcode/group.go` | 这是保护 I4 的 HTTP 层限制；让用户走项目侧移除/退出/转让项目所有权路径，不要建议直接改群。来源: pkg/errcode/group.go#L71-L80；来源: pkg/errcode/group.go#L82-L88 |
+| 项目群聊 tab 应该调哪个接口？ | 5 API 与错误 | 2 鉴权模型、4 业务模块清单 | `modules/project/api.go`、`modules/project/api_group.go` | 使用 `GET /v1/projects/:project_id/groups`，它返回调用者自己的项目群，不内嵌 threads/unread/is_all_member_group。来源: modules/project/api.go#L186-L198；来源: modules/project/api_group.go#L26-L40 |
+| 消息侧边栏怎么知道群属于哪个项目？ | 6 IM 控制面 | 5 API 与错误、8 存储 | `modules/message/api_sidebar.go` | 带 X-Space-ID 时可读 sidebar item 的 `project_id`；不带 X-Space-ID 时该字段全链路为空，不要把空串直接当“直属 Space”。来源: modules/message/api_sidebar.go#L128-L140；来源: modules/message/api_sidebar.go#L142-L147 |
+| 项目置顶是什么状态？ | 8 存储与外部依赖 | 3 配置、5 API 与错误 | `modules/project/api_setting.go`、`modules/project/sql/20260908000001_project_user_setting.sql` | `pinned` 是调用者个人偏好，不是项目属性；受项目写开关约束，超配额报 quota，不自动挤出旧置顶。来源: modules/project/api_setting.go#L17-L26；来源: modules/project/api_setting.go#L28-L34；来源: modules/project/api_setting.go#L36-L43；来源: modules/project/sql/20260908000001_project_user_setting.sql#L32-L40 |

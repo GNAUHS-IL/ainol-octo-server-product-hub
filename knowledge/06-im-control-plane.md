@@ -442,3 +442,31 @@ WuKongIM 对已同步成员/订阅的底层投递仍在 IM 侧；本条只覆盖
 #### 不确定边界
 
 agent_hosting 的真实性来自 Bot 自上报；本仓只把它作为展示过滤，不确认其可作为安全信号。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：项目全员群的 IM 频道创建和订阅由 Group 标准建群/准入路径承担
+
+#### 结论
+
+项目全员群由 group 模块注册的 provisioner 通过 `Service.CreateGroup` 创建，并携带 `ProjectID`；项目侧注释要求实现必须走标准建群路径，因为该路径承担 IM 频道创建、群创建通知和 I2 准入闸门。成员加入全员群后还会调用 `IMAddSubscriber` 订阅父群频道；若 DB 成员行已提交但 broker 订阅失败，会包装为 `ErrAdmittedButNotSubscribed`，这类缺口不是 I4 DB 扫描能发现的。
+
+#### 证据
+
+- 来源: modules/project/all_member_group_registry.go#L55-L67
+- 来源: modules/group/all_member_group.go#L53-L67
+- 来源: modules/group/all_member_group.go#L170-L180
+- 来源: pkg/project/all_member_group.go#L128-L140
+
+#### 适用范围
+
+适用于排查“项目成员已经在全员群成员表里，但实时消息收不到”的 IM 控制面问题。
+
+#### 不确定边界
+
+本仓源码仍不能反查 WuKongIM broker 内部 subscriber 状态；需要结合 WuKongIM 运维或外部观测。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

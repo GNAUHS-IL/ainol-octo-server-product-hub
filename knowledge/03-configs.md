@@ -537,3 +537,32 @@ OpenSearch 索引结构和 DSL 拼接需在 API/存储或消息搜索专题继�
 #### 不确定边界
 
 具体生产环境是否已设置这些环境变量或 system_setting，需要看运行时配置；源码只能证明支持的配置项与默认/回退逻辑。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：Project 写开关运行期解析，关闭后冻结新写入但保留读取
+
+#### 结论
+
+Project 模块的写开关通过 `writeEnabled()` 运行期解析，优先读取 `SystemSettings.ProjectEnabledOverride()`，没有 DB override 时再回退到启动时环境配置。`requireWriteEnabled` 只拦写路径；注释明确读取不受影响，因此关闭开关是“冻结新增/修改数据”，不是把既有项目数据整体下线。
+
+#### 证据
+
+- 来源: modules/project/api.go#L212-L223
+- 来源: modules/project/api.go#L226-L233
+- 来源: modules/project/api.go#L235-L244
+- 来源: modules/project/api.go#L246-L252
+- 来源: modules/project/api_setting.go#L36-L43
+
+#### 适用范围
+
+适用于解释“项目功能开关关闭后为什么还能看到已有项目/为什么置顶也受写开关影响”。
+
+#### 不确定边界
+
+具体 system_setting 管理入口与刷新周期需要另查 `modules/common`。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

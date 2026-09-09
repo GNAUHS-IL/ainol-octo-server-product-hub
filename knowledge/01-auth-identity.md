@@ -371,3 +371,28 @@ WuKongIM 自身 WebSocket 握手参数和校验细节不在本仓完整实现内
 #### 不确定边界
 
 外部消费者是否已正确使用 `projects` 字段，需要到对应服务仓库核验；octo-server 只提供收窄用事实。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：AI Team / Project 里的 Agent 身份仍以 User Bot 所有者关系和活跃 Space seat 为准
+
+#### 结论
+
+AI Team 的 Agent 可见与加入资格不是信任客户端传入的 bot id，而是在服务端联查 `robot`、`user`、`space`、人类 `space_member`、bot `space_member`，并要求 `robot.creator_uid = userUID`、`robot.status = 1`、用户未销毁、Space 与双方 seat 均活跃。Project 创建时的 `agent_uids` 也被注释限定为“调用者自己的 AI agents”，由服务端在事务内重新判定资格。
+
+#### 证据
+
+- 来源: modules/ai_team/service.go#L37-L47
+- 来源: modules/ai_team/service.go#L57-L66
+- 来源: modules/project/model.go#L150-L162
+- 来源: pkg/errcode/project.go#L58-L69
+- 来源: pkg/errcode/project.go#L70-L75
+
+#### 适用范围
+
+适用于回答“AI 分身 / Agent 是否能被任意带入项目或 AI Team”这类身份边界问题。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

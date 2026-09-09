@@ -498,3 +498,44 @@ provisioning 上游是否创建 mailbox、返回什么实体由 octo-mail 决定
 #### 不确定边界
 
 Bot Task 的上游调用方是谁、实际任务执行 runtime 如何消费 bot typed event，可能在 octo-fleet 或外部 runtime，不完全由 octo-server 定义。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：`GET /v1/ai-team/agents` 已从平铺列表变为固定三组返回
+
+#### 结论
+
+AI Team Agent 列表的响应模型现在是 `groups`，固定包含 `cloud_clone`、`personal_assistant`、`digital_employee` 三类。分类规则是：`robot.agent_hosting = 'octo_hosted'` 进入 `cloud_clone`，其余 User Bot 进入 `personal_assistant`；`digital_employee` 当前保留为空组，count 为 0。分页仍按 `ai_team_agent.id` 降序游标，count 是各组符合资格的总数，不是当前页长度。
+
+#### 证据
+
+- 来源: modules/ai_team/model.go#L20-L29
+- 来源: modules/ai_team/model.go#L73-L82
+- 来源: modules/ai_team/service.go#L197-L206
+- 来源: modules/ai_team/service.go#L215-L229
+- 来源: modules/ai_team/service.go#L230-L237
+
+#### 适用范围
+
+适用于回答 AI Team 左侧分组、云端分身/个人助理/数字员工展示规则，以及为什么数字员工当前为空。
+
+### 知识点：`agent_hosting` 只参与展示分组，不改变 AI Team 权限资格
+
+#### 结论
+
+AI Team 可列出的 Agent 先通过 `eligibleAgentsQuery` 约束：AI Team 记录为 `is_added=1`，robot 活跃且由当前用户创建，用户未销毁，Space 活跃，人类 seat 和 bot seat 都活跃。`agent_hosting` 只在 SELECT 分类表达式中决定显示分组；不能作为授权、路由或能力依据。
+
+#### 证据
+
+- 来源: modules/ai_team/service.go#L186-L194
+- 来源: modules/ai_team/service.go#L201-L205
+- 来源: modules/ai_team/model.go#L27-L28
+
+#### 适用范围
+
+适用于区分 User Bot/App Bot、Agent 展示分组和真实访问控制边界。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

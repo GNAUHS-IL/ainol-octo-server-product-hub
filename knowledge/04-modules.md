@@ -445,3 +445,47 @@ card action dispatch 的 routes registry 与 worker 细节需在 Bot/卡片专�
 #### 不确定边界
 
 模块被注册不等于所有能力默认对用户开放；`project`、`ai_team`、`bot_task` 都有各自开关、鉴权或来源配置，需结合对应知识库条目判断是否可用。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：Project 与 Group 仍禁止直接 import，项目全员群通过 Group → Project 的反向注册衔接
+
+#### 结论
+
+项目全员群不是由 `modules/project` 直接 import `modules/group` 创建；源码注释明确 `modules/project` 永不 import `modules/group`，群侧在构造时注册四个 hook：全员群创建、全员群准入、群主同步、群名同步。hook 必须幂等，并在项目事务提交后运行，避免把跨模块事务和 WuKongIM 调用关进行锁里。
+
+#### 证据
+
+- 来源: modules/project/all_member_group_registry.go#L9-L15
+- 来源: modules/project/all_member_group_registry.go#L17-L24
+- 来源: modules/project/all_member_group_registry.go#L28-L39
+- 来源: modules/group/all_member_group.go#L22-L31
+- 来源: modules/project/all_member_group_registry.go#L55-L67
+- 来源: modules/project/all_member_group_registry.go#L69-L82
+- 来源: modules/project/all_member_group_registry.go#L84-L89
+
+#### 适用范围
+
+适用于解释 Project / Group 模块依赖方向、为什么全员群维护采用注册钩子而不是项目模块直接调用群模块。
+
+### 知识点：Project P2 新增项目群列表与项目个人设置两个接口面
+
+#### 结论
+
+`modules/project` 在 `/v1/projects` 路由组下新增 `GET /:project_id/groups` 和 `PUT /:project_id/setting`。前者读取调用者自己的项目群列表；后者是项目个人偏好设置袋，本轮先承载 `pinned`。
+
+#### 证据
+
+- 来源: modules/project/api.go#L186-L198
+- 来源: modules/project/api.go#L200-L202
+- 来源: modules/project/api_group.go#L8-L20
+- 来源: modules/project/api_setting.go#L17-L26
+
+#### 适用范围
+
+适用于模块清单、API 归属、前端 Project 群聊 tab / 项目置顶能力定位。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

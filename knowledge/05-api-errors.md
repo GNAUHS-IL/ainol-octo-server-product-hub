@@ -605,3 +605,57 @@ Agent Mail upstream 的错误码/响应体不属于 `octo-server` 源码定义�
 #### 不确定边界
 
 错误码注册证明服务端响应分类；具体客户端如何展示，需要结合前端/调用方实现确认。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：Project Agent 资格错误统一为 `err.server.project.agent_not_eligible`，避免形成 UID / Bot 归属探测器
+
+#### 结论
+
+项目添加 AI agent 时，源码把“不是你的 bot、不是 bot、self-hosted、无活跃 Space seat、系统 bot、不存在、owner 不是项目成员”等多种失败统一映射为 `ErrProjectAgentNotEligible`。错误 details 只允许携带调用者提交的 `uids`，不返回具体哪个 uid 因何失败，避免接口被用来枚举 uid、bot 类型和归属。
+
+#### 证据
+
+- 来源: pkg/errcode/project.go#L58-L69
+- 来源: pkg/errcode/project.go#L70-L75
+- 来源: modules/project/model.go#L154-L162
+
+#### 适用范围
+
+适用于客户端处理“勾选 AI 分身加入项目失败”的错误展示和安全口径。
+
+### 知识点：全员群被保护时返回 `err.server.group.all_member_group_protected`，details.action 指明被拒动作
+
+#### 结论
+
+全员群保护错误码覆盖五类会破坏项目成员等价关系的群操作：disband、exit、remove、transfer、blacklist。响应允许安全透出 `action`，用于客户端把用户引导到项目侧操作，而不是泛化提示。
+
+#### 证据
+
+- 来源: pkg/errcode/group.go#L71-L80
+- 来源: pkg/errcode/group.go#L82-L88
+- 来源: modules/group/all_member_group_guard.go#L130-L132
+
+#### 适用范围
+
+适用于群管理 UI 和 Bot API 接入处理“项目全员群不能直接操作成员/群主/黑名单”的错误提示。
+
+### 知识点：项目置顶超限使用独立 quota 错误，不做自动挤出
+
+#### 结论
+
+项目置顶超过配额时通过 `ErrProjectQuotaPinned` 表达；源码注释明确不采用自动取消最旧置顶的策略，因为那会造成用户未请求的数据丢失。
+
+#### 证据
+
+- 来源: modules/project/api_setting.go#L77-L86
+- 来源: pkg/errcode/project.go#L135-L140
+
+#### 适用范围
+
+适用于项目置顶接口错误处理和产品口径说明。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

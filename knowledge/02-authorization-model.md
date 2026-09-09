@@ -403,3 +403,45 @@ Project 不是单纯 Space 列表能力：`/v1/projects/:project_id/*` 先经 `p
 #### 不确定边界
 
 群 admission 的所有入口清单在 `modules/group/admission.go` 中维护；如果未来新增写 group_member 的路径，必须看 guard test 是否覆盖。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：项目群列表的访问控制是“只返回调用者自己的项目群”，不是额外角色门禁
+
+#### 结论
+
+`GET /v1/projects/:project_id/groups` 挂在 `AuthMiddleware → SharedUIDRateLimiter → projectMiddleware` 后；handler 注释明确该接口返回调用者在该项目内“自己的 live groups”，不再额外做项目角色门禁。原因是返回集合本身由调用者群成员关系限定，Space admin 未加入项目时正确结果是空列表，而不是 403，以免把“是否项目成员”变成额外可观察信息。
+
+#### 证据
+
+- 来源: modules/project/api.go#L186-L198
+- 来源: modules/project/api_group.go#L8-L20
+- 来源: modules/project/api_group.go#L22-L24
+- 来源: modules/project/api_group.go#L54-L67
+
+#### 适用范围
+
+适用于解释 Project 不是新的读安全边界、项目维度只是过滤维度，以及项目群列表为什么不按 Space admin 额外放宽。
+
+### 知识点：全员群保护只拦 HTTP 人工操作，服务层级联与系统维护路径保持可用
+
+#### 结论
+
+项目全员群的成员集合必须等于项目活跃成员集合。为避免人工群操作破坏该不变量，HTTP handler 层会拒绝解散、退出、移除成员、群主转让、黑名单五类动作；但保护不下沉到服务层，因为项目级联、Space 移除级联、bot 删除和全员群 owner 同步都要复用服务层原语维持 I2/I4。
+
+#### 证据
+
+- 来源: modules/group/all_member_group_guard.go#L53-L67
+- 来源: modules/group/all_member_group_guard.go#L74-L88
+- 来源: pkg/errcode/group.go#L71-L80
+- 来源: pkg/errcode/group.go#L82-L88
+- 来源: pkg/errcode/group.go#L99-L107
+
+#### 适用范围
+
+适用于回答“为什么全员群不能手动踢人/退群/转让/拉黑，但系统级联还能改群成员”。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00

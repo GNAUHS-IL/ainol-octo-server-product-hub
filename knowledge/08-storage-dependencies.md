@@ -500,3 +500,62 @@ fleet workspace 与 drive space 的最终创建和状态真实性由对应子系
 #### 不确定边界
 
 fleet/drive 是否已经正确实现 octosign 验签与时间窗口检查，需要到对应子系统仓库确认；本仓只定义 octo-server 发起侧和共享 primitive。
+
+## V3 增量补强（2026-09-09，目标仓 98d20920）
+
+### 知识点：项目全员群指针存放在 `octo_project`，空串是“尚未建成”的哨兵值
+
+#### 结论
+
+P2 迁移在 `octo_project` 上新增 `all_member_group_no`，使用 `NOT NULL DEFAULT ''`。注释明确空串表示该项目还没有全员群，且“有且仅有一个”由项目行自身的一行一值保证，而不是在 `group` 表上做部分唯一索引。
+
+#### 证据
+
+- 来源: modules/project/sql/20260907000002_project_all_member_group.sql#L54-L65
+- 来源: modules/project/sql/20260907000002_project_all_member_group.sql#L67-L74
+- 来源: modules/project/model.go#L105-L115
+
+#### 适用范围
+
+适用于解释项目全员群的数据归属、为什么响应里的 `all_member_group_no` 可能为空，以及为什么不能把空值理解成异常崩溃。
+
+### 知识点：全员群补建使用项目行 CAS 租约，避免提交后跨模块建群并发重复
+
+#### 结论
+
+全员群创建发生在项目事务提交后，不能依赖项目行锁串行化；迁移新增 `all_member_group_lease_until` 作为补建租约。调用方通过 CAS 抢占 lease，成功者建群并写回 group_no，失败或进程中断后等待租约过期由后续写路径重试。
+
+#### 证据
+
+- 来源: modules/project/sql/20260907000002_project_all_member_group.sql#L78-L88
+- 来源: modules/project/sql/20260907000002_project_all_member_group.sql#L90-L101
+- 来源: modules/project/sql/20260907000002_project_all_member_group.sql#L103-L106
+- 来源: modules/project/all_member_group_registry.go#L17-L24
+- 来源: modules/project/all_member_group_registry.go#L28-L39
+
+#### 适用范围
+
+适用于排查项目创建成功但全员群暂缺、补建并发、I4 扫描告警等问题。
+
+### 知识点：项目置顶偏好独立存储在 `octo_project_user_setting`
+
+#### 结论
+
+P2 新增 `octo_project_user_setting` 表，按 `(project_id, uid)` 唯一约束保存用户对项目的个人偏好，目前包括 `pinned` 与 `pinned_at`。配额扫描使用 `(uid, pinned)` 索引，只统计仍然 pinned=1 的行；取消置顶留下的 pinned=0 行不会落入配额扫描区间。
+
+#### 证据
+
+- 来源: modules/project/sql/20260908000001_project_user_setting.sql#L32-L40
+- 来源: modules/project/sql/20260908000001_project_user_setting.sql#L49-L58
+- 来源: modules/project/sql/20260908000001_project_user_setting.sql#L59-L64
+- 来源: modules/project/api_setting.go#L103-L110
+- 来源: modules/project/api_setting.go#L111-L120
+
+#### 适用范围
+
+适用于解释项目置顶排序、配额和为什么 pin 是用户个人状态而不是项目成员状态。
+
+#### 最后验证
+
+- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
+- Time: 2026-09-09T14:35:00+08:00
