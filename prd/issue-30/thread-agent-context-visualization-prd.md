@@ -110,8 +110,8 @@ AI Team 已有 Agent 与 Session 概念，Session 响应包含 session 标识、
 - 所属故事：US-01、US-02、US-03
 - 需求描述：当 Thread / 子区触发或承载 Agent session 时，系统应在用户可见链路中体现 session 与来源消息、Thread、触发用户和目标 Agent 的关系。
 - 业务规则：Agent session 不是 Thread 来源消息能力的自然延伸；需要单独在产品口径中说明 session 从何处发起、当前在哪个会话处理、最后活动是什么、是否仍在处理。
-- 边界场景：一个 Thread 关联多个 session、一个 session 被多次唤起、session 被归档/删除/失败、Agent 被移除、同一消息触发多个 Agent 时，应展示清楚的多节点或不可确认状态。
-- 来源: modules/ai_team/model.go#L46-L60；来源: modules/ai_team/model.go#L61-L64；来源: modules/ai_team/api.go#L92-L106；来源: modules/ai_team/api.go#L107-L109；来源: modules/ai_team/service.go#L261-L275；来源: modules/ai_team/service.go#L329-L343；来源: modules/ai_team/service.go#L344-L345；来源: modules/ai_team/service.go#L347-L361；来源: modules/ai_team/service.go#L362-L376；来源: modules/ai_team/service.go#L584-L598；来源: modules/ai_team/service.go#L599-L612
+- 边界场景：一个 Thread 关联多个 session、一个 session 被多次唤起、session 被归档/失败或不可用、Agent 被移除、同一消息触发多个 Agent 时，应展示清楚的多节点或不可确认状态。
+- 来源: modules/ai_team/model.go#L46-L60；来源: modules/ai_team/model.go#L61-L64；来源: modules/ai_team/api.go#L92-L106；来源: modules/ai_team/api.go#L107-L109；来源: modules/ai_team/service.go#L261-L275；来源: modules/ai_team/service.go#L329-L343；来源: modules/ai_team/service.go#L344-L345；来源: modules/ai_team/service.go#L347-L361；来源: modules/ai_team/service.go#L362-L376；来源: modules/ai_team/service.go#L584-L592；来源: modules/ai_team/service.go#L444-L450
 
 ### F-01-6 跨 session 来源标识与信任级别
 - 所属故事：US-03、US-05
@@ -125,7 +125,7 @@ AI Team 已有 Agent 与 Session 概念，Session 响应包含 session 标识、
 - 需求描述：系统应为上下文链路提供用户可理解的闭环状态，辅助判断事项是否仍需处理。
 - 业务规则：建议状态包括：处理中、等待用户、等待 Agent、已有最后回复、已闭环、已归档、失败、无法确认。状态应基于用户可见事实表达，不应把发送成功、Thread 存在或 session 存在直接等同于已闭环。
 - 边界场景：最后回复不可见、回复只在私聊、Agent session 失败、Thread 归档但问题未解决、用户重新追问、多个 Agent 部分完成、发送后触达未知时，应展示未闭环或无法确认。
-- 来源: modules/ai_team/model.go#L46-L60；来源: modules/ai_team/model.go#L61-L64；来源: modules/ai_team/service.go#L463-L477；来源: modules/ai_team/service.go#L478-L492；来源: modules/ai_team/service.go#L495-L509；来源: modules/ai_team/service.go#L510-L510；来源: modules/ai_team/service.go#L511-L525；来源: modules/ai_team/service.go#L526-L534；来源: modules/ai_team/service.go#L584-L598；来源: modules/ai_team/service.go#L599-L612
+- 来源: modules/ai_team/model.go#L46-L60；来源: modules/ai_team/model.go#L61-L64；来源: modules/ai_team/service.go#L463-L477；来源: modules/ai_team/service.go#L478-L492；来源: modules/ai_team/service.go#L495-L509；来源: modules/ai_team/service.go#L510-L510；来源: modules/ai_team/service.go#L511-L525；来源: modules/ai_team/service.go#L526-L534；来源: modules/ai_team/service.go#L584-L592；来源: modules/ai_team/service.go#L444-L450
 
 ### F-01-8 与发送前预检和发送后回执的边界
 - 所属故事：US-02、US-04
