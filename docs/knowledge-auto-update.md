@@ -42,6 +42,35 @@ scripts/run_upstream_knowledge_watch.sh
 | 08 存储与依赖 | `knowledge/08-storage-dependencies.md` | SQL migration、MySQL/Redis、projectprovision、octosign |
 | 09 构建与发布 | `knowledge/09-build-release.md` | Dockerfile、Makefile、CI、go.mod、release docs |
 
+
+
+## 本地 cron / 外部 scheduler 巡检（2026-09-09 补充）
+
+为避免目标仓更新后只能靠人工提问才发现，当前落地方案采用本地 cron 或外部 scheduler 调用：
+
+```text
+scripts/cron_upstream_knowledge_watch.sh
+```
+
+运行边界：
+
+- 只读同步 `Mininglamp-OSS/octo-server`，不写目标仓；
+- 对比 `knowledge/upstream-baseline.json` 与目标仓 `main`；
+- 无 drift：只写 `state/exam/upstream-watch-result.json`，不提醒、不群发；
+- 有 drift：生成 `state/exam/upstream-delta-audit.{json,md}` 和 `state/exam/upstream-drift-current.json`；
+- cron 不调用答题流程、不群发、不建 issue、不进 PRD、不自动改写 `knowledge/*`；
+- heartbeat 默认保持空文件，不启用定时模型调用；如后续开启，只能读取 drift 状态并做轻量提醒，不能直接启动全量知识库更新。
+
+答题优先级：
+
+- 用户正在问源码 / API / 鉴权 / Bot / IM / 配置等问题时，先快速核对目标仓 HEAD 与 baseline；
+- 无 drift：直接基于知识库和源码回答；
+- 有 drift 但问题与变更无关：继续回答，并说明依据当前可核验证据；
+- 有 drift 且命中新变更：优先查目标仓最新源码回答，再安排知识库补充；
+- 全量知识库更新只在空闲时执行，或在用户明确要求“抓紧更新”时执行。
+
+人工闭环仍按完成标准执行：审核源码 / `.octospec` → 更新知识库 → `verify_citations.py` → 更新 baseline → commit → push_verify。
+
 ## 本地手工复跑
 
 ```bash
