@@ -655,7 +655,26 @@ Agent Mail upstream 的错误码/响应体不属于 `octo-server` 源码定义�
 
 适用于项目置顶接口错误处理和产品口径说明。
 
+
+### 知识点：Project 协作角色新增独立 disabled / invalid / duplicate / quota 错误码
+
+#### 结论
+
+协作角色相关错误并未复用通用项目角色错误：名称非法、角色不存在/非法、目标成员非法、功能关闭、项目协作角色超配额、成员协作角色超配额都有独立错误码。handler 会把名称上限、每项目上限、每成员上限作为 safe details 返回，便于前端给出精确提示。
+
+#### 证据
+
+- 来源: pkg/errcode/project.go#L83-L93
+- 来源: pkg/errcode/project.go#L94-L99
+- 来源: pkg/errcode/project.go#L125-L129
+- 来源: pkg/errcode/project.go#L207-L218
+- 来源: modules/project/api_collaboration_role.go#L219-L229
+- 来源: modules/project/api_collaboration_role.go#L230-L240
+
+#### 适用范围
+
+适用于协作角色创建/绑定失败的客户端错误处理和产品口径说明。
 #### 最后验证
 
-- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
-- Time: 2026-09-09T14:35:00+08:00
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00

@@ -441,7 +441,27 @@ Project 不是单纯 Space 列表能力：`/v1/projects/:project_id/*` 先经 `p
 
 适用于回答“为什么全员群不能手动踢人/退群/转让/拉黑，但系统级联还能改群成员”。
 
+
+### 知识点：Project 协作角色是“展示/分工标签”，写入权限与成员有效性仍由项目角色和 Space seat 决定
+
+#### 结论
+
+协作角色接口新增在 `/v1/projects/:project_id` 下：列表要求调用者可看项目成员；创建、重命名、删除自定义协作角色只允许项目 owner；给成员替换协作角色要求调用者具备成员管理权限。绑定目标必须是该项目 active 且未 removing 的真人成员，bot 目标会被拒绝；协作角色本身不承载项目权限，项目权限仍由 owner/admin/common 角色控制。
+
+#### 证据
+
+- 来源: modules/project/api.go#L211-L215
+- 来源: modules/project/api_collaboration_role.go#L23-L34
+- 来源: modules/project/api_collaboration_role.go#L47-L60
+- 来源: modules/project/api_collaboration_role.go#L154-L167
+- 来源: modules/project/service_collaboration_role.go#L345-L359
+- 来源: modules/project/service_collaboration_role.go#L366-L379
+- 来源: modules/project/service_collaboration_role.go#L366-L379
+
+#### 适用范围
+
+适用于回答“协作角色能不能授权”“谁能维护协作角色”“能否给机器人打协作角色标签”。
 #### 最后验证
 
-- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
-- Time: 2026-09-09T14:35:00+08:00
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00

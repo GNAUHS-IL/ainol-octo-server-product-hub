@@ -555,7 +555,68 @@ P2 新增 `octo_project_user_setting` 表，按 `(project_id, uid)` 唯一约束
 
 适用于解释项目置顶排序、配额和为什么 pin 是用户个人状态而不是项目成员状态。
 
+
+### 知识点：Project 协作角色新增目录表、成员绑定表和独立 epoch
+
+#### 结论
+
+协作角色迁移在 `octo_project` 上新增 `collaboration_role_epoch`，并新增 `octo_project_collaboration_role` 与 `octo_project_member_collaboration_role` 两张表。角色名称按项目内 normalized name 唯一；内置角色通过 `(project_id, builtin_key)` 保证幂等；成员绑定表以 `(project_id, uid, role_id)` 为主键。真实变更会 bump `collaboration_role_epoch`，便于客户端识别角色目录或成员绑定变化。
+
+#### 证据
+
+- 来源: modules/project/sql/20260909000001_project_collaboration_role.sql#L3-L6
+- 来源: modules/project/sql/20260909000001_project_collaboration_role.sql#L8-L22
+- 来源: modules/project/sql/20260909000001_project_collaboration_role.sql#L25-L32
+- 来源: modules/project/db_collaboration_role.go#L31-L45
+- 来源: modules/project/db_collaboration_role.go#L46-L56
+- 来源: modules/project/db_collaboration_role.go#L57-L63
+- 来源: modules/project/db_collaboration_role.go#L305-L315
+
+#### 适用范围
+
+适用于解释协作角色的数据模型、缓存失效标识、以及为什么内置角色补齐可以多实例重试。
+
+### 知识点：协作角色内置角色补齐和绑定完整性检查走有界维护任务
+
+#### 结论
+
+存量项目不会在 DDL 里做无界 `INSERT ... SELECT`。应用侧维护任务按 `ReconcileInterval` 和 `ReconcileLimit` 分页补齐内置协作角色，并扫描成员绑定是否指向不存在的角色、已失效项目或非活跃/移除中的成员；发现异常通过指标和错误日志暴露。
+
+#### 证据
+
+- 来源: modules/project/sql/20260909000001_project_collaboration_role.sql#L34-L36
+- 来源: modules/project/collaboration_role_maintenance.go#L45-L51
+- 来源: modules/project/collaboration_role_maintenance.go#L53-L67
+- 来源: modules/project/collaboration_role_maintenance.go#L69-L83
+- 来源: modules/project/collaboration_role_maintenance.go#L117-L126
+- 来源: modules/project/collaboration_role_maintenance.go#L127-L132
+- 来源: modules/project/collaboration_role_maintenance.go#L135-L149
+- 来源: modules/project/collaboration_role_maintenance.go#L154-L161
+
+#### 适用范围
+
+适用于存量项目升级、协作角色一致性巡检、以及排查“内置产品/前端/后端/HR 标签为什么稍后才出现”。
+
+### 知识点：Project provisioning abandoned 行新增启动期定向 requeue
+
+#### 结论
+
+provisioning outbox 原本把 `abandoned` 作为终态，需要人工介入；最新实现增加 `OCTO_PROJECT_PROVISION_REQUEUE_PROJECT_ID`，在 worker 启动时把指定项目、且属于已启用 target 的 abandoned 行重排回 pending。更新条件会重新检查 `status = abandoned`，因此多副本同时启动时只有一个副本能移动同一行；如果 target 未启用，requeue 不会执行。
+
+#### 证据
+
+- 来源: modules/project/config_provisioning.go#L114-L128
+- 来源: modules/project/config_provisioning.go#L129-L140
+- 来源: modules/project/provisioning_worker.go#L159-L170
+- 来源: modules/project/provisioning_worker.go#L173-L187
+- 来源: modules/project/provisioning_worker.go#L188-L194
+- 来源: modules/project/provisioning_worker.go#L195-L205
+- 来源: modules/project/provisioning_worker.go#L207-L211
+
+#### 适用范围
+
+适用于 Project provisioning 卡在 abandoned 后的人工恢复口径；不要把它解释成自动重试或用户可触发修复。
 #### 最后验证
 
-- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
-- Time: 2026-09-09T14:35:00+08:00
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00

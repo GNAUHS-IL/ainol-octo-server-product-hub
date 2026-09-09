@@ -485,7 +485,28 @@ card action dispatch 的 routes registry 与 worker 细节需在 Bot/卡片专�
 
 适用于模块清单、API 归属、前端 Project 群聊 tab / 项目置顶能力定位。
 
+
+### 知识点：Project 模块新增协作角色 API 面，但仍挂在 project 路由与原鉴权链路下
+
+#### 结论
+
+`modules/project` 在项目作用域新增 5 个协作角色接口：列出角色、创建角色、重命名角色、删除角色、替换某成员的协作角色。它们复用 `/v1/projects/:project_id` 的项目中间件，不是独立模块；写接口还受协作角色开关和项目角色校验约束。
+
+#### 证据
+
+- 来源: modules/project/api.go#L185-L198
+- 来源: modules/project/api.go#L211-L215
+- 来源: modules/project/api_collaboration_role.go#L13-L20
+- 来源: modules/project/api_collaboration_role.go#L47-L60
+- 来源: modules/project/api_collaboration_role.go#L61-L75
+- 来源: modules/project/api_collaboration_role.go#L154-L167
+- 来源: modules/project/api_collaboration_role.go#L173-L180
+- 来源: modules/project/api_collaboration_role.go#L185-L196
+
+#### 适用范围
+
+适用于模块清单、API 归属、前端 Project 成员分工标签入口、以及“为什么不是新建 collaboration-role 模块”的回答。
 #### 最后验证
 
-- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
-- Time: 2026-09-09T14:35:00+08:00
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00

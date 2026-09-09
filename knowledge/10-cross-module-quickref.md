@@ -131,3 +131,11 @@
 | 项目群聊 tab 应该调哪个接口？ | 5 API 与错误 | 2 鉴权模型、4 业务模块清单 | `modules/project/api.go`、`modules/project/api_group.go` | 使用 `GET /v1/projects/:project_id/groups`，它返回调用者自己的项目群，不内嵌 threads/unread/is_all_member_group。来源: modules/project/api.go#L186-L198；来源: modules/project/api_group.go#L26-L40 |
 | 消息侧边栏怎么知道群属于哪个项目？ | 6 IM 控制面 | 5 API 与错误、8 存储 | `modules/message/api_sidebar.go` | 带 X-Space-ID 时可读 sidebar item 的 `project_id`；不带 X-Space-ID 时该字段全链路为空，不要把空串直接当“直属 Space”。来源: modules/message/api_sidebar.go#L128-L140；来源: modules/message/api_sidebar.go#L142-L147 |
 | 项目置顶是什么状态？ | 8 存储与外部依赖 | 3 配置、5 API 与错误 | `modules/project/api_setting.go`、`modules/project/sql/20260908000001_project_user_setting.sql` | `pinned` 是调用者个人偏好，不是项目属性；受项目写开关约束，超配额报 quota，不自动挤出旧置顶。来源: modules/project/api_setting.go#L17-L26；来源: modules/project/api_setting.go#L28-L34；来源: modules/project/api_setting.go#L36-L43；来源: modules/project/sql/20260908000001_project_user_setting.sql#L32-L40 |
+| 项目协作角色是权限吗？ | 2 鉴权模型 | 3 配置、5 API 与错误、8 存储 | `modules/project/api_collaboration_role.go`、`modules/project/service_collaboration_role.go` | 不是权限模型，只是项目成员分工标签；创建/改名/删除自定义角色仅 owner，绑定需成员管理权限，目标必须是真人 active 项目成员。来源: modules/project/api_collaboration_role.go#L47-L60；来源: modules/project/api_collaboration_role.go#L154-L167；来源: modules/project/service_collaboration_role.go#L366-L379 |
+| Project provisioning abandoned 怎么重驱？ | 8 存储与外部依赖 | 3 配置、9 构建与发布 | `modules/project/config_provisioning.go`、`modules/project/provisioning_worker.go` | 通过 `OCTO_PROJECT_PROVISION_REQUEUE_PROJECT_ID` 在 worker 启动时定向 requeue 指定项目的 abandoned 行；只对已启用 target 生效，不是用户接口。来源: modules/project/config_provisioning.go#L114-L128；来源: modules/project/provisioning_worker.go#L173-L187 |
+
+
+#### 最后验证
+
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00

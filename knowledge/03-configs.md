@@ -562,7 +562,29 @@ Project 模块的写开关通过 `writeEnabled()` 运行期解析，优先读取
 
 具体 system_setting 管理入口与刷新周期需要另查 `modules/common`。
 
+
+### 知识点：Project 协作角色与 provisioning requeue 都是显式配置启用，默认不扩大运行面
+
+#### 结论
+
+协作角色写入口由 `OCTO_PROJECT_COLLABORATION_ROLE_ENABLED` 控制，默认关闭；每项目协作角色数和每成员绑定数分别由 `OCTO_PROJECT_COLLABORATION_ROLE_MAX_PER_PROJECT`、`OCTO_PROJECT_COLLABORATION_ROLE_MAX_PER_MEMBER` 控制，默认 50 / 8。Project provisioning 新增 `OCTO_PROJECT_PROVISION_REQUEUE_PROJECT_ID` 作为“重启时重驱某个项目 abandoned provisioning 行”的人工救援开关；它只有在 provisioning target 已启用时才会实际重排，否则配置加载会记录问题，避免静默无效。
+
+#### 证据
+
+- 来源: modules/project/config.go#L24-L25
+- 来源: modules/project/config.go#L53-L60
+- 来源: modules/project/config.go#L90-L92
+- 来源: modules/project/config.go#L167-L178
+- 来源: modules/project/config_provisioning.go#L114-L128
+- 来源: modules/project/config_provisioning.go#L129-L140
+- 来源: modules/project/config_provisioning.go#L323-L326
+- 来源: modules/project/config_provisioning.go#L328-L340
+- 来源: modules/project/config_provisioning.go#L341-L347
+
+#### 适用范围
+
+适用于部署开关、回滚、安全审计、以及解释“源码有接口但写入返回 disabled / quota”的场景。
 #### 最后验证
 
-- Commit: 98d20920607241d2a00934554f07bfd400dcb4f0
-- Time: 2026-09-09T14:35:00+08:00
+- Commit: c16f8c1858596011faa7e2dcdbc14677fa479871
+- Time: 2026-09-09T15:35:00+08:00
