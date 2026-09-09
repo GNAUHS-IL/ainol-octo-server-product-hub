@@ -18,8 +18,10 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 
 - GitHub incoming webhook 支持并在安全策略要求下强制校验 `X-Hub-Signature-256`。
 - 为 GitHub webhook 提供独立的 GitHub webhook secret 配置口径，不复用 URL token 作为审计要求下的签名 secret。
-- 对新建、编辑和存量 GitHub webhook 给出清晰迁移策略，避免上线后存量集成静默失效。
+- 对新建、编辑和存量 GitHub webhook 给出确定迁移策略：存量迁移窗口为 30 个自然日；到期后未完成配置的 GitHub webhook 必须拒绝未签名或签名错误的请求。
 - 对缺失签名、签名不匹配、secret 未配置、迁移期豁免、签名校验通过等状态提供调用方和运营可理解的提示与排障口径。
+- 明确签名状态、迁移状态、delivery 签名失败原因与 secret 配置/重置的角色权限矩阵。
+- 明确迁移期豁免在产品文档和 deliveries / audit 中标记为“仅过渡，不满足最终审计要求”。
 - 在 deliveries / audit 中保留脱敏、安全、可追溯的签名校验结果，帮助管理员定位配置错误和安全风险。
 - 更新 GitHub webhook 接入文档，让配置步骤覆盖 Payload URL、Content type、Secret、签名校验开关和迁移提示。
 - 明确多租户、权限、外部输入、限流、防滥用、审计和凭证脱敏边界。
@@ -30,7 +32,7 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 - 不要求本单覆盖 GitLab、企业微信、飞书、Multica、Octo 或 native webhook 的签名机制。
 - 不在 PRD 中定义签名算法实现、内部字段、数据库表、缓存、队列、SQL、代码路径或部署方案。
 - 不要求在群聊、issue、deliveries、日志或审计中展示明文 URL token、GitHub webhook secret、签名原文或完整敏感 payload。
-- 不把迁移期内的兼容豁免解释为长期安全通过；迁移窗口结束后的产品口径应以强制校验为准。
+- 不把迁移期内的兼容豁免解释为长期安全通过；迁移期豁免必须标记为“仅过渡，不满足最终审计要求”，迁移窗口结束后的产品口径应以强制校验为准。
 
 ## 3. 用户故事
 
@@ -74,8 +76,8 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 ### F-01-1 GitHub 签名校验策略
 - 所属故事：US-01、US-02、US-04
 - 需求描述：GitHub incoming webhook 应支持 `X-Hub-Signature-256` 校验，并在安全策略要求下对 GitHub 适配器强制启用。
-- 业务规则：推荐产品口径为“GitHub 适配器默认强制签名校验；存量 webhook 可在迁移窗口内临时保留豁免；迁移窗口结束后，GitHub webhook 不应继续只靠 URL token 接收事件”。
-- 边界场景：当某个存量 webhook 处于迁移窗口内，管理端应明确显示其风险状态和截止时间；当迁移窗口结束或管理员新建 GitHub webhook 时，应按强制校验口径处理。
+- 业务规则：本版产品规则为“GitHub 适配器默认强制签名校验；存量 webhook 迁移窗口为 30 个自然日；迁移窗口结束后，GitHub webhook 不得继续只靠 URL token 接收事件”。
+- 边界场景：当某个存量 webhook 处于迁移窗口内，管理端应明确显示其风险状态、剩余天数和截止时间；当迁移窗口结束或管理员新建 GitHub webhook 时，应按强制校验口径处理。
 - 来源: modules/incomingwebhook/README.md#L200-L202；来源: modules/incomingwebhook/adapter_github.go#L9-L10
 
 ### F-01-2 Secret 配置口径
@@ -109,8 +111,8 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 ### F-01-6 存量迁移窗口
 - 所属故事：US-04、US-05
 - 需求描述：对已存在且未配置 GitHub webhook secret 的 GitHub webhook，系统应提供明确迁移窗口、风险标识、提醒文案和窗口结束后的处理口径。
-- 业务规则：迁移窗口内，管理端应把未启用签名校验的 GitHub webhook 标记为安全待整改；窗口结束后，仍未完成配置的 GitHub webhook 应按签名校验失败处理，不继续静默接收。
-- 边界场景：业务方无法在窗口内完成迁移、GitHub 仓库管理员与 Octo 管理员不是同一人、secret 疑似泄露或 webhook 长期无人维护时，应引导产品运营负责人或授权管理员确认延期、禁用或重建策略。
+- 业务规则：迁移窗口内，管理端应把未启用签名校验的 GitHub webhook 标记为安全待整改，并明确“仅过渡，不满足最终审计要求”；窗口结束后，仍未完成配置的 GitHub webhook 应按签名校验失败处理，不继续静默接收。延期只能由产品运营负责人或具备 Space 安全管理职责的授权管理员批准，且每次延期必须有截止时间、原因类别和脱敏审计记录。
+- 边界场景：业务方无法在窗口内完成迁移、GitHub 仓库管理员与 Octo 管理员不是同一人、secret 疑似泄露或 webhook 长期无人维护时，应引导产品运营负责人或授权管理员在禁用、重建或一次性受控延期中选择；普通 webhook 创建者不得自行批准延期。
 - 来源: modules/incomingwebhook/README.md#L200-L202；来源: modules/incomingwebhook/adapter_github.go#L9-L10
 
 ### F-01-7 文档与配置指引
@@ -124,6 +126,12 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 - 所属故事：US-02、US-05
 - 需求描述：签名校验、管理端状态展示和 deliveries / audit 查询必须限制在操作者有权访问的 Space、群和 webhook 范围内。
 - 业务规则：无权用户不得查看 webhook 是否存在、签名状态、secret 状态、delivery 详情或失败原因；错误口径不得帮助外部请求方枚举 webhook_id、URL token 或群存在性。
+- 权限矩阵：
+  - Space 管理员：可查看签名状态、迁移状态、delivery 签名失败原因；可配置、重置 GitHub webhook secret；可在 30 日迁移窗口内处理整改；可提交延期或禁用决策。
+  - 群管理员 / webhook 管理员：可查看其有权群内 webhook 的签名状态、迁移状态和脱敏 delivery 失败原因；可配置或重置自己有权管理的 GitHub webhook secret；不得批准迁移期延期。
+  - webhook 创建者：可查看自己创建且仍有权管理的 webhook 的签名状态和迁移提醒；可按权限配置或重置 secret；只能查看自身 webhook 的脱敏 delivery 摘要。
+  - 产品运营负责人 / 授权排障人员：可在授权 Space / 群范围内查看签名状态、迁移风险、失败原因类别和脱敏审计摘要；可裁定延期、禁用或重建建议。
+  - 普通群成员、外部请求方、无权调用方：不可查看签名状态、secret 状态、delivery 详情或对象存在性。
 - 边界场景：跨 Space 查询、群已解散、webhook 被删除、创建者退群、管理员权限变化、外部请求批量尝试 token 或伪造签名时，应统一安全失败、限制或降噪。
 - 来源: modules/incomingwebhook/api.go#L1320-L1349；来源: modules/incomingwebhook/api.go#L1352-L1365；来源: modules/incomingwebhook/api.go#L1383-L1414
 
@@ -137,8 +145,8 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 ### F-01-10 审计与脱敏
 - 所属故事：US-02、US-05
 - 需求描述：系统应为 GitHub webhook 签名校验相关的配置变更、迁移状态、失败原因查看和异常请求保留脱敏审计摘要。
-- 业务规则：审计摘要应能追溯谁在何时对哪个授权范围内的 GitHub webhook 查看或变更了签名校验状态，以及 delivery 的签名校验类别；不得记录明文 URL token、GitHub webhook secret、签名原文、cookie、私钥或完整敏感 payload。
-- 边界场景：secret 重置、疑似泄露、迁移豁免延期、连续签名失败、跨范围查看失败或系统依赖异常时，应记录脱敏原因类别并提示人工复核。
+- 业务规则：审计摘要应能追溯谁在何时对哪个授权范围内的 GitHub webhook 查看或变更了签名校验状态，以及 delivery 的签名校验类别；迁移期豁免必须在产品文档、管理端状态、deliveries / audit 中标记为“仅过渡，不满足最终审计要求”；不得记录明文 URL token、GitHub webhook secret、签名原文、cookie、私钥或完整敏感 payload。
+- 边界场景：secret 重置、疑似泄露、迁移豁免延期、连续签名失败、跨范围查看失败或系统依赖异常时，应记录脱敏原因类别、审批来源和截止时间，并提示人工复核。
 - 来源: modules/incomingwebhook/model.go#L88-L96；来源: modules/incomingwebhook/model.go#L215-L220；来源: modules/incomingwebhook/README.md#L395-L428
 
 ## 5. 状态与提示
@@ -147,8 +155,8 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 
 - 已启用签名校验：该 GitHub webhook 已配置签名校验要求，可按安全基线接收 GitHub delivery。
 - 待配置 secret：该 GitHub webhook 尚未完成 GitHub webhook secret 配置，不能视为安全审计通过。
-- 迁移期豁免：该存量 GitHub webhook 暂时未强制签名校验，但管理端明确显示风险、截止时间和整改建议。
-- 迁移已到期：该 GitHub webhook 不再允许只靠 URL token 接收 GitHub delivery。
+- 迁移期豁免：该存量 GitHub webhook 暂时未强制签名校验；管理端明确显示“仅过渡，不满足最终审计要求”、剩余天数、截止时间和整改建议。
+- 迁移已到期：该 GitHub webhook 不再允许只靠 URL token 接收 GitHub delivery；未签名或签名错误请求不得投递到群内。
 - 签名校验失败：GitHub delivery 缺少签名、签名格式不符合要求、签名不匹配或 secret 配置不一致。
 - 状态不可确认：当前用户无权查看、配置不完整、依赖暂不可用或历史记录不足以确认。
 
@@ -157,7 +165,7 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 - 新建 GitHub webhook：请在 GitHub Webhooks 中同时配置 Payload URL、Content type 和 Secret；Secret 与 Octo 侧 GitHub webhook secret 保持一致。
 - 签名缺失：当前 GitHub delivery 未携带 required signature，请检查 GitHub Webhooks 的 Secret 配置。
 - 签名不匹配：当前 GitHub delivery 的签名无法通过校验，请重新确认 GitHub Secret 与 Octo 侧配置是否一致。
-- 迁移期风险：当前 GitHub webhook 仍处于未强制签名校验状态，请在迁移窗口结束前完成 secret 配置。
+- 迁移期风险：当前 GitHub webhook 仍处于未强制签名校验状态，仅用于过渡，不满足最终审计要求；请在 30 个自然日迁移窗口结束前完成 secret 配置。
 - 无权查看：当前账号无权查看该 webhook 的签名状态或 delivery 详情。
 
 ## 6. 验收标准
@@ -166,9 +174,9 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 - AC-02：当 GitHub delivery 携带正确签名且 URL token 仍有效时，事件能按原有 GitHub 适配器语义继续进入后续投递或跳过流程。
 - AC-03：当 GitHub delivery 缺少签名、签名格式不符合要求、签名不匹配或 secret 未配置时，事件不会被投递到群内，调用方和授权管理员能看到脱敏且可修复的失败原因。
 - AC-04：当 URL token 无效、webhook 不存在、webhook 已删除或群不可用时，系统继续使用安全失败口径，不通过签名错误差异泄露对象存在性。
-- AC-05：当存量 GitHub webhook 尚未配置 secret 时，管理端能显示迁移期风险、截止时间和整改建议；迁移窗口结束后不再静默接收未签名的 GitHub delivery。
+- AC-05：当存量 GitHub webhook 尚未配置 secret 时，管理端能显示 30 个自然日迁移窗口、剩余时间、截止时间、“仅过渡，不满足最终审计要求”和整改建议；迁移窗口结束后不再静默接收未签名的 GitHub delivery。
 - AC-06：当授权管理员查看 deliveries / audit 时，能区分签名校验失败、迁移期豁免、事件跳过、内容解析失败和投递失败；结果不包含明文 URL token、secret、签名原文或完整敏感 payload。
-- AC-07：当无权用户或外部请求方尝试查看签名状态、delivery 详情或通过错误差异探测 webhook 时，系统不给出可用于枚举的对象存在性信息。
+- AC-07：当无权用户或外部请求方尝试查看签名状态、secret 状态、delivery 详情或通过错误差异探测 webhook 时，系统不给出可用于枚举的对象存在性信息。
 - AC-08：当发生高频签名失败、伪造 header、超大 payload 或重试风暴时，系统能限制、降噪或安全失败，并保留脱敏追溯摘要。
 - AC-09：GitHub incoming webhook 文档明确更新配置步骤、签名校验要求、迁移策略、常见失败原因和凭证脱敏规则。
 - AC-10：任何界面、文档、日志、deliveries、审计和 issue 评论均不得展示真实 URL token、GitHub webhook secret、cookie、私钥或生产凭证。
@@ -182,16 +190,17 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 - V5 only：当前未使用 `pm/*`、`source/*`、`evidence/*`、`risk/*`
 - Blocking risk：未发现 issue 正文或本 PRD 中包含明文 token/secret；但该需求属于外部 webhook 鉴权增强，涉及凭证、签名失败口径、迁移豁免和防枚举，Review 应重点核验。
 
-## 8. 待确认事项
+## 8. 已定产品规则
 
-1. [待确认] 迁移窗口时长与到期策略：是否按全局统一窗口执行，还是允许产品运营负责人对个别存量 webhook 做受控延期。
-2. [待确认] 管理端签名状态的展示范围：仅 Space 管理员 / 群管理员可见，还是 webhook 创建者也可见受限状态。
-3. [待确认] 迁移期豁免的安全审计口径：是否需要在产品文档中明确“不满足最终审计要求，仅用于过渡”。
+1. 迁移窗口：存量 GitHub webhook 统一给 30 个自然日迁移窗口；窗口结束后，未签名、签名格式不符合要求、签名不匹配或 secret 未配置的 GitHub delivery 不得继续投递到群内。
+2. 延期规则：如业务方无法在 30 个自然日内完成迁移，只能由产品运营负责人或具备 Space 安全管理职责的授权管理员批准一次性受控延期；延期必须有截止时间、原因类别和脱敏审计记录，普通 webhook 创建者不得自行批准延期。
+3. 权限范围：Space 管理员、群管理员 / webhook 管理员、webhook 创建者、产品运营负责人 / 授权排障人员按 F-01-8 的权限矩阵查看或处理签名状态；普通群成员、外部请求方和无权调用方不可查看对象存在性、签名状态、secret 状态或 delivery 详情。
+4. 审计口径：迁移期豁免在产品文档、管理端状态、deliveries / audit 中必须明确标记为“仅过渡，不满足最终审计要求”；所有配置、重置、延期、失败查看和异常请求只记录脱敏摘要。
 
 ## 9. 五类风险检查
 
 - 多租户 / Space 隔离：签名状态、secret 状态、deliveries 和 audit 只能在操作者有权访问的 Space、群和 webhook 范围内展示；跨 Space 或跨群对象不得通过错误口径泄露。
-- 权限 / ownership：只有有权管理或排障该 webhook 的角色可查看和调整签名校验状态；普通成员、外部请求方或无权调用方不得查看 secret 状态和 delivery 细节。
+- 权限 / ownership：按 F-01-8 的权限矩阵控制签名状态、迁移状态、delivery 签名失败原因和 secret 配置 / 重置权限；普通成员、外部请求方或无权调用方不得查看 secret 状态和 delivery 细节。
 - 安全 / 外部输入 / 凭证：GitHub payload、signature header、URL token 和 GitHub webhook secret 都属于敏感或外部输入相关内容；界面、文档、日志、deliveries、审计和 issue 评论不得展示明文 secret、token、cookie、私钥、签名原文或完整敏感 payload。
 - 限流 / 防滥用：签名校验失败、伪造 header、批量 token 尝试和 GitHub 重试风暴需要保持限流、防扫描、请求体大小限制和降噪，避免成为新攻击面。
 - 审计 / 可追溯：签名校验状态变更、迁移豁免、失败原因查看和异常请求应可追溯到操作者、时间、Space / 群 / webhook 范围和脱敏结果类别；不得记录明文敏感信息。
@@ -200,6 +209,6 @@ Issue #32 反馈：安全审计要求 octo-server 在接收 GitHub webhook 时�
 
 - 技术 How：通过。PRD 只定义管理员 / 调用方 / 审计人员可见的签名校验能力、配置口径、迁移策略、失败提示、deliveries / audit 口径和安全边界；未定义内部字段、SQL、缓存、队列、代码或签名算法实现。
 - 引用核验：通过。源码和文档引用已按当前只读目标仓核验，覆盖现有 GitHub webhook 文档、适配器注释、适配器注册、URL token 鉴权、限流、失败审计和 deliveries 相关边界。
-- Label 完整性：通过。Issue #32 当前具备 `type/feature`、`priority/P1`、`status/prd-drafting`、`area/auth`、`area/bot-agent`；PRD 完成后建议唯一状态更新为 `status/reviewing`。
-- 状态真实性：通过。当前为 PRD 草拟中；完成远端 PRD、issue 回填和群内交接后可进入 `status/reviewing`。
-- 风险提醒 / 待人工确认：是。需产品运营负责人确认迁移窗口、可见角色和迁移期豁免的审计口径。
+- Label 完整性：通过。Issue #32 返工前具备 `type/feature`、`priority/P1`、`status/rework`、`area/auth`、`area/bot-agent`；返工完成后建议唯一状态更新为 `status/reviewing`。
+- 状态真实性：通过。当前为 Review 打回返工；完成远端 PRD 修订、issue 回填和群内交接后可重新进入 `status/reviewing`。
+- 风险提醒 / 待人工确认：否。Review 打回的 3 个核心规则已补成确定口径：30 个自然日迁移窗口、F-01-8 权限矩阵、迁移期豁免“仅过渡，不满足最终审计要求”的审计标记。
